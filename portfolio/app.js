@@ -16,3 +16,19 @@ let typed = new Typed('.auto-input', {
     backDelay: 2000,
     loop: true,
 })
+
+
+ // Pobierz element span, który zawiera rok
+ const copyrightElement = document.getElementById("copyright");
+
+ // Funkcja do aktualizacji roku
+ function updateYear() {
+   const currentYear = new Date().getFullYear();
+   copyrightElement.textContent = `&copy; ${currentYear}`;
+ }
+
+ // Wywołaj funkcję aktualizującą rok
+ updateYear();
+
+ // Ustaw interwał do sprawdzania zmiany roku co minutę
+ setInterval(updateYear, 60000); // Możesz dostosować częstotliwość do swoich potrzeb
