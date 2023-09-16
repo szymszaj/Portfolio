@@ -10,7 +10,7 @@ MenuBtn.addEventListener('click', function (e) {
 
 let typed = new Typed('.auto-input', {
     //tekst do zmiany 
-    strings: ['Front-End Developer!', 'Technik Geodeta!'],
+    strings: ['Początkujący Front-End Developer!', 'Technik Geodeta!'],
     typeSpeed: 100,
     backSpeed: 100,
     backDelay: 2000,
