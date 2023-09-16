@@ -1,0 +1,8 @@
+<section id="fact">
+        <h1 class="sub-heading">Zainteresowania</h1>
+        <div class="divider"></div>
+        <p class="sub-para">
+          Posiadam szeroki zakres umiejętności, które pozwalają mi skutecznie
+          wykonywać zadania związane z programowaniem i nie tylko!
+        </p>
+      </section>
