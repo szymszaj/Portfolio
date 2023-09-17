@@ -314,20 +314,12 @@ main {
         margin-left: 340px;
     }
 }
-
-/* @media only screen and (max-width: 577px){
-    #home{
-        padding: 30px;
+/* Dodaj tło dla ekranów o szerokości 670px i mniejszych */
+@media only screen and (max-width: 670px) {
+    #home {
+        background-image: url('./img/me1.JPG');
     }
-    #home .home-row h1{
-        font-size: 35px;
-        letter-spacing: 0;
-        line-height: 50px;
-    }
-} */
-
-
-
+}
 /* about me */
 #about {
     padding: 70px 30px;
