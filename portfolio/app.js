@@ -1,5 +1,4 @@
 let MenuBtn = document.getElementById('MenuBtn')
-
 MenuBtn.addEventListener('click', function (e) {
     document.querySelector('body').classList.toggle('mobile-nav-active')
 
@@ -7,7 +6,6 @@ MenuBtn.addEventListener('click', function (e) {
 })
 
 //animation 
-
 let typed = new Typed('.auto-input', {
     //tekst do zmiany 
     strings: ['Początkujący Front-End Developer!', 'Technik Geodeta!'],
@@ -17,23 +15,17 @@ let typed = new Typed('.auto-input', {
     loop: true,
 })
 
-
  // Pobierz element span, który zawiera rok
  const copyrightElement = document.getElementById("copyright");
-
  // Funkcja do aktualizacji roku
  function updateYear() {
    const currentYear = new Date().getFullYear();
    copyrightElement.textContent = `&copy; ${currentYear}`;
  }
-
  // Wywołaj funkcję aktualizującą rok
  updateYear();
-
  // Ustaw interwał do sprawdzania zmiany roku co minutę
  setInterval(updateYear, 60000); // Możesz dostosować częstotliwość do swoich potrzeb
-
-
 //plynne przewijanie po nacisnięciu na odnosnik w nawigacji 
  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
@@ -50,31 +42,26 @@ let typed = new Typed('.auto-input', {
   });
 });
 
+
 //zamykanie odnosnika po nacisnieciu 
 function closeNavAndFooter() {
   const nav = document.querySelector("header");
-  const footer = document.querySelector(".footer");
-  
-  // Ukryj nawigację
+  const footer = document.querySelector(".footer")
+// Ukryj nawigację
   nav.style.left = "-300px";
-  
-  // Ukryj stopkę
+ // Ukryj stopkę
   footer.style.bottom = "-80px"; // Możesz dostosować wartość bottom do preferencji
 }
-
 function openNavAndFooter() {
   const nav = document.querySelector("header");
   const footer = document.querySelector(".footer");
-  
   // Po kliknięciu w przycisk MenuBtn, pokaż nawigację i stopkę
   nav.style.left = "0";
   footer.style.bottom = "0";
 }
-
 document.addEventListener("DOMContentLoaded", function () {
   const links = document.querySelectorAll("header nav ul li a");
   const menuBtn = document.getElementById("MenuBtn");
-  
   links.forEach((link) => {
     link.addEventListener("click", () => {
       if (window.innerWidth <= 992) {
@@ -83,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-
   menuBtn.addEventListener("click", () => {
     if (window.innerWidth <= 992) {
       openNavAndFooter();
@@ -91,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
       closeNavAndFooter();
     }
   });
-
   // Obsługa zdarzenia resize
   window.addEventListener("resize", () => {
     if (window.innerWidth > 992) {
@@ -102,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
       closeNavAndFooter();
     }
   });
-
   // Wywołaj funkcję closeNavAndFooter() przy załadowaniu strony, jeśli szerokość ekranu jest mniejsza lub równa 992px
   if (window.innerWidth <= 992) {
     closeNavAndFooter();
