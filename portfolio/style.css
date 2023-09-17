@@ -206,6 +206,8 @@ main {
     width: 100%;
     background-image: url('img/IMG_0419.JPG12.JPG');
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     background-attachment: fixed;
     display: flex;
     justify-content: center;
@@ -315,11 +317,15 @@ main {
     }
 }
 /* Dodaj tło dla ekranów o szerokości 670px i mniejszych */
-@media only screen and (max-width: 670px) {
+/* @media only screen and (max-width: 670px) {
     #home {
         background-image: url('./img/me1.JPG');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
     }
-}
+} */
+
 /* about me */
 #about {
     padding: 70px 30px;
