@@ -236,7 +236,7 @@ main {
     letter-spacing: -1px;
     margin-bottom: 10px;
     line-height: 70px;
-    margin-right: 450px;
+    margin-right: 260px;
 }
 
 #home .home-row h1 span {
@@ -287,6 +287,15 @@ main {
     }
 }
 
+@media only screen and (max-width: 1350px) {
+    #home .home-row h1 {
+        margin-left: 360px;
+    }
+
+    #home .home-row p {
+        margin-left: 360px;
+    }
+}
 @media only screen and (max-width: 1024px) {
     #home .home-row h1 {
         margin-left: 360px;
@@ -316,6 +325,7 @@ main {
         margin-left: 340px;
     }
 }
+
 /* Dodaj tło dla ekranów o szerokości 670px i mniejszych */
 @media only screen and (max-width: 670px) {
     #home {
@@ -951,17 +961,18 @@ button:hover {
     color: var(--bgColor);
 }
 
-@media only screen and (max-width:800px){
+@media only screen and (max-width:800px) {
     #contact {
         padding: 50px;
     }
-    
+
     #contact .contact-row {
         flex-direction: column;
         gap: 10px;
     }
 }
-@media only screen and (max-width:500px){
+
+@media only screen and (max-width:500px) {
     #contact {
         padding: 50px 10px;
     }
