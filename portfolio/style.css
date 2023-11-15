@@ -370,7 +370,7 @@ main {
 /* Dodaj tło dla ekranów o szerokości 670px i mniejszych */
 @media only screen and (max-width: 670px) {
     #home {
-        background-image: url('./img/me1.JPG');
+        /* background-image: url('./img/me1.JPG'); */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
