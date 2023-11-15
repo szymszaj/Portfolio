@@ -369,9 +369,7 @@ main {
 
 @media only screen and (max-width: 670px) {
     #home {
-        /* background-image: url('./img/me1.JPG'); */
         background-image: url('./img/software-3682509_1920.jpg');
-        /* background-image: url(./img/world-wide-web-7109276_1920.jpg); */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
