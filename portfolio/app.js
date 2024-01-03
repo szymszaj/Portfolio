@@ -8,14 +8,13 @@ MenuBtn.addEventListener('click', function (e) {
 //animation 
 let typed = new Typed('.auto-input', {
     //tekst do zmiany 
-    strings: ['Początkujący Front-End Developer!', 'Technik Geodeta!'],
+    strings: ['Stażysta Front-End Developer!', 'Technik Geodeta!'],
     typeSpeed: 100,
     backSpeed: 100,
     backDelay: 2000,
     loop: true,
 })
 
- // Pobierz element span, który zawiera rok
  const copyrightElement = document.getElementById("copyright");
  // Funkcja do aktualizacji roku
  function updateYear() {
