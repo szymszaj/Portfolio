@@ -1,60 +1,60 @@
-let MenuBtn = document.getElementById('MenuBtn')
-MenuBtn.addEventListener('click', function (e) {
-    document.querySelector('body').classList.toggle('mobile-nav-active')
+let MenuBtn = document.getElementById("MenuBtn");
+MenuBtn.addEventListener("click", function (e) {
+  document.querySelector("body").classList.toggle("mobile-nav-active");
 
-    this.classList.toggle('fa-xmark')
-})
+  this.classList.toggle("fa-xmark");
+});
 
-//animation 
-let typed = new Typed('.auto-input', {
-    //tekst do zmiany 
-    strings: ['Stażysta Front-End Developer!', 'Technik Geodeta!'],
-    typeSpeed: 100,
-    backSpeed: 100,
-    backDelay: 2000,
-    loop: true,
-})
+// Animation
+let typed = new Typed(".auto-input", {
+  // Text to change
+  strings: ["Front-End Developer Intern!", "Geodetic Technician!"],
+  typeSpeed: 100,
+  backSpeed: 100,
+  backDelay: 2000,
+  loop: true,
+});
 
- const copyrightElement = document.getElementById("copyright");
- // Funkcja do aktualizacji roku
- function updateYear() {
-   const currentYear = new Date().getFullYear();
-   copyrightElement.textContent = `&copy; ${currentYear}`;
- }
- // Wywołaj funkcję aktualizującą rok
- updateYear();
- // Ustaw interwał do sprawdzania zmiany roku co minutę
- setInterval(updateYear, 60000); // Możesz dostosować częstotliwość do swoich potrzeb
-//plynne przewijanie po nacisnięciu na odnosnik w nawigacji 
- document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
+const copyrightElement = document.getElementById("copyright");
+// Function to update the year
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  copyrightElement.textContent = `&copy; ${currentYear}`;
+}
+// Call the function to update the year
+updateYear();
+// Set an interval to check for year changes every minute
+setInterval(updateYear, 60000); // You can adjust the frequency to your needs
+
+// Smooth scrolling when clicking on a link in the navigation
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
     e.preventDefault();
 
-    const targetId = this.getAttribute('href').substring(1);
+    const targetId = this.getAttribute("href").substring(1);
     const targetElement = document.getElementById(targetId);
 
     if (targetElement) {
       targetElement.scrollIntoView({
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   });
 });
 
-
-//zamykanie odnosnika po nacisnieciu 
+// Closing the navigation and footer on click
 function closeNavAndFooter() {
   const nav = document.querySelector("header");
-  const footer = document.querySelector(".footer")
-// Ukryj nawigację
+  const footer = document.querySelector(".footer");
+  // Hide the navigation
   nav.style.left = "-300px";
- // Ukryj stopkę
-  footer.style.bottom = "-80px"; // Możesz dostosować wartość bottom do preferencji
+  // Hide the footer
+  footer.style.bottom = "-80px"; // You can adjust the bottom value to your preference
 }
 function openNavAndFooter() {
   const nav = document.querySelector("header");
   const footer = document.querySelector(".footer");
-  // Po kliknięciu w przycisk MenuBtn, pokaż nawigację i stopkę
+  // On MenuBtn click, show the navigation and footer
   nav.style.left = "0";
   footer.style.bottom = "0";
 }
@@ -64,8 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
   links.forEach((link) => {
     link.addEventListener("click", () => {
       if (window.innerWidth <= 992) {
-        // Wywołaj funkcję closeNavAndFooter() z opóźnieniem, aby zsynchronizować zamykanie nawigacji i stopki
-        setTimeout(closeNavAndFooter, 400); // 400 ms (możesz dostosować czas do swoich preferencji)
+        // Call the closeNavAndFooter() function with a delay to synchronize the closing of navigation and footer
+        setTimeout(closeNavAndFooter, 400); // 400 ms (you can adjust the time to your preference)
       }
     });
   });
@@ -76,19 +76,18 @@ document.addEventListener("DOMContentLoaded", function () {
       closeNavAndFooter();
     }
   });
-  // Obsługa zdarzenia resize
+  // Handling the resize event
   window.addEventListener("resize", () => {
     if (window.innerWidth > 992) {
-      // Jeśli szerokość ekranu jest większa niż 992px, pokaż nawigację i stopkę
+      // If the screen width is greater than 992px, show the navigation and footer
       openNavAndFooter();
     } else {
-      // W przeciwnym razie ukryj nawigację i stopkę
+      // Otherwise, hide the navigation and footer
       closeNavAndFooter();
     }
   });
-  // Wywołaj funkcję closeNavAndFooter() przy załadowaniu strony, jeśli szerokość ekranu jest mniejsza lub równa 992px
+  // Call the closeNavAndFooter() function on page load if the screen width is less than or equal to 992px
   if (window.innerWidth <= 992) {
     closeNavAndFooter();
   }
 });
-
