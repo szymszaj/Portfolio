@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 const ageElement = document.getElementById("age");
 
-// 
+// Age calculation based on date of birth
 function calculateAge(birthDate) {
   const currentDate = new Date();
   const diff = currentDate - birthDate;
