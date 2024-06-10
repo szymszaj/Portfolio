@@ -8,8 +8,8 @@
 }
 
 :root {
-  --black: #07101d;
-  --themColor: #00a78e;
+  --black: #0d1117;
+  --themColor: #00967f;
   --iconColor: #2c2f3f;
   --textColor: #525252;
   --bgColor: #f7f7f7;
@@ -226,7 +226,7 @@ main {
 #home {
   height: 100vh;
   width: 100%;
-  background-image: url("img/IMG_0419.JPG12.JPG");
+  background-image: url("./img/PC.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -348,7 +348,7 @@ main {
 
 @media only screen and (max-width: 670px) {
   #home {
-    background-image: url("./img/software-3682509_1920.jpg");
+    background-image: url("./img/phone.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -392,7 +392,7 @@ main {
 }
 
 #about .about-col .img-col img {
-  width: 100%;
+  width: 80%;
 }
 
 #about .about-col .img-col .info-col {
@@ -913,6 +913,7 @@ main {
   box-shadow: 0 0 20px rgba(0, 0, 0, 20%);
   border-radius: 8px;
   padding: 30px;
+  height: 20%;
 }
 
 #contact .contact-row .contact-right .icon-box {
@@ -940,7 +941,7 @@ button {
 }
 
 button:hover {
-  transform: scale(0.9);
+  transform: scale(0.98);
   color: var(--black);
 }
 
