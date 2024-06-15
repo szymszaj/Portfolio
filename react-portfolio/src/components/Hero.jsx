@@ -1,5 +1,5 @@
 import { HERO_CONTENT } from "../constants";
-import profilePic from "../assets/profile.jpg";
+import VSCODE from "../assets/3.png";
 
 const Hero = () => {
   return (
@@ -18,9 +18,9 @@ const Hero = () => {
             </p>
           </div>
         </div>
-        <div className="w-full lg:w-1/3 lg:p-8">
+        <div className="w-full lg:w-1/2 lg:p-8">
           <div className="flex justify-center">
-            <img className="rounded-2xl" src={profilePic} alt="Szymon" />
+            <img className="rounded-2xl" src={VSCODE} alt="Szymon" />
           </div>
         </div>
       </div>

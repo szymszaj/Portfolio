@@ -1,5 +1,5 @@
-import aboutImg from "../assets/about.jpg";
 import { ABOUT_TEXT } from "../constants";
+import profilePic from "../assets/profile.jpg";
 
 const About = () => {
   return (
@@ -9,9 +9,9 @@ const About = () => {
         <span className="text-neutral-500"> Me</span>
       </h2>
       <div className="flex flex-wrap">
-        <div className="w-full lg:w-1/2 lg:p-8">
+        <div className="w-full lg:w-1/3 lg:p-8">
           <div className="flex items-center justify-center">
-            <img className="rounded-2xl" src={aboutImg} alt="about" />
+            <img className="rounded-2xl" src={profilePic} alt="about" />
           </div>
         </div>
         <div className="w-full lg:w-1/2">
