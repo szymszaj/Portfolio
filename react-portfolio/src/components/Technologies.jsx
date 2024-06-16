@@ -13,16 +13,16 @@ const Technologies = () => {
           <RiReactjsLine className="text-7xl text-cyan-400" />
         </div>
         <div className="rounded-2xl border-4 border-neutral-800 p-4">
-          <RiJavascriptFill className="text-7xl text-cyan-400" />
+          <RiJavascriptFill className="text-7xl text-yellow-300" />
         </div>
         <div className="rounded-2xl border-4 border-neutral-800 p-4">
-          <RiTailwindCssFill className="text-7xl text-cyan-400" />
+          <RiTailwindCssFill className="text-7xl" />
         </div>
         <div className="rounded-2xl border-4 border-neutral-800 p-4">
-          <RiHtml5Line className="text-7xl text-cyan-400" />
+          <RiHtml5Line className="text-7xl text-red-500" />
         </div>
         <div className="rounded-2xl border-4 border-neutral-800 p-4">
-          <RiCss3Fill className="text-7xl text-cyan-400" />
+          <RiCss3Fill className="text-7xl text-blue-800" />
         </div>
       </div>
     </div>
