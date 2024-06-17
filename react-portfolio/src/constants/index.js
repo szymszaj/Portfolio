@@ -21,4 +21,62 @@ export const EXPERIENCES = [
       "Playwright",
     ],
   },
+  {
+    year: "2023",
+    role: "Web Development Assistant",
+    company: "",
+    description: `Pomoc przy stronach internetowych, tworzenie komponentów oraz poprawa strony w WordPress. Dodawanie reklam w Google Ads oraz Facebook.`,
+    technologies: ["WordPress", "Google Ads", "Facebook Ads"],
+  },
 ];
+
+export const PROJECTS = [
+  {
+    title: "Sklep Internetowy",
+    image: project1,
+    description:
+      "Stworzyłem czysty i profesjonalny wygląd sklepu internetowego, wykorzystując React i Tailwind CSS. Byłem odpowiedzialny za zaprojektowanie i wdrożenie całego wyglądu sklepu, zapewniając estetyczne i responsywne doświadczenie użytkownika.",
+    technologies: ["HTML", "CSS", "React", "JavaScript", "Tailwind"],
+  },
+  {
+    title: "Gra przy użyciu JavaScript",
+    image: project2,
+    description:
+      "Moje projekty na GitHub, gra, która ćwiczy umiejętności i szkolenie w JavaScript",
+    technologies: ["HTML", "CSS", "JavaScript"],
+  },
+  {
+    title: "Strona Portfolio",
+    image: project3,
+    description:
+      "Moje projekty na GitHub, osobista strona portfolio prezentująca projekty, umiejętności i informacje kontaktowe.",
+    technologies: ["HTML", "CSS", "SCSS", "JavaScript"],
+  },
+  {
+    title: "Moja pierwsza strona Bootstrap",
+    image: project4,
+    description:
+      "Moje projekty na GitHub, responsywna strona stworzona przy pomocy Bootstrapa",
+    technologies: ["HTML", "CSS", "Bootstrap"],
+  },
+  {
+    title: "Ćwiczenie Grid",
+    image: project4,
+    description:
+      "Moje projekty na GitHub, tworzenie responsywnej strony używając Grid",
+    technologies: ["HTML", "CSS", "JavaScript"],
+  },
+  {
+    title: "Ćwiczenie Flexbox",
+    image: project4,
+    description:
+      "Moje projekty na GitHub, tworzenie responsywnej strony używając Flexbox",
+    technologies: ["HTML", "CSS", "JavaScript"],
+  },
+];
+
+export const CONTACT = {
+  address: "Polska",
+  phoneNo: "+48 695615115 ",
+  email: "szymonzych868@gmail.com",
+};
