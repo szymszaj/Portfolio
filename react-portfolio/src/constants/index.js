@@ -1,5 +1,5 @@
 import project1 from "../assets/projects/project-1.jpg";
-import project2 from "../assets/projects/project-2.jpg";
+import project2 from "../assets/projects/game.png";
 import project3 from "../assets/projects/project-3.jpg";
 import project4 from "../assets/projects/project-4.jpg";
 
@@ -61,14 +61,14 @@ export const PROJECTS = [
   },
   {
     title: "Ćwiczenie Grid",
-    image: project4,
+    image: project1,
     description:
       "Moje projekty na GitHub, tworzenie responsywnej strony używając Grid",
     technologies: ["HTML", "CSS", "JavaScript"],
   },
   {
     title: "Ćwiczenie Flexbox",
-    image: project4,
+    image: project3,
     description:
       "Moje projekty na GitHub, tworzenie responsywnej strony używając Flexbox",
     technologies: ["HTML", "CSS", "JavaScript"],
