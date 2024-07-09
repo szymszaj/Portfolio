@@ -39,6 +39,13 @@ export const PROJECTS = [
     technologies: ["HTML", "CSS", "React", "JavaScript", "Tailwind"],
   },
   {
+    title: "Testy Jednostkowe",
+    image: project4,
+    description:
+      "Tworzenie aplikacji z testami jednostkowymi. W projekcie implementowałem testy jednostkowe, aby zapewnić wysoką jakość kodu i niezawodność aplikacji.",
+    technologies: ["React.js", "JavaScript", "Unit Testing"],
+  },
+  {
     title: "Gra przy użyciu JavaScript",
     image: project2,
     description:
