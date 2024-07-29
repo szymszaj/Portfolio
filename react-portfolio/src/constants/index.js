@@ -12,7 +12,7 @@ export const EXPERIENCES = [
     year: "2023 - Present",
     role: "Junior Front-end Developer",
     company: "Monogo",
-    description: `Tworzenie sklepu internetowego przy użyciu React.js i Tailwind CSS. Obsługa panelu Magento 2. Dodawanie data-testID do projektu oraz tworzenie i wdrażanie testów automatyzujących dla bloga na stronie sklepu. Współpraca z zespołem projektowym w celu określenia wymagań. Rozwój gita, React.js oraz JavaScript w trakcie realizacji projektu. `,
+    description: `Tworzenie sklepu internetowego przy użyciu React.js i Tailwind CSS. Obsługa panelu Magento 2. Tworzenie i wdrażanie testów automatyzujących dla bloga na stronie sklepu.  Tworzenie testów jednostkowych dla aplikacji na projekcie klienckim. Współpraca z zespołem projektowym w celu określenia wymagań. Rozwój gita, React.js oraz JavaScript w trakcie realizacji projektu. `,
     technologies: [
       "Javascript",
       "React.js",
