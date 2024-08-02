@@ -1,14 +1,14 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #333;
 }
 main {
-    text-align: center;
+  text-align: center;
 }
 .img {
-    max-width: 100%;
+  max-width: 100%;
 }
