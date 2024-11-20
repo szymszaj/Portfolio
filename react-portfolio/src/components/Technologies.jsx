@@ -1,8 +1,8 @@
 import { RiReactjsLine } from "react-icons/ri";
 import { RiJavascriptFill } from "react-icons/ri";
 import { RiTailwindCssFill } from "react-icons/ri";
-import { RiHtml5Line } from "react-icons/ri";
 import { RiCss3Fill } from "react-icons/ri";
+import { RiNextjsFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 
 const iconVariants = (duration) => ({
@@ -44,7 +44,7 @@ const Technologies = () => {
           animate="animate"
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
-          <RiJavascriptFill className="text-7xl text-yellow-300" />
+          <RiNextjsFill className="text-7xl text-neutral-50" />
         </motion.div>
         <motion.div
           variants={iconVariants(5)}
@@ -52,7 +52,7 @@ const Technologies = () => {
           animate="animate"
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
-          <RiTailwindCssFill className="text-7xl" />
+          <RiTailwindCssFill className="text-7xl text-cyan-400" />
         </motion.div>
         <motion.div
           variants={iconVariants(2)}
@@ -60,7 +60,7 @@ const Technologies = () => {
           animate="animate"
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
-          <RiHtml5Line className="text-7xl text-red-500" />
+          <RiJavascriptFill className="text-7xl text-yellow-300" />
         </motion.div>
         <motion.div
           variants={iconVariants(6)}
