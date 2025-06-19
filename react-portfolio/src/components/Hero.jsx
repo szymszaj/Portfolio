@@ -1,6 +1,7 @@
 import { HERO_CONTENT } from "../constants";
 import VSCODE from "../assets/3.png";
 import { motion } from "framer-motion";
+import Typewriter from "./Typewriter";
 
 const container = (delay) => ({
   hidden: { x: -100, opacity: 0 },
@@ -10,6 +11,12 @@ const container = (delay) => ({
     transition: { duration: 0.5, delay: delay },
   },
 });
+
+const HERO_TITLES = [
+  "Junior Front-end Developer",
+  "React Enthusiast",
+  "Next.js & TypeScript Fan",
+];
 
 const Hero = () => {
   return (
@@ -29,9 +36,14 @@ const Hero = () => {
               variants={container(0.5)}
               initial="hidden"
               animate="visible"
-              className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-3xl tracking-tight text-transparent"
+              className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-3xl tracking-tight text-transparent h-12 min-h-[48px] flex items-center"
             >
-              Junior Front-end Developer
+              <Typewriter
+                words={HERO_TITLES}
+                typingSpeed={80}
+                deletingSpeed={40}
+                pause={1400}
+              />
             </motion.span>
             <motion.p
               variants={container(1)}
