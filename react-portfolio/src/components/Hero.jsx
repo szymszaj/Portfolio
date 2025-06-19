@@ -44,7 +44,6 @@ const Hero = () => {
                 deletingSpeed={40}
                 pause={1400}
               />
-              Front-end Developer
             </motion.span>
             <motion.p
               variants={container(1)}
