@@ -19,6 +19,7 @@ export const EXPERIENCES = [
       "Tailwind CSS",
       "Next.js",
       "WordPress",
+      "API Integration",
     ],
   },
 
@@ -48,11 +49,34 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "Strona z ofertami w Next.js",
+    image: project1,
+    description:
+      "Stworzenie nowoczesnej i szybkiej strony z ofertami od zera w technologii Next.js. Projekt obejmował zaprojektowanie i wdrożenie dynamicznego systemu prezentacji ofert, z możliwością łatwego zarządzania treścią oraz pełną responsywnością. Zastosowane rozwiązania umożliwiają łatwą rozbudowę oraz optymalizację SEO.",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind"],
+  },
+
+  {
+    title: "Stały support stron internetowych",
+    image: project4,
+    description:
+      "Zapewniam stały support i utrzymanie stron internetowych. Obejmuje to aktualizacje, monitoring, rozwiązywanie problemów technicznych, a także rozwijanie i ulepszanie istniejących funkcjonalności. Gwarantuję szybki czas reakcji i indywidualne podejście do każdego klienta.",
+    technologies: ["Next.js", "WordPress", "React", "Support", "Maintenance"],
+  },
+  {
+    title:
+      "Tworzenie strony internetowej korzystajac z  custom components + integracja z Builder.io",
+    image: project1,
+    description:
+      "Projektowanie i wdrożenie nowoczesnej strony internetowej z użyciem autorskich, kastomowych komponentów w Next, w pełni zintegrowanych z systemem zarządzania treścią Builder.io. Pozwala to na łatwe rozbudowywanie strony przez klienta, dynamiczne zarządzanie treścią oraz szybkie wdrażanie nowych sekcji lub podstron bez konieczności ingerencji w kod. Rozwiązanie zapewnia wysoką wydajność, elastyczność i pełną responsywność.",
+    technologies: ["React", "Next.js", "TypeScript", "Builder.io", "Tailwind"],
+  },
+  {
     title: "Sklep Internetowy",
     image: project1,
     description:
       "Stworzyłem czysty i profesjonalny wygląd sklepu internetowego, wykorzystując React i Tailwind CSS. Byłem odpowiedzialny za zaprojektowanie i wdrożenie całego wyglądu sklepu, zapewniając estetyczne i responsywne doświadczenie użytkownika.",
-    technologies: ["HTML", "CSS", "React", "JavaScript", "Tailwind"],
+    technologies: ["React", "JavaScript", "Tailwind", "headless"],
   },
   {
     title: "Testy Jednostkowe",
@@ -61,6 +85,34 @@ export const PROJECTS = [
       "Tworzenie aplikacji z testami jednostkowymi. W projekcie implementowałem testy jednostkowe, aby zapewnić wysoką jakość kodu i niezawodność aplikacji.",
     technologies: ["React.js", "JavaScript", "Unit Testing"],
   },
+  // {
+  //   title: "Strona internetowa – storytelling",
+  //   image: project1,
+  //   description:
+  //     "Kompleksowe wykonanie strony internetowej prezentującej storytelling marki wraz z atrakcyjną szatą graficzną, animacjami i dbałością o UX/UI. Projekt dostępny pod adresem: [the-story-behind-your-website.vercel.app](https://the-story-behind-your-website.vercel.app/)",
+  //   technologies: [
+  //     "Next.js",
+  //     "React",
+  //     "TypeScript",
+  //     "Tailwind",
+  //     "Framer Motion",
+  //   ],
+  //   link: "https://the-story-behind-your-website.vercel.app/",
+  // },
+  // {
+  //   title: "Strona internetowa dla prywatnego obiektu noclegowego",
+  //   image: project1,
+  //   description:
+  //     "Projekt i wdrożenie strony internetowej dla apartamentu na wynajem. Strona prezentuje ofertę, galerię zdjęć oraz umożliwia kontakt z właścicielem. Projekt dostępny pod adresem: [apartament-u-moniki.vercel.app](https://apartament-u-moniki.vercel.app/)",
+  //   technologies: [
+  //     "Next.js",
+  //     "React",
+  //     "TypeScript",
+  //     "Tailwind",
+  //     "Framer Motion",
+  //   ],
+  //   link: "https://apartament-u-moniki.vercel.app/",
+  // },
   {
     title: "Gra przy użyciu JavaScript",
     image: project2,
@@ -74,27 +126,6 @@ export const PROJECTS = [
     description:
       "Moje projekty na GitHub, osobista strona portfolio prezentująca projekty, umiejętności i informacje kontaktowe.",
     technologies: ["HTML", "CSS", "SCSS", "JavaScript"],
-  },
-  {
-    title: "Moja pierwsza strona Bootstrap",
-    image: project4,
-    description:
-      "Moje projekty na GitHub, responsywna strona stworzona przy pomocy Bootstrapa",
-    technologies: ["HTML", "CSS", "Bootstrap"],
-  },
-  {
-    title: "Ćwiczenie Grid",
-    image: project1,
-    description:
-      "Moje projekty na GitHub, tworzenie responsywnej strony używając Grid",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    title: "Ćwiczenie Flexbox",
-    image: project3,
-    description:
-      "Moje projekty na GitHub, tworzenie responsywnej strony używając Flexbox",
-    technologies: ["HTML", "CSS", "JavaScript"],
   },
 ];
 
