@@ -36,7 +36,7 @@ const Hero = () => {
               variants={container(0.5)}
               initial="hidden"
               animate="visible"
-              className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-3xl tracking-tight text-transparent h-12 min-h-[48px] flex items-center"
+              className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-xl sm:text-2xl md:text-3xl tracking-tight text-transparent flex items-center flex-wrap break-words w-full"
             >
               <Typewriter
                 words={HERO_TITLES}
