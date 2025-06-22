@@ -1,15 +1,17 @@
 import { ABOUT_TEXT } from "../constants";
 import profilePic from "../assets/profile.jpg";
 import { motion } from "framer-motion";
+import StarsBackground from "./StarsBackground";
 
 const About = () => {
   return (
-    <div className="border-b border-neutral-900 pb-4">
-      <h2 className="my-20 text-center text-4xl">
+    <div className="relative border-b border-neutral-900 pb-4 overflow-hidden">
+      <StarsBackground />
+      <h2 className="my-20 text-center text-4xl relative z-10">
         About
         <span className="text-neutral-500"> Me</span>
       </h2>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap relative z-10">
         <motion.div
           whileInView={{ opacity: 1, x: 0 }}
           initial={{ opacity: 0, x: -100 }}
