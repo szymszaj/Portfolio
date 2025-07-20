@@ -12,17 +12,26 @@ export const EXPERIENCES = [
     year: "2025 - Present",
     role: "Junior Front-end Developer",
     company: "Indigital",
-    description: `Tworzenie stron internetowych i aplikacji z wykorzystaniem technologii React.js oraz Next.js. Praca z systemem zarządzania treścią WordPress, w tym tworzenie i modyfikacja motywów. Udział w projektach e-commerce, gdzie odpowiedzialność obejmowała integrację z API oraz optymalizację wydajności aplikacji.`,
+    description: [
+      "Integracja frontendu z systemem WordPress (tworzenie tematów i komunikacja przez API).",
+      "Tworzenie nowych projektów stron internetowych od podstaw, zgodnie z dostarczonymi projektami UI.",
+      "Projektowanie i implementacja komponentów frontendowych pod nowe inwestycje (nowe strony) w oparciu o makiety z Figma.",
+      "Aktualizacja danych i rozwiązywanie problemów technicznych pojawiających się na stronach produkcyjnych.",
+      "Praca z repozytorium, dbanie o porządek w kodzie i commity zgodnie z workflow.",
+      "Współpraca z zespołem grafików, testerów i backendowców.",
+      "Ciągła aktualizacja i utrzymanie istniejących rozwiązań frontendowych.",
+      "Implementacja responsywnego designu dla różnych urządzeń i przeglądarek.",
+      "Samodzielne wykonywanie przydzielonych zadań.",
+    ],
     technologies: [
-      "Javascript",
-      "React.js",
-      "Tailwind CSS",
+      "JavaScript",
+      "Gatsby",
       "Next.js",
+      "Figma",
       "WordPress",
       "API Integration",
     ],
   },
-
   {
     year: "2023 - 2025",
     role: "Junior Front-end Developer",
@@ -48,43 +57,42 @@ export const EXPERIENCES = [
 ];
 
 export const PROJECTS = [
-  {
-    title: "Strona z ofertami w Next.js",
-    image: project1,
-    description:
-      "Stworzenie nowoczesnej i szybkiej strony z ofertami od zera w technologii Next.js. Projekt obejmował zaprojektowanie i wdrożenie dynamicznego systemu prezentacji ofert, z możliwością łatwego zarządzania treścią oraz pełną responsywnością. Zastosowane rozwiązania umożliwiają łatwą rozbudowę oraz optymalizację SEO.",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind"],
-  },
-
-  {
-    title: "Stały support stron internetowych",
-    image: project4,
-    description:
-      "Zapewniam stały support i utrzymanie stron internetowych. Obejmuje to aktualizacje, monitoring, rozwiązywanie problemów technicznych, a także rozwijanie i ulepszanie istniejących funkcjonalności. Gwarantuję szybki czas reakcji i indywidualne podejście do każdego klienta.",
-    technologies: ["Next.js", "WordPress", "React", "Support", "Maintenance"],
-  },
-  {
-    title:
-      "Tworzenie strony internetowej korzystajac z  custom components + integracja z Builder.io",
-    image: project1,
-    description:
-      "Projektowanie i wdrożenie nowoczesnej strony internetowej z użyciem autorskich, kastomowych komponentów w Next, w pełni zintegrowanych z systemem zarządzania treścią Builder.io. Pozwala to na łatwe rozbudowywanie strony przez klienta, dynamiczne zarządzanie treścią oraz szybkie wdrażanie nowych sekcji lub podstron bez konieczności ingerencji w kod. Rozwiązanie zapewnia wysoką wydajność, elastyczność i pełną responsywność.",
-    technologies: ["React", "Next.js", "TypeScript", "Builder.io", "Tailwind"],
-  },
-  {
-    title: "Sklep Internetowy",
-    image: project1,
-    description:
-      "Stworzyłem czysty i profesjonalny wygląd sklepu internetowego, wykorzystując React i Tailwind CSS. Byłem odpowiedzialny za zaprojektowanie i wdrożenie całego wyglądu sklepu, zapewniając estetyczne i responsywne doświadczenie użytkownika.",
-    technologies: ["React", "JavaScript", "Tailwind", "headless"],
-  },
-  {
-    title: "Testy Jednostkowe",
-    image: project4,
-    description:
-      "Tworzenie aplikacji z testami jednostkowymi. W projekcie implementowałem testy jednostkowe, aby zapewnić wysoką jakość kodu i niezawodność aplikacji.",
-    technologies: ["React.js", "JavaScript", "Unit Testing"],
-  },
+  // {
+  //   title: "Strona z ofertami w Next.js",
+  //   image: project1,
+  //   description:
+  //     "Stworzenie nowoczesnej i szybkiej strony z ofertami od zera w technologii Next.js. Projekt obejmował zaprojektowanie i wdrożenie dynamicznego systemu prezentacji ofert, z możliwością łatwego zarządzania treścią oraz pełną responsywnością. Zastosowane rozwiązania umożliwiają łatwą rozbudowę oraz optymalizację SEO.",
+  //   technologies: ["Next.js", "React", "TypeScript", "Tailwind"],
+  // },
+  // {
+  //   title: "Stały support stron internetowych",
+  //   image: project4,
+  //   description:
+  //     "Zapewniam stały support i utrzymanie stron internetowych. Obejmuje to aktualizacje, monitoring, rozwiązywanie problemów technicznych, a także rozwijanie i ulepszanie istniejących funkcjonalności. Gwarantuję szybki czas reakcji i indywidualne podejście do każdego klienta.",
+  //   technologies: ["Next.js", "WordPress", "React", "Support", "Maintenance"],
+  // },
+  // {
+  //   title:
+  //     "Tworzenie strony internetowej korzystajac z  custom components + integracja z Builder.io",
+  //   image: project1,
+  //   description:
+  //     "Projektowanie i wdrożenie nowoczesnej strony internetowej z użyciem autorskich, kastomowych komponentów w Next, w pełni zintegrowanych z systemem zarządzania treścią Builder.io. Pozwala to na łatwe rozbudowywanie strony przez klienta, dynamiczne zarządzanie treścią oraz szybkie wdrażanie nowych sekcji lub podstron bez konieczności ingerencji w kod. Rozwiązanie zapewnia wysoką wydajność, elastyczność i pełną responsywność.",
+  //   technologies: ["React", "Next.js", "TypeScript", "Builder.io", "Tailwind"],
+  // },
+  // {
+  //   title: "Sklep Internetowy",
+  //   image: project1,
+  //   description:
+  //     "Stworzyłem czysty i profesjonalny wygląd sklepu internetowego, wykorzystując React i Tailwind CSS. Byłem odpowiedzialny za zaprojektowanie i wdrożenie całego wyglądu sklepu, zapewniając estetyczne i responsywne doświadczenie użytkownika.",
+  //   technologies: ["React", "JavaScript", "Tailwind", "headless"],
+  // },
+  // {
+  //   title: "Testy Jednostkowe",
+  //   image: project4,
+  //   description:
+  //     "Tworzenie aplikacji z testami jednostkowymi. W projekcie implementowałem testy jednostkowe, aby zapewnić wysoką jakość kodu i niezawodność aplikacji.",
+  //   technologies: ["React.js", "JavaScript", "Unit Testing"],
+  // },
   // {
   //   title: "Strona internetowa – storytelling",
   //   image: project1,
@@ -113,20 +121,20 @@ export const PROJECTS = [
   //   ],
   //   link: "https://apartament-u-moniki.vercel.app/",
   // },
-  {
-    title: "Gra przy użyciu JavaScript",
-    image: project2,
-    description:
-      "Moje projekty na GitHub, gra, która ćwiczy umiejętności i szkolenie w JavaScript",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    title: "Strona Portfolio",
-    image: project3,
-    description:
-      "Moje projekty na GitHub, osobista strona portfolio prezentująca projekty, umiejętności i informacje kontaktowe.",
-    technologies: ["HTML", "CSS", "SCSS", "JavaScript"],
-  },
+  // {
+  //   title: "Gra przy użyciu JavaScript",
+  //   image: project2,
+  //   description:
+  //     "Moje projekty na GitHub, gra, która ćwiczy umiejętności i szkolenie w JavaScript",
+  //   technologies: ["HTML", "CSS", "JavaScript"],
+  // },
+  // {
+  //   title: "Strona Portfolio",
+  //   image: project3,
+  //   description:
+  //     "Moje projekty na GitHub, osobista strona portfolio prezentująca projekty, umiejętności i informacje kontaktowe.",
+  //   technologies: ["HTML", "CSS", "SCSS", "JavaScript"],
+  // },
 ];
 
 export const CONTACT = {
