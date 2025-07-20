@@ -3,6 +3,8 @@ import { RiJavascriptFill } from "react-icons/ri";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { RiCss3Fill } from "react-icons/ri";
 import { RiNextjsFill } from "react-icons/ri";
+import { RiGatsbyFill } from "react-icons/ri";
+import { FaWordpress } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const iconVariants = (duration) => ({
@@ -27,7 +29,7 @@ const Technologies = () => {
         transition={{ duration: 1.5 }}
         className="my-20 text-center text-4xl"
       >
-        Technologies
+        Technologie
       </motion.h1>
       <motion.div className="flex flex-wrap items-center justify-center gap-4">
         <motion.div
@@ -69,6 +71,22 @@ const Technologies = () => {
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
           <RiCss3Fill className="text-7xl text-blue-800" />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(4)}
+          initial="initial"
+          animate="animate"
+          className="rounded-2xl border-4 border-neutral-800 p-4"
+        >
+          <RiGatsbyFill className="text-7xl text-purple-600" />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(3.5)}
+          initial="initial"
+          animate="animate"
+          className="rounded-2xl border-4 border-neutral-800 p-4"
+        >
+          <FaWordpress className="text-7xl text-blue-600" />
         </motion.div>
       </motion.div>
     </div>

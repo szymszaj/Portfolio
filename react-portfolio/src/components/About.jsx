@@ -8,8 +8,7 @@ const About = () => {
     <div className="relative border-b border-neutral-900 pb-4 overflow-hidden">
       <StarsBackground />
       <h2 className="my-20 text-center text-4xl relative z-10">
-        About
-        <span className="text-neutral-500"> Me</span>
+        O <span className="text-neutral-500">Mnie</span>
       </h2>
       <div className="flex flex-wrap relative z-10">
         <motion.div

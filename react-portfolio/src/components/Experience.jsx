@@ -10,7 +10,7 @@ const Experience = () => {
         transition={{ duration: 0.5 }}
         className="my-20 text-center text-4xl"
       >
-        Experience
+        Doświadczenie
       </motion.h2>
       <div className="">
         {EXPERIENCES.map((experience, index) => (

@@ -1,6 +1,5 @@
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Navbar = () => {
@@ -18,7 +17,6 @@ const Navbar = () => {
             icon: FaLinkedin,
           },
           { href: "https://github.com/szymszaj", icon: FaGithub },
-          { href: "https://www.facebook.com", icon: FaFacebook },
           { href: "https://x.com/SzymonZych12", icon: FaXTwitter },
         ].map(({ href, icon: Icon }, index) => (
           <a
@@ -26,10 +24,9 @@ const Navbar = () => {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative text-whitetransition-colors duration-300"
+            className="transition-colors duration-300 no-underline hover:text-purple-400"
           >
             <Icon />
-            <span className="absolute left-0 bottom-[-8px] h-[2px] w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
           </a>
         ))}
       </div>

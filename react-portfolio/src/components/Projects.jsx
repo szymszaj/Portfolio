@@ -40,16 +40,15 @@ const Projects = () => {
                 alt={project.title}
                 className="w-full h-full object-cover transition duration-300 group-hover:scale-105 group-hover:brightness-110"
               />
-              {/* Overlay na hover */}
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition bg-black/40"
               >
-                <span className="px-4 py-2 text-sm font-semibold rounded-lg bg-purple-800/80 text-white shadow">
+                {/* <span className="px-4 py-2 text-sm font-semibold rounded-lg bg-purple-800/80 text-white shadow">
                   Zobacz projekt
-                </span>
+                </span> */}
               </a>
             </div>
             <h3 className="text-lg font-semibold mb-1 text-white text-center">
