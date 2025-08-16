@@ -14,7 +14,7 @@ const cardVariants = {
 const Projects = () => {
   return (
     <section className="relative border-b border-neutral-900 pb-20 overflow-hidden">
-      <StarsBackground />
+      {/* <StarsBackground /> */}
       <motion.h2
         whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: -60 }}

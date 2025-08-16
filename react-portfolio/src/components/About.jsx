@@ -6,7 +6,7 @@ import StarsBackground from "./StarsBackground";
 const About = () => {
   return (
     <div className="relative border-b border-neutral-900 pb-4 overflow-hidden">
-      <StarsBackground />
+      {/* <StarsBackground /> */}
       <h2 className="my-20 text-center text-4xl relative z-10">
         O <span className="text-neutral-500">Mnie</span>
       </h2>
