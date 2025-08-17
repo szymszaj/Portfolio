@@ -15,7 +15,7 @@ export const Contact = () => {
         Skontaktuj się ze mną
       </motion.h2>
       <div className="relative z-10 flex flex-col items-center justify-center gap-4 max-w-xl mx-auto px-4 py-10 bg-neutral-950/70 rounded-2xl shadow-xl backdrop-blur-md border border-neutral-800 overflow-hidden">
-        {/* <StarsBackground /> */}
+        <StarsBackground />
         <motion.p
           whileInView={{ opacity: 1, x: 0 }}
           initial={{ opacity: 0, x: -60 }}
