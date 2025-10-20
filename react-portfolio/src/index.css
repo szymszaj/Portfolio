@@ -5,3 +5,27 @@
 :root {
   font-family: "Inter", sans-serif;
 }
+
+.flip-card-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+}
+
+.flip-card-interactive:hover {
+  transform: rotateY(180deg);
+}
+
+.flip-card-interactive.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
