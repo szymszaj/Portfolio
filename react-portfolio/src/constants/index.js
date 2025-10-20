@@ -194,7 +194,7 @@ export const PROJECTS = [
   {
     title: "Strona dla obiektu noclegowego",
     description:
-      "Projekt prywatny — nowoczesna strona dla apartamentu na wynajem. Zrealizowana w React z użyciem Tailwinda i lekkich animacji. Umożliwia prezentację oferty, galerii oraz kontakt z właścicielem. Stworzona od zera, łącznie z projektem graficznym.",
+      "Projekt prywatny:  nowoczesna strona dla apartamentu na wynajem. Zrealizowana w React z użyciem Tailwinda i lekkich animacji. Umożliwia prezentację oferty, galerii oraz kontakt z właścicielem. Stworzona od zera, łącznie z projektem graficznym.",
     technologies: ["React", "Tailwind", "Framer Motion", "TypeScript"],
     image: apartament,
   },
