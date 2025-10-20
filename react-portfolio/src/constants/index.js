@@ -1,10 +1,16 @@
 import project1 from "../assets/projects/project-1.jpg";
-import project2 from "../assets/projects/game.png";
-import project3 from "../assets/projects/project-3.jpg";
-import project4 from "../assets/projects/project-4.jpg";
+import game from "../assets/projects/game.png";
+import apartament from "../assets/projects/apartament.png";
+import GH from "../assets/projects/GH.png";
+import testy from "../assets/projects/testy.jpg";
+import figma from "../assets/projects/figma.jpg";
 import { FiCode, FiUser, FiHeart } from "react-icons/fi";
 
-export const HERO_TITLES = ["Front-end Developer", "Web Application Builder"];
+export const HERO_TITLES = [
+  "Front-end Developer",
+  "Web Application Builder",
+  "Student UEK",
+];
 
 export const HERO_TABS = [
   {
@@ -144,82 +150,69 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
-    title: "Strona z ofertami w Next.js",
+    title: "Platforma z kursami online",
+    description:
+      "Projekt komercyjny oparty o Next.js i WordPress. Odpowiadałem za tworzenie komponentów z Figmy, wdrożenie CMS-a do zarządzania treścią oraz dopracowanie szczegółów pod kątem UX i responsywności. Strona sprzedaje kursy online i jest w pełni edytowalna przez panel WordPressa.",
+    technologies: ["Next.js", "TypeScript", "WordPress", "Figma"],
+    image: figma,
+  },
+  {
+    title: "Strona główna firmy",
+    description:
+      "Tworzenie i wdrażanie komponentów do strony głównej firmy, zbudowanej i zarządzanej przez Builder.io. Odpowiadałem za ok. 60% elementów frontendu — od sekcji hero, przez animacje, po dynamiczne moduły. Dodatkowo tworzyłem podstrony case study na podstawie dokumentacji projektowej oraz dbałem o spójność wizualną całego projektu.",
+    technologies: ["Next.js", "Builder.io", "Framer Motion", "TypeScript"],
+    image: figma,
+  },
+
+  {
+    title: "Budowa stron z Figmy",
+    description:
+      "Realizacja kilku stron internetowych od podstaw — od projektu z Figmy po finalne wdrożenie. Skupienie na czystym kodzie, zgodności z designem i elastyczności komponentów. Każda strona w pełni responsywna i przygotowana pod przyszłą rozbudowę.",
+    technologies: ["Next.js", "React", "TypeScript", "Figma"],
     image: project1,
-    description:
-      "Stworzenie nowoczesnej i szybkiej strony z ofertami od zera w technologii Next.js. Projekt obejmował zaprojektowanie i wdrożenie dynamicznego systemu prezentacji ofert, z możliwością łatwego zarządzania treścią oraz pełną responsywnością. Zastosowane rozwiązania umożliwiają łatwą rozbudowę oraz optymalizację SEO.",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind"],
   },
   {
-    title: "Stały support stron internetowych",
-    image: project4,
+    title: "Integracja sklepu z Magento",
     description:
-      "Zapewniam stały support i utrzymanie stron internetowych. Obejmuje to aktualizacje, monitoring, rozwiązywanie problemów technicznych, a także rozwijanie i ulepszanie istniejących funkcjonalności. Gwarantuję szybki czas reakcji i indywidualne podejście do każdego klienta.",
-    technologies: ["Next.js", "WordPress", "React", "Support", "Maintenance"],
-  },
-  {
-    title:
-      "Tworzenie strony internetowej korzystajac z  custom components + integracja z Builder.io",
-    image: project1,
-    description:
-      "Projektowanie i wdrożenie nowoczesnej strony internetowej z użyciem autorskich, kastomowych komponentów w Next, w pełni zintegrowanych z systemem zarządzania treścią Builder.io. Pozwala to na łatwe rozbudowywanie strony przez klienta, dynamiczne zarządzanie treścią oraz szybkie wdrażanie nowych sekcji lub podstron bez konieczności ingerencji w kod. Rozwiązanie zapewnia wysoką wydajność, elastyczność i pełną responsywność.",
-    technologies: ["React", "Next.js", "TypeScript", "Builder.io", "Tailwind"],
-  },
-  {
-    title: "Sklep Internetowy",
-    image: project1,
-    description:
-      "Stworzyłem czysty i profesjonalny wygląd sklepu internetowego, wykorzystując React i Tailwind CSS. Byłem odpowiedzialny za zaprojektowanie i wdrożenie całego wyglądu sklepu, zapewniając estetyczne i responsywne doświadczenie użytkownika.",
-    technologies: ["React", "JavaScript", "Tailwind", "headless"],
-  },
-  {
-    title: "Testy Jednostkowe",
-    image: project4,
-    description:
-      "Tworzenie aplikacji z testami jednostkowymi. W projekcie implementowałem testy jednostkowe, aby zapewnić wysoką jakość kodu i niezawodność aplikacji.",
-    technologies: ["React.js", "JavaScript", "Unit Testing"],
-  },
-  {
-    title: "Strona internetowa – storytelling",
-    image: project1,
-    description:
-      "Kompleksowe wykonanie strony internetowej prezentującej storytelling marki wraz z atrakcyjną szatą graficzną, animacjami i dbałością o UX/UI. Projekt dostępny pod adresem: [the-story-behind-your-website.vercel.app](https://the-story-behind-your-website.vercel.app/)",
+      "Projekt e-commerce, w którym zajmowałem się stroną UX i utrzymaniem sklepu. Odpowiadałem za dodawanie produktów, poprawki frontendu oraz optymalizację wyglądu i użyteczności. Projekt wymagał łączenia aspektów technicznych z biznesowymi.",
     technologies: [
-      "Next.js",
+      "Magento",
+      "JavaScript",
       "React",
-      "TypeScript",
-      "Tailwind",
-      "Framer Motion",
+      "Tailwind CSS",
+      "Headless CMS",
     ],
-    link: "https://the-story-behind-your-website.vercel.app/",
-  },
-  {
-    title: "Strona internetowa dla prywatnego obiektu noclegowego",
     image: project1,
-    description:
-      "Projekt i wdrożenie strony internetowej dla apartamentu na wynajem. Strona prezentuje ofertę, galerię zdjęć oraz umożliwia kontakt z właścicielem. Projekt dostępny pod adresem: [apartament-u-moniki.vercel.app](https://apartament-u-moniki.vercel.app/)",
-    technologies: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Tailwind",
-      "Framer Motion",
-    ],
-    link: "https://apartament-u-moniki.vercel.app/",
   },
   {
-    title: "Gra przy użyciu JavaScript",
-    image: project2,
+    title: "Testy jednostkowe",
     description:
-      "Moje projekty na GitHub, gra, która ćwiczy umiejętności i szkolenie w JavaScript",
-    technologies: ["HTML", "CSS", "JavaScript"],
+      "W projekcie nordicspirit byłem odpowiedzialny za pisanie testów jednostkowych i automatycznych. Celem było zwiększenie stabilności i jakości kodu. Praca obejmowała testy komponentów, widoków i logiki aplikacji.",
+    technologies: ["React", "TypeScript", "Playwright", "Unit Testing"],
+    image: testy,
   },
   {
-    title: "Strona Portfolio",
-    image: project3,
+    title: "Strona dla obiektu noclegowego",
     description:
-      "Moje projekty na GitHub, osobista strona portfolio prezentująca projekty, umiejętności i informacje kontaktowe.",
-    technologies: ["HTML", "CSS", "SCSS", "JavaScript"],
+      "Projekt prywatny — nowoczesna strona dla apartamentu na wynajem. Zrealizowana w React z użyciem Tailwinda i lekkich animacji. Umożliwia prezentację oferty, galerii oraz kontakt z właścicielem. Stworzona od zera, łącznie z projektem graficznym.",
+    technologies: ["React", "Tailwind", "Framer Motion", "TypeScript"],
+    image: apartament,
+  },
+  {
+    title: "Gra przeglądarkowa w JavaScript",
+    description:
+      "Mały projekt hobbystyczny napisany w czystym JavaScript. Prosta gra, dzięki której rozwijałem logikę programistyczną i pracę z DOM-em. Pozwoliła mi połączyć naukę z zabawą i kreatywnością.",
+    technologies: ["JavaScript", "HTML", "CSS"],
+    image: game,
+    link: "https://szymszaj.github.io/alien-attack/Physics-Game/index.html",
+  },
+  {
+    title: "Więcej projektów",
+    description:
+      "To tylko wybrane realizacje, na moim GitHubie znajdziesz więcej projektów, nad którymi pracuję w wolnym czasie. Zachęcam również do rozmowy, chętnie opowiem więcej o sobie, moich doświadczeniach i podejściu.",
+    technologies: ["szymszaj"],
+    link: "https://github.com/szymszaj",
+    image: GH,
   },
 ];
 
