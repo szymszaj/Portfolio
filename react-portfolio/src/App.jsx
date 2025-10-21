@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Technologies from "./components/Technologies";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import Courses from "./components/Courses";
 import { Contact } from "./components/Contact";
 // import ParticleBackground from "./components/ui/ParticleBackground";
 
@@ -16,13 +17,14 @@ const App = () => {
 
       {/* <ParticleBackground /> */}
 
-      <div className="container mx-auto px-8 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <Navbar />
         <Hero />
         {/* <About /> */}
         <Technologies />
         <Experience />
         <Projects />
+        {/* <Courses /> */}
         <Contact />
       </div>
     </div>

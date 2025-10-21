@@ -79,12 +79,12 @@ export const Contact = () => {
         Skontaktuj się ze mną
       </motion.h2>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
           whileInView={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
-          className="relative p-8 md:p-12 bg-gradient-to-br from-neutral-950/90 via-neutral-900/80 to-neutral-950/90 rounded-3xl shadow-2xl backdrop-blur-xl border border-neutral-800/50 overflow-hidden"
+          className="relative p-4 md:p-12 bg-gradient-to-br from-neutral-950/90 via-neutral-900/80 to-neutral-950/90 rounded-3xl shadow-2xl backdrop-blur-xl border border-neutral-800/50 overflow-hidden"
         >
           <StarsBackground />
 
@@ -282,7 +282,7 @@ export const Contact = () => {
                     className="w-full px-5 py-4 bg-neutral-800/40 border border-neutral-700/50 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-200 resize-none"
                     placeholder="Napisz swoją wiadomość tutaj..."
                   />
-                  </motion.div>
+                </motion.div>
 
                 <motion.div
                   whileInView={{ opacity: 1, y: 0 }}

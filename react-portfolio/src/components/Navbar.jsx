@@ -249,7 +249,7 @@ const Navbar = () => {
                   transition={{ delay: 0.1 }}
                   className="text-3xl font-bold text-white mb-2"
                 >
-                  📨 Skontaktuj się ze mną
+                  📨
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0, y: -20 }}
@@ -262,7 +262,7 @@ const Navbar = () => {
                 </motion.p>
               </div>
 
-              <div className="p-8">
+              <div className="p-4">
                 <Contact />
               </div>
             </motion.div>
