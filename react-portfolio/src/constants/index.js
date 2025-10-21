@@ -217,8 +217,8 @@ export const PROJECTS = [
 ];
 
 export const COURSES_TEXTS = {
-  title: "Kursy i",
-  titleHighlight: "certyfikaty",
+  title: "Kursy",
+  // titleHighlight: "certyfikaty",
   viewCertificate: "Zobacz certyfikat",
   completed: "Ukończono",
   inProgress: "W trakcie",
