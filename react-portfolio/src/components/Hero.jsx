@@ -1,4 +1,4 @@
-import VSCODE from "../assets/3.png";
+import VSCODE from "../assets/me.jpg";
 import PROFILE from "../assets/profile.jpg";
 import { motion } from "framer-motion";
 import { useState } from "react";
