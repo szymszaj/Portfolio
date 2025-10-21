@@ -83,7 +83,7 @@ const Navbar = () => {
           </motion.span>
         </motion.div>
 
-        <div className="flex items-center justify-center gap-6 text-2xl">
+        <div className="flex items-center justify-center gap-4 lg:gap-6 text-2xl">
           {socialLinks.map((link, index) => {
             const Icon = link.icon;
             return (
