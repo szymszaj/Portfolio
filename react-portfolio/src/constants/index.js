@@ -36,7 +36,7 @@ export const HERO_TABS = [
     label: "Hobby",
     icon: FiHeart,
     content:
-      "Poza programowaniem interesuję się geopolityką, podróżami oraz światem nowych technologii, szczególnie sprzętu komputerowego i innowacji w branży IT. W wolnym czasie gram w gry komputerowe, głównie shootery. Lubię też podróżować i odkrywać nowe miejsca, poznając ludzi oraz kulturę różnych regionów świata.",
+      "Poza programowaniem interesuję się geopolityką, oraz światem nowych technologii, szczególnie sprzętu komputerowego i innowacji w branży IT. W wolnym czasie gram w gry komputerowe, głównie shootery. Lubię też podróżować i odkrywać nowe miejsca, poznając ludzi oraz kulturę różnych regionów świata.",
     color: "from-red-500 to-orange-500",
   },
 ];
@@ -213,6 +213,33 @@ export const PROJECTS = [
     technologies: ["szymszaj"],
     link: "https://github.com/szymszaj",
     image: GH,
+  },
+];
+
+export const COURSES_TEXTS = {
+  title: "Kursy i",
+  titleHighlight: "certyfikaty",
+  subtitle: "Ciągły rozwój i poszerzanie umiejętności",
+  viewCertificate: "Zobacz certyfikat",
+  completed: "Ukończono",
+  inProgress: "W trakcie",
+  duration: "Czas trwania",
+  provider: "Platforma",
+};
+
+export const COURSES = [
+  {
+    title: "React - The Complete Guide",
+    provider: "Udemy",
+    duration: "48h",
+    status: "completed",
+    completedDate: "2024",
+    description:
+      "Kompleksowy kurs React obejmujący hooks, context, routing, testing oraz najlepsze praktyki w tworzeniu aplikacji.",
+    technologies: ["React", "TypeScript", "Testing", "Redux"],
+    certificateUrl: "#",
+    level: "Zaawansowany",
+    instructor: "Maximilian Schwarzmüller",
   },
 ];
 
