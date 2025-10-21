@@ -36,7 +36,7 @@ export const HERO_TABS = [
     label: "Hobby",
     icon: FiHeart,
     content:
-      "Poza programowaniem interesuję się geopolityką, oraz światem nowych technologii, szczególnie sprzętu komputerowego i innowacji w branży IT. W wolnym czasie gram w gry komputerowe, głównie shootery. Lubię też podróżować i odkrywać nowe miejsca, poznając ludzi oraz kulturę różnych regionów świata.",
+      "Poza programowaniem interesuję się geopolityką oraz światem nowych technologii, szczególnie sprzętu komputerowego i innowacji w branży IT. W wolnym czasie gram w gry komputerowe, głównie shootery. Lubię też podróżować i odkrywać nowe miejsca, poznając ludzi oraz kulturę różnych regionów świata.",
     color: "from-red-500 to-orange-500",
   },
 ];
