@@ -7,9 +7,9 @@ import figma from "../assets/projects/figma.jpg";
 import { FiCode, FiUser, FiHeart } from "react-icons/fi";
 
 export const HERO_TITLES = [
-  "Front-end Developer",
-  "Web Application Builder",
-  "Student UEK",
+  "Front-end Developer.",
+  "Web Application Builder.",
+  "Student UEK.",
 ];
 
 export const HERO_TABS = [
@@ -219,7 +219,6 @@ export const PROJECTS = [
 export const COURSES_TEXTS = {
   title: "Kursy i",
   titleHighlight: "certyfikaty",
-  subtitle: "Ciągły rozwój i poszerzanie umiejętności",
   viewCertificate: "Zobacz certyfikat",
   completed: "Ukończono",
   inProgress: "W trakcie",
@@ -229,17 +228,131 @@ export const COURSES_TEXTS = {
 
 export const COURSES = [
   {
-    title: "React - The Complete Guide",
+    title: "Understanding TypeScript",
     provider: "Udemy",
-    duration: "48h",
-    status: "completed",
-    completedDate: "2024",
+    duration: "22.5h",
+    status: "inProgress",
+    completedDate: null,
     description:
-      "Kompleksowy kurs React obejmujący hooks, context, routing, testing oraz najlepsze praktyki w tworzeniu aplikacji.",
-    technologies: ["React", "TypeScript", "Testing", "Redux"],
-    certificateUrl: "#",
+      "Boost your JavaScript projects with TypeScript: Learn all about core types, generics, TypeScript + React or Node & more!",
+    technologies: ["React", "TypeScript"],
+
+    level: "Średniozaawansowany",
+    instructor: "Maximilian Schwarzmüller",
+    progress: 1,
+  },
+  {
+    title: "JavaScript - The Complete Guide 2025 (Beginner + Advanced)",
+    provider: "Udemy",
+    duration: "52h",
+    status: "inProgress",
+    completedDate: null,
+    description:
+      "Modern JavaScript from the beginning - all the way up to JS expert level!",
+    technologies: ["JavaScript"],
+
+    level: "Średniozaawansowany",
+    instructor: "Maximilian Schwarzmüller",
+    progress: 2,
+  },
+  {
+    title: "Next.js 15 & React - The Complete Guide",
+    provider: "Udemy",
+    duration: "40.5h",
+    status: "inProgress",
+    completedDate: null,
+    description:
+      "Kompleksowy kurs Next.js 15 i React z najnowszymi funkcjonalnościami, Server Components, App Router oraz nowoczesne wzorce developmentu.",
+    technologies: ["Next.js 15", "React", "Server Components", "TypeScript"],
+
     level: "Zaawansowany",
     instructor: "Maximilian Schwarzmüller",
+    progress: 6,
+  },
+  {
+    title: "Kurs WordPress + Woocommerce + AI. 2025",
+    provider: "Udemy",
+    duration: "22h",
+    status: "completed",
+    completedDate: "2025",
+    description:
+      "Tworzenie profesjonalnych stron WordPress, sklepów WooCommerce oraz integracja z narzędziami AI.",
+    technologies: ["WordPress", "WooCommerce", "PHP", "AI Integration"],
+
+    level: "Średniozaawansowany",
+    instructor: "Dariusz Pichałski",
+    progress: 100,
+  },
+  {
+    title: "10 projektów w czystym JavaScript",
+    provider: "Udemy",
+    duration: "10h",
+    status: "completed",
+    completedDate: "2023",
+    description:
+      "Praktyczny kurs budowania 10 różnych projektów w czystym JavaScript. Od prostych aplikacji po zaawansowane projekty.",
+    technologies: ["JavaScript", "DOM", "API", "Local Storage"],
+
+    level: "Średniozaawansowany",
+    instructor: "Mateusz Maj",
+    progress: 100,
+  },
+  {
+    title: "JavaScript - Jedyny Kurs, Którego Potrzebujesz!",
+    provider: "Udemy",
+    duration: "7h",
+    status: "completed",
+    completedDate: "2023",
+    description:
+      "Kompletny kurs JavaScript od podstaw po zaawansowane koncepty. ES6+, async/await, DOM manipulation, projektowanie aplikacji.",
+    technologies: ["JavaScript", "ES6+", "DOM", "Async Programming"],
+
+    level: "Podstawowy",
+    instructor: "Mateusz Maj",
+    progress: 100,
+  },
+  {
+    title: " Kurs Tworzenia Stron WWW cz. II - SASS, JS, Bootstrap",
+    provider: "Udemy",
+    duration: "10h+",
+    status: "completed",
+    completedDate: "2023",
+    description:
+      "Zaawansowany kurs tworzenia stron z użyciem SASS, JavaScript i Bootstrap. Responsywne layouty i nowoczesne techniki CSS.",
+    technologies: ["SASS", "JavaScript", "Bootstrap", "CSS3"],
+
+    level: "podstawowy",
+    instructor: "Mateusz Maj",
+    progress: 100,
+  },
+
+  {
+    title: "Kurs Tworzenia Stron WWW cz. I - HTML, CSS, RWD",
+    provider: "Udemy",
+    duration: "10h+",
+    status: "completed",
+    completedDate: "2023",
+    description:
+      "Podstawy HTML, CSS, semantyka, dobre praktyki pisania kodu i RWD, czyli responsywne strony internetowe!.",
+    technologies: ["HTML", "CSS", "RWD"],
+
+    level: "podstawowy",
+    instructor: "Mateusz Maj",
+    progress: 100,
+  },
+  {
+    title: "Emmet: Pisz Szybszy i Wydajniejszy Kod HTML i CSS!",
+    provider: "Udemy",
+    duration: "8h",
+    status: "completed",
+    completedDate: "2023",
+    description:
+      "Nauka skrótów i technik Emmet do szybszego pisania HTML i CSS. Zwiększenie produktywności w codziennej pracy.",
+    technologies: ["Emmet", "HTML", "CSS", "Productivity"],
+
+    level: "Podstawowy",
+    instructor: "Mateusz Maj",
+    progress: 100,
   },
 ];
 
