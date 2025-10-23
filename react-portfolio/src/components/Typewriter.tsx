@@ -47,7 +47,6 @@ const Typewriter: React.FC<TypewriterProps> = ({
     }
 
     return () => clearTimeout(timeout);
-    // eslint-disable-next-line
   }, [charIndex, isDeleting, wordIndex]);
 
   return <span className={className}>{text}|</span>;
