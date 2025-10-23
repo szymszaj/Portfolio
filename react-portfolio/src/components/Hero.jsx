@@ -142,7 +142,7 @@ const Hero = () => {
                 <div className="flip-card-front absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-neutral-800/50">
                   <img
                     className="w-full h-full object-cover"
-                    src={VSCODE}
+                    src={PROFILE}
                     alt="Szymon - Workspace"
                   />
                 </div>
@@ -150,7 +150,7 @@ const Hero = () => {
                 <div className="flip-card-back absolute inset-0 w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-neutral-800/50">
                   <img
                     className="w-full h-full object-cover"
-                    src={PROFILE}
+                    src={VSCODE}
                     alt="Szymon - Profile"
                   />
                 </div>
