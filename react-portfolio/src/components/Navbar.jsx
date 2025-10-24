@@ -47,6 +47,16 @@ const Navbar = () => {
       return;
     }
 
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) || window.innerWidth <= 768;
+
+    if (isMobile) {
+      window.open(link.href, "_blank", "noopener,noreferrer");
+      return;
+    }
+
     setActiveToast({
       ...link,
       id: index,
@@ -95,11 +105,16 @@ const Navbar = () => {
               >
                 <motion.button
                   onClick={(e) => handleSocialClick(e, link, index)}
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    handleSocialClick(e, link, index);
+                  }}
                   className={`relative p-3 rounded-xl bg-gradient-to-r ${link.color} text-white shadow-lg transition-all duration-300 hover:shadow-xl border border-white/10 backdrop-blur-sm`}
                   whileHover={{
                     boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
                     y: -2,
                   }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <div className="absolute inset-0 rounded-xl bg-white/20 opacity-0 hover:opacity-100 transition-opacity duration-300" />
 
