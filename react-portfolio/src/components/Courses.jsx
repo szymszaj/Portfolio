@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
-import { COURSES, COURSES_TEXTS } from "../constants";
+import { useTranslations } from "../hooks/useTranslations";
 import {
   FiBook,
   FiCalendar,
@@ -16,6 +16,7 @@ import {
 
 const CourseCard = ({ course }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { t } = useTranslations();
 
   const getLevelColor = (level) => {
     switch (level) {
@@ -81,7 +82,7 @@ const CourseCard = ({ course }) => {
               <div className="flex items-center gap-2 text-sm text-neutral-400">
                 <FiCalendar className="w-4 h-4" />
                 <span>
-                  {COURSES_TEXTS.completed}: {course.completedDate}
+                  {t("courses.completed")}: {course.completedDate}
                 </span>
               </div>
             )}
@@ -148,7 +149,7 @@ const CourseCard = ({ course }) => {
               whileTap={{ scale: 0.98 }}
             >
               <FiExternalLink className="w-4 h-4" />
-              {COURSES_TEXTS.viewCertificate}
+              {t("courses.viewCertificate")}
             </motion.a>
           )}
         </div>
@@ -175,16 +176,17 @@ CourseCard.propTypes = {
 
 const Courses = () => {
   const [showAll, setShowAll] = useState(false);
+  const { t } = useTranslations();
 
-  const completedCount = COURSES.filter(
+  const completedCount = t("COURSES").filter(
     (course) => course.status === "completed"
   ).length;
-  const inProgressCount = COURSES.filter(
+  const inProgressCount = t("COURSES").filter(
     (course) => course.status === "inProgress"
   ).length;
 
-  const displayedCourses = showAll ? COURSES : COURSES.slice(0, 3);
-  const hasMoreCourses = COURSES.length > 3;
+  const displayedCourses = showAll ? t("COURSES") : t("COURSES").slice(0, 3);
+  const hasMoreCourses = t("COURSES").length > 3;
 
   return (
     <div className="border-b border-neutral-800 pb-12 pt-12 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -196,23 +198,27 @@ const Courses = () => {
         className="text-center mb-12 sm:mb-16"
       >
         <h2 className="text-3xl lg:text-4xl font-bold  text-white mb-4">
-          {COURSES_TEXTS.title}{" "}
+          {t("courses.title")}{" "}
           <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            {COURSES_TEXTS.titleHighlight}
+            {t("courses.titleHighlight")}
           </span>
         </h2>
         <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
-          {COURSES_TEXTS.subtitle}
+          {t("courses.subtitle")}
         </p>
 
         <div className="flex items-center justify-center gap-6 mt-6">
           <div className="flex items-center gap-2 text-green-400">
             <FiCheckCircle className="w-5 h-5" />
-            <span className="font-medium">{completedCount} ukończonych</span>
+            <span className="font-medium">
+              {completedCount} {t("courses.completedCount")}
+            </span>
           </div>
           <div className="flex items-center gap-2 text-blue-400">
             <FiPlay className="w-5 h-5" />
-            <span className="font-medium">{inProgressCount} w trakcie</span>
+            <span className="font-medium">
+              {inProgressCount} {t("courses.inProgressCount")}
+            </span>
           </div>
         </div>
       </motion.div>

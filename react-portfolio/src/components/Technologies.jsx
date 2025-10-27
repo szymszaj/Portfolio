@@ -6,7 +6,7 @@ import { RiNextjsFill } from "react-icons/ri";
 import { RiGatsbyFill } from "react-icons/ri";
 import { FaWordpress } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { TECHNOLOGIES_TEXTS } from "../constants";
+import { useTranslations } from "../hooks/useTranslations";
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -22,6 +22,8 @@ const iconVariants = (duration) => ({
 });
 
 const Technologies = () => {
+  const { t } = useTranslations();
+
   return (
     <div className="border-b border-neutral-800 pb-24">
       <motion.h1
@@ -30,7 +32,7 @@ const Technologies = () => {
         transition={{ duration: 1.5 }}
         className="my-20 text-center text-4xl"
       >
-        {TECHNOLOGIES_TEXTS.title}
+        {t("technologies.title")}
       </motion.h1>
       <motion.div className="flex flex-wrap items-center justify-center gap-4">
         <motion.div

@@ -11,9 +11,11 @@ import {
   FiX,
 } from "react-icons/fi";
 import emailjs from "@emailjs/browser";
+import { useTranslations } from "../hooks/useTranslations";
 
 export const Contact = () => {
   const form = useRef();
+  const { t } = useTranslations();
   const [formData, setFormData] = useState({
     from_name: "",
     from_email: "",
@@ -47,7 +49,7 @@ export const Contact = () => {
       if (result.text === "OK") {
         setStatus({
           type: "success",
-          message: "Wiadomość została wysłana pomyślnie!",
+          message: t("contact.messages.success"),
         });
         setFormData({
           from_name: "",
@@ -60,8 +62,7 @@ export const Contact = () => {
       console.error("EmailJS Error:", error);
       setStatus({
         type: "error",
-        message:
-          "Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.",
+        message: t("contact.messages.error"),
       });
     } finally {
       setIsLoading(false);
@@ -76,7 +77,7 @@ export const Contact = () => {
         transition={{ duration: 0.7 }}
         className="my-16 text-center text-4xl font-bold relative z-10 drop-shadow"
       >
-        Skontaktuj się ze mną
+        {t("contact.title")}
       </motion.h2>
 
       <div className="relative z-10 max-w-6xl mx-auto">
@@ -108,7 +109,7 @@ export const Contact = () => {
                   </div>
 
                   <h3 className="text-lg font-semibold text-white mb-2">
-                    Email
+                    {t("contact.contactInfo.email")}
                   </h3>
 
                   <a
@@ -135,7 +136,7 @@ export const Contact = () => {
                   </div>
 
                   <h3 className="text-lg font-semibold text-white mb-2">
-                    Telefon
+                    {t("contact.contactInfo.phone")}
                   </h3>
 
                   <a
@@ -162,7 +163,7 @@ export const Contact = () => {
                   </div>
 
                   <h3 className="text-lg font-semibold text-white mb-2">
-                    Lokalizacja
+                    {t("contact.contactInfo.location")}
                   </h3>
 
                   <p className="text-neutral-300">{CONTACT.address}</p>
@@ -178,11 +179,10 @@ export const Contact = () => {
             >
               <div className="text-center mb-8">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                  Wyślij mi wiadomość
+                  {t("contact.formTitle")}
                 </h3>
                 <p className="text-neutral-400 max-w-2xl mx-auto">
-                  Masz pytania lub chcesz porozmawiać o współpracy? Napisz do
-                  mnie, odpowiem tak szybko jak to możliwe.
+                  {t("contact.subtitle")}
                 </p>
               </div>
 
@@ -213,7 +213,7 @@ export const Contact = () => {
                     transition={{ duration: 0.6, delay: 0.4 }}
                   >
                     <label className="block text-sm font-medium text-neutral-300 mb-2">
-                      Imię i nazwisko
+                      {t("contact.labels.name")}
                     </label>
                     <input
                       type="text"
@@ -222,7 +222,7 @@ export const Contact = () => {
                       onChange={handleChange}
                       required
                       className="w-full px-5 py-4 bg-neutral-800/40 border border-neutral-700/50 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-200"
-                      placeholder="Jan Kowalski"
+                      placeholder={t("contact.placeholders.name")}
                     />
                   </motion.div>
 
@@ -232,7 +232,7 @@ export const Contact = () => {
                     transition={{ duration: 0.6, delay: 0.5 }}
                   >
                     <label className="block text-sm font-medium text-neutral-300 mb-2">
-                      Adres email
+                      {t("contact.labels.email")}
                     </label>
                     <input
                       type="email"
@@ -241,7 +241,7 @@ export const Contact = () => {
                       onChange={handleChange}
                       required
                       className="w-full px-5 py-4 bg-neutral-800/40 border border-neutral-700/50 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-200"
-                      placeholder="jan@example.com"
+                      placeholder={t("contact.placeholders.email")}
                     />
                   </motion.div>
                 </div>
@@ -252,7 +252,7 @@ export const Contact = () => {
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
                   <label className="block text-sm font-medium text-neutral-300 mb-2">
-                    Temat
+                    {t("contact.labels.subject")}
                   </label>
                   <input
                     type="text"
@@ -261,7 +261,7 @@ export const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-5 py-4 bg-neutral-800/40 border border-neutral-700/50 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-200"
-                    placeholder="Temat wiadomości?"
+                    placeholder={t("contact.placeholders.subject")}
                   />
                 </motion.div>
 
@@ -271,7 +271,7 @@ export const Contact = () => {
                   transition={{ duration: 0.6, delay: 0.7 }}
                 >
                   <label className="block text-sm font-medium text-neutral-300 mb-2">
-                    Wiadomość
+                    {t("contact.labels.message")}
                   </label>
                   <textarea
                     name="message"
@@ -280,7 +280,7 @@ export const Contact = () => {
                     required
                     rows="6"
                     className="w-full px-5 py-4 bg-neutral-800/40 border border-neutral-700/50 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-200 resize-none"
-                    placeholder="Napisz swoją wiadomość tutaj..."
+                    placeholder={t("contact.placeholders.message")}
                   />
                 </motion.div>
 
@@ -304,12 +304,12 @@ export const Contact = () => {
                     {isLoading ? (
                       <>
                         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white" />
-                        Wysyłanie...
+                        {t("contact.buttons.sending")}
                       </>
                     ) : (
                       <>
                         <FiSend className="w-5 h-5" />
-                        Wyślij wiadomość
+                        {t("contact.buttons.send")}
                       </>
                     )}
                   </motion.button>

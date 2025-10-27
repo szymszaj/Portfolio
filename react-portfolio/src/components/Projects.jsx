@@ -1,9 +1,9 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { PROJECTS, PROJECTS_TEXTS } from "../constants";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiExternalLink, FiX, FiEye, FiCode } from "react-icons/fi";
 import StarsBackground from "./StarsBackground";
+import { useTranslations } from "../hooks/useTranslations";
 
 const cardVariants = {
   initial: { opacity: 0, y: 60 },
@@ -35,6 +35,8 @@ const backdropVariants = {
 };
 
 const ProjectModal = ({ project, isOpen, onClose }) => {
+  const { t } = useTranslations();
+
   if (!project) return null;
 
   return (
@@ -81,7 +83,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
               <div className="mb-6">
                 <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
                   <FiCode className="text-purple-400" />
-                  {PROJECTS_TEXTS.description}
+                  {t("projects.description")}
                 </h3>
                 <p className="text-neutral-300 leading-relaxed text-base">
                   {project.description}
@@ -90,7 +92,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
               <div className="mb-6">
                 <h3 className="text-xl font-semibold text-white mb-3">
-                  {PROJECTS_TEXTS.technologies}
+                  {t("projects.technologies")}
                 </h3>
                 <div className="flex flex-wrap gap-3">
                   {project.technologies.map((tech) => (
@@ -115,7 +117,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                     whileTap={{ scale: 0.95 }}
                   >
                     <FiExternalLink className="w-5 h-5" />
-                    {PROJECTS_TEXTS.viewProject}
+                    {t("projects.viewProject")}
                   </motion.a>
                 </div>
               )}
@@ -142,6 +144,7 @@ ProjectModal.propTypes = {
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { t } = useTranslations();
 
   const openModal = (project) => {
     setSelectedProject(project);
@@ -161,12 +164,12 @@ const Projects = () => {
         transition={{ duration: 0.8 }}
         className="my-20 text-center text-4xl font-bold relative z-10 drop-shadow"
       >
-        {PROJECTS_TEXTS.title}{" "}
-        <span className="text-purple-400">{PROJECTS_TEXTS.titleHighlight}</span>
+        {t("projects.title")}{" "}
+        <span className="text-purple-400">{t("projects.titleHighlight")}</span>
       </motion.h2>
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto">
-        {PROJECTS.map((project, i) => (
+        {t("PROJECTS").map((project, i) => (
           <motion.div
             key={project.title}
             className="group relative rounded-2xl border border-neutral-800/60 bg-gradient-to-br from-neutral-950/80 to-neutral-900/40 backdrop-blur-md shadow-xl overflow-hidden cursor-pointer"
@@ -204,7 +207,7 @@ const Projects = () => {
 
               <div className="mt-2 flex items-center justify-between">
                 <span className="text-sm text-purple-400 font-medium group-hover:text-purple-300 transition-colors">
-                  Kliknij aby zobaczyć więcej
+                  {t("projects.clickToSeeMore")}
                 </span>
                 <div className="p-2 rounded-full bg-purple-600/20 group-hover:bg-purple-600/30 transition-colors">
                   <FiEye className="w-4 h-4 text-purple-400" />

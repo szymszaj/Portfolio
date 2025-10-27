@@ -4,10 +4,13 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { Contact } from "./Contact";
+import { useTranslations } from "../hooks/useTranslations";
+import LanguageToggle from "./LanguageToggle";
 
 const Navbar = () => {
   const [activeToast, setActiveToast] = useState(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const { t } = useTranslations();
 
   const socialLinks = [
     {
@@ -31,7 +34,7 @@ const Navbar = () => {
     {
       href: "#contact",
       icon: FiMail,
-      name: "Kontakt",
+      name: t("navbar.contact"),
       color: "from-purple-600 to-purple-400",
       bgColor: "bg-purple-500/10",
       borderColor: "border-purple-500/30",
@@ -94,6 +97,8 @@ const Navbar = () => {
         </motion.div>
 
         <div className="flex items-center justify-center gap-4 lg:gap-6 text-2xl">
+          <LanguageToggle />
+
           {socialLinks.map((link, index) => {
             const Icon = link.icon;
             return (
@@ -173,7 +178,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 }}
                   >
-                    Przekierowywanie...
+                    {t("navbar.toastRedirecting")}
                   </motion.h3>
                   <motion.p
                     className="text-neutral-300 text-sm"
@@ -181,7 +186,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
                   >
-                    Otwieramy {activeToast.name}
+                    {t("navbar.toastOpening")} {activeToast.name}
                   </motion.p>
                 </div>
 
@@ -201,7 +206,7 @@ const Navbar = () => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
                   >
-                    2s
+                    {t("navbar.toastTime")}
                   </motion.span>
                 </motion.div>
               </div>
@@ -264,7 +269,7 @@ const Navbar = () => {
                   transition={{ delay: 0.1 }}
                   className="text-3xl font-bold text-white mb-2"
                 >
-                  📨
+                  {t("navbar.modalTitle")} 📨
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0, y: -20 }}
@@ -272,8 +277,7 @@ const Navbar = () => {
                   transition={{ delay: 0.2 }}
                   className="text-neutral-400"
                 >
-                  Masz pytania lub chcesz porozmawiać o współpracy? Napisz do
-                  mnie!
+                  {t("navbar.modalSubtitle")}
                 </motion.p>
               </div>
 

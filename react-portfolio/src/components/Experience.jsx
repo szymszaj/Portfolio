@@ -1,6 +1,6 @@
-import { EXPERIENCES } from "../constants";
 import { motion } from "framer-motion";
 import { FiBriefcase, FiCalendar, FiMapPin, FiCode } from "react-icons/fi";
+import { useTranslations } from "../hooks/useTranslations";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -17,6 +17,8 @@ const cardVariants = {
 };
 
 const Experience = () => {
+  const { t } = useTranslations();
+
   return (
     <section className="relative border-b border-neutral-900 pb-24 overflow-hidden">
       <motion.h2
@@ -25,12 +27,15 @@ const Experience = () => {
         transition={{ duration: 0.7 }}
         className="my-20 text-center text-4xl font-bold relative z-10"
       >
-        Moje <span className="text-purple-400">doświadczenie</span>
+        {t("experience.title")}{" "}
+        <span className="text-purple-400">
+          {t("experience.titleHighlight")}
+        </span>
       </motion.h2>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 gap-8">
-          {EXPERIENCES.map((experience, index) => (
+          {t("EXPERIENCES").map((experience, index) => (
             <motion.div
               key={index}
               className="group relative"
@@ -100,7 +105,7 @@ const Experience = () => {
                     <div className="flex items-center gap-2 mb-4">
                       <FiCode className="w-5 h-5 text-cyan-400" />
                       <h4 className="text-lg font-semibold text-white">
-                        Technologie
+                        {t("experience.technologies")}
                       </h4>
                     </div>
                     <div className="flex flex-wrap gap-3">

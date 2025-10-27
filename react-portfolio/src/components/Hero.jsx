@@ -3,7 +3,8 @@ import PROFILE from "../assets/profile.jpg";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Typewriter from "./Typewriter";
-import { HERO_TITLES, HERO_TABS } from "../constants";
+import { useTranslations } from "../hooks/useTranslations";
+import { FiCode, FiUser, FiHeart } from "react-icons/fi";
 
 const container = (delay) => ({
   hidden: { x: -100, opacity: 0 },
@@ -17,10 +18,35 @@ const container = (delay) => ({
 const Hero = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [activeTab, setActiveTab] = useState("work");
+  const { t } = useTranslations();
 
   const handleCardClick = () => {
     setIsFlipped(!isFlipped);
   };
+
+  const HERO_TABS = [
+    {
+      id: "work",
+      label: t("hero.tabs.work.label"),
+      icon: FiCode,
+      content: t("hero.tabs.work.content"),
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      id: "about",
+      label: t("hero.tabs.about.label"),
+      icon: FiUser,
+      content: t("hero.tabs.about.content"),
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      id: "hobby",
+      label: t("hero.tabs.hobby.label"),
+      icon: FiHeart,
+      content: t("hero.tabs.hobby.content"),
+      color: "from-red-500 to-orange-500",
+    },
+  ];
 
   return (
     <div className="relative border-b border-neutral-900 pb-24 overflow-hidden min-h-screen flex items-center">
@@ -44,7 +70,7 @@ const Hero = () => {
               >
                 <div className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl tracking-tight text-transparent">
                   <Typewriter
-                    words={HERO_TITLES}
+                    words={t("hero.titles")}
                     typingSpeed={80}
                     deletingSpeed={40}
                     pause={1400}
