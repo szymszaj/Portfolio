@@ -78,8 +78,7 @@ export const translations = {
       },
       messages: {
         success: "Wiadomość została wysłana pomyślnie!",
-        error:
-          "Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.",
+        error: "Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.",
       },
       contactInfo: {
         email: "Email",
