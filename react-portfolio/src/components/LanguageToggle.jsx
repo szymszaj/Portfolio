@@ -6,10 +6,12 @@ import { FiGlobe } from "react-icons/fi";
 const LanguageToggle = () => {
   const { language, toggleLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const [rotationKey, setRotationKey] = useState(0);
 
   const handleLanguageChange = (lang) => {
     if (language !== lang) {
       toggleLanguage();
+      setRotationKey((prev) => prev + 1);
     }
     setIsOpen(false);
   };
@@ -30,7 +32,13 @@ const LanguageToggle = () => {
         whileTap={{ scale: 0.95 }}
       >
         <div className="relative flex items-center gap-1">
-          <FiGlobe className="w-5 h-5" />
+          <motion.div
+            key={rotationKey}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+          >
+            <FiGlobe className="w-5 h-5" />
+          </motion.div>
           <span className="text-xs font-bold">{language}</span>
         </div>
       </motion.button>
