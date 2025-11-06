@@ -1,7 +1,7 @@
 import VSCODE from "../assets/me.jpg";
 import PROFILE from "../assets/profile.jpg";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Typewriter from "./Typewriter";
 import { useTranslations } from "../hooks/useTranslations";
 import { FiCode, FiUser, FiHeart } from "react-icons/fi";
@@ -20,11 +20,11 @@ const Hero = () => {
   const [activeTab, setActiveTab] = useState("work");
   const { t } = useTranslations();
 
-  const handleCardClick = () => {
-    setIsFlipped(!isFlipped);
-  };
+  const handleCardClick = useCallback(() => {
+    setIsFlipped((prev) => !prev);
+  }, []);
 
-  const HERO_TABS = [
+  const HERO_TABS = useMemo(() => [
     {
       id: "work",
       label: t("hero.tabs.work.label"),
@@ -46,7 +46,12 @@ const Hero = () => {
       content: t("hero.tabs.hobby.content"),
       color: "from-red-500 to-orange-500",
     },
-  ];
+  ], [t]);
+
+  const activeTabData = useMemo(
+    () => HERO_TABS.find((tab) => tab.id === activeTab),
+    [HERO_TABS, activeTab]
+  );
 
   return (
     <div className="relative border-b border-neutral-900 pb-24 overflow-hidden min-h-screen flex items-center">
@@ -90,7 +95,7 @@ const Hero = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
+                    className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${
                       activeTab === tab.id
                         ? `bg-gradient-to-r ${tab.color} text-white shadow-lg`
                         : "bg-neutral-800/50 text-neutral-400 hover:text-white hover:bg-neutral-700/50"
@@ -107,38 +112,28 @@ const Hero = () => {
                 key={activeTab}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}
               >
                 <div
-                  className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${
-                    HERO_TABS.find((t) => t.id === activeTab)?.color
-                  } opacity-10 rounded-full blur-2xl`}
+                  className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${activeTabData?.color} opacity-10 rounded-full blur-2xl`}
                 ></div>
 
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-4">
                     <div
-                      className={`p-2 rounded-lg bg-gradient-to-r ${
-                        HERO_TABS.find((t) => t.id === activeTab)?.color
-                      }`}
+                      className={`p-2 rounded-lg bg-gradient-to-r ${activeTabData?.color}`}
                     >
-                      {(() => {
-                        const activeTabData = HERO_TABS.find(
-                          (t) => t.id === activeTab
-                        );
-                        const IconComponent = activeTabData?.icon;
-                        return IconComponent ? (
-                          <IconComponent className="w-5 h-5 text-white" />
-                        ) : null;
-                      })()}
+                      {activeTabData?.icon && (
+                        <activeTabData.icon className="w-5 h-5 text-white" />
+                      )}
                     </div>
                     <h3 className="text-xl font-bold text-white">
-                      {HERO_TABS.find((t) => t.id === activeTab)?.label}
+                      {activeTabData?.label}
                     </h3>
                   </div>
 
                   <p className="text-neutral-300 leading-relaxed">
-                    {HERO_TABS.find((t) => t.id === activeTab)?.content}
+                    {activeTabData?.content}
                   </p>
                 </div>
               </motion.div>
@@ -148,11 +143,11 @@ const Hero = () => {
           <motion.div
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 1.3 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
             className="flex justify-center"
           >
             <div
-              className="relative cursor-pointer"
+              className="relative cursor-pointer will-change-transform"
               style={{ perspective: "1000px" }}
             >
               <div
@@ -170,6 +165,8 @@ const Hero = () => {
                     className="w-full h-full object-cover"
                     src={PROFILE}
                     alt="Szymon - Workspace"
+                    loading="eager"
+                    decoding="async"
                   />
                 </div>
 
@@ -178,6 +175,8 @@ const Hero = () => {
                     className="w-full h-full object-cover"
                     src={VSCODE}
                     alt="Szymon - Profile"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>

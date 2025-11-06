@@ -6,7 +6,7 @@ const StarsBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     let width = window.innerWidth;
@@ -14,39 +14,51 @@ const StarsBackground = () => {
     canvas.width = width;
     canvas.height = height;
 
-    const stars = Array.from({ length: 100 }, () => ({
+    //
+    const stars = Array.from({ length: 50 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      r: Math.random() * 1.3 + 0.2,
-      dx: (Math.random() - 0.5) * 0.07,
-      dy: (Math.random() - 0.5) * 0.07,
-      alpha: Math.random() * 0.5 + 0.5,
+      r: Math.random() * 1.2 + 0.3,
+      dx: (Math.random() - 0.5) * 0.05,
+      dy: (Math.random() - 0.5) * 0.05,
+      alpha: Math.random() * 0.4 + 0.4,
     }));
 
     let animationFrameId;
+    let lastTime = 0;
+    const fps = 30;
+    const interval = 1000 / fps;
 
-    const draw = () => {
-      ctx.clearRect(0, 0, width, height);
-      for (const star of stars) {
-        ctx.save();
-        ctx.globalAlpha = star.alpha;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-        ctx.fillStyle = "#fff";
-        ctx.shadowColor = "#fff";
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        ctx.restore();
+    const draw = (currentTime) => {
+      const deltaTime = currentTime - lastTime;
 
-        star.x += star.dx;
-        star.y += star.dy;
-        if (star.x < 0 || star.x > width) star.dx *= -1;
-        if (star.y < 0 || star.y > height) star.dy *= -1;
+      if (deltaTime >= interval) {
+        lastTime = currentTime - (deltaTime % interval);
+
+        ctx.clearRect(0, 0, width, height);
+
+        for (const star of stars) {
+          ctx.save();
+          ctx.globalAlpha = star.alpha;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+          ctx.fillStyle = "#fff";
+          ctx.shadowColor = "#fff";
+          ctx.shadowBlur = 5;
+          ctx.fill();
+          ctx.restore();
+
+          star.x += star.dx;
+          star.y += star.dy;
+          if (star.x < 0 || star.x > width) star.dx *= -1;
+          if (star.y < 0 || star.y > height) star.dy *= -1;
+        }
       }
+
       animationFrameId = requestAnimationFrame(draw);
     };
 
-    draw();
+    draw(0);
 
     const handleResize = () => {
       width = window.innerWidth;

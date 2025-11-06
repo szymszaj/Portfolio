@@ -1,12 +1,21 @@
-// import About from "./components/About";
+
+import { lazy, Suspense } from "react";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
-import Technologies from "./components/Technologies";
-import Experience from "./components/Experience";
-import Projects from "./components/Projects";
-import Courses from "./components/Courses";
-import { Contact } from "./components/Contact";
-// import ParticleBackground from "./components/ui/ParticleBackground";
+
+
+const Technologies = lazy(() => import("./components/Technologies"));
+const Experience = lazy(() => import("./components/Experience"));
+const Projects = lazy(() => import("./components/Projects"));
+const Courses = lazy(() => import("./components/Courses"));
+const Contact = lazy(() => import("./components/Contact").then(module => ({ default: module.Contact })));
+
+
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center py-20">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500"></div>
+  </div>
+);
 
 const App = () => {
   return (
@@ -21,11 +30,13 @@ const App = () => {
         <Navbar />
         <Hero />
         {/* <About /> */}
-        <Technologies />
-        <Experience />
-        <Projects />
-        <Courses />
-        <Contact />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Technologies />
+          <Experience />
+          <Projects />
+          <Courses />
+          <Contact />
+        </Suspense>
       </div>
     </div>
   );

@@ -6,9 +6,23 @@
   font-family: "Inter", sans-serif;
 }
 
+* {
+  will-change: auto;
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
 .flip-card-inner {
   transform-style: preserve-3d;
   transition: transform 0.8s ease-in-out;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .flip-card-interactive:hover {
@@ -24,8 +38,19 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .flip-card-back {
   transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
