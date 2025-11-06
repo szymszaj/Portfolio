@@ -17,8 +17,8 @@ export const Contact = () => {
   const form = useRef();
   const { t } = useTranslations();
   const [formData, setFormData] = useState({
-    from_name: "",
-    from_email: "",
+    name: "",
+    email: "",
     subject: "",
     message: "",
   });
@@ -52,8 +52,8 @@ export const Contact = () => {
           message: t("contact.messages.success"),
         });
         setFormData({
-          from_name: "",
-          from_email: "",
+          name: "",
+          email: "",
           subject: "",
           message: "",
         });
@@ -217,8 +217,8 @@ export const Contact = () => {
                     </label>
                     <input
                       type="text"
-                      name="from_name"
-                      value={formData.from_name}
+                      name="name"
+                      value={formData.name}
                       onChange={handleChange}
                       required
                       className="w-full px-5 py-4 bg-neutral-800/40 border border-neutral-700/50 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-200"
@@ -236,8 +236,8 @@ export const Contact = () => {
                     </label>
                     <input
                       type="email"
-                      name="from_email"
-                      value={formData.from_email}
+                      name="email"
+                      value={formData.email}
                       onChange={handleChange}
                       required
                       className="w-full px-5 py-4 bg-neutral-800/40 border border-neutral-700/50 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-200"
