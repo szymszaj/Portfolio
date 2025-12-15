@@ -24,29 +24,32 @@ const Hero = () => {
     setIsFlipped((prev) => !prev);
   }, []);
 
-  const HERO_TABS = useMemo(() => [
-    {
-      id: "work",
-      label: t("hero.tabs.work.label"),
-      icon: FiCode,
-      content: t("hero.tabs.work.content"),
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      id: "about",
-      label: t("hero.tabs.about.label"),
-      icon: FiUser,
-      content: t("hero.tabs.about.content"),
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      id: "hobby",
-      label: t("hero.tabs.hobby.label"),
-      icon: FiHeart,
-      content: t("hero.tabs.hobby.content"),
-      color: "from-red-500 to-orange-500",
-    },
-  ], [t]);
+  const HERO_TABS = useMemo(
+    () => [
+      {
+        id: "work",
+        label: t("hero.tabs.work.label"),
+        icon: FiCode,
+        content: t("hero.tabs.work.content"),
+        color: "from-blue-500 to-cyan-500",
+      },
+      {
+        id: "about",
+        label: t("hero.tabs.about.label"),
+        icon: FiUser,
+        content: t("hero.tabs.about.content"),
+        color: "from-purple-500 to-pink-500",
+      },
+      {
+        id: "hobby",
+        label: t("hero.tabs.hobby.label"),
+        icon: FiHeart,
+        content: t("hero.tabs.hobby.content"),
+        color: "from-red-500 to-orange-500",
+      },
+    ],
+    [t]
+  );
 
   const activeTabData = useMemo(
     () => HERO_TABS.find((tab) => tab.id === activeTab),
