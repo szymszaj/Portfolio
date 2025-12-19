@@ -1,15 +1,14 @@
-
 import { lazy, Suspense } from "react";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
-
 
 const Technologies = lazy(() => import("./components/Technologies"));
 const Experience = lazy(() => import("./components/Experience"));
 const Projects = lazy(() => import("./components/Projects"));
 const Courses = lazy(() => import("./components/Courses"));
-const Contact = lazy(() => import("./components/Contact").then(module => ({ default: module.Contact })));
-
+const Contact = lazy(() =>
+  import("./components/Contact").then((module) => ({ default: module.Contact }))
+);
 
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center py-20">
