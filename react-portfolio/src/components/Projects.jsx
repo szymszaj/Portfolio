@@ -43,7 +43,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90"
           variants={backdropVariants}
           initial="hidden"
           animate="visible"
@@ -52,14 +52,14 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
         >
           <StarsBackground />
           <motion.div
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-neutral-900/95 to-neutral-950/95 rounded-2xl border border-neutral-700/50 backdrop-blur-xl"
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-neutral-900 rounded-2xl border border-neutral-700/50"
             variants={modalVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 flex items-center justify-between p-6 border-b border-neutral-700/50 bg-neutral-900/80 backdrop-blur-sm rounded-t-2xl">
+            <div className="sticky top-0 flex items-center justify-between p-6 border-b border-neutral-700/50 bg-neutral-900 rounded-t-2xl">
               <h2 className="text-2xl font-bold text-white">{project.title}</h2>
               <button
                 onClick={onClose}
@@ -172,7 +172,7 @@ const Projects = () => {
         {t("PROJECTS").map((project, i) => (
           <motion.div
             key={project.title}
-            className="group relative rounded-2xl border border-neutral-800/60 bg-gradient-to-br from-neutral-950/80 to-neutral-900/40 backdrop-blur-md shadow-xl overflow-hidden cursor-pointer"
+            className="group relative rounded-2xl border border-neutral-800/60 bg-neutral-900 shadow-xl overflow-hidden cursor-pointer"
             variants={cardVariants}
             initial="initial"
             whileInView="animate"
@@ -190,11 +190,13 @@ const Projects = () => {
               <img
                 src={project.image}
                 alt={project.title}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
               />
 
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/40 backdrop-blur-sm">
-                <div className="p-4 rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/40">
+                <div className="p-4 rounded-full bg-white/20 border border-white/30">
                   <FiEye className="w-8 h-8 text-white" />
                 </div>
               </div>

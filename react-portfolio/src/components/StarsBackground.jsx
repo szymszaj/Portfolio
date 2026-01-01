@@ -43,8 +43,6 @@ const StarsBackground = () => {
           ctx.beginPath();
           ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
           ctx.fillStyle = "#fff";
-          ctx.shadowColor = "#fff";
-          ctx.shadowBlur = 5;
           ctx.fill();
           ctx.restore();
 

@@ -111,7 +111,7 @@ const Navbar = () => {
                     e.preventDefault();
                     handleSocialClick(e, link, index);
                   }}
-                  className={`relative p-3 rounded-xl bg-gradient-to-r ${link.color} text-white shadow-lg transition-all duration-300 hover:shadow-xl border border-white/10 backdrop-blur-sm`}
+                  className={`relative p-3 rounded-xl bg-gradient-to-r ${link.color} text-white shadow-lg transition-all duration-300 hover:shadow-xl border border-white/10`}
                   whileHover={{
                     boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
                     y: -2,
@@ -153,7 +153,7 @@ const Navbar = () => {
             className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50"
           >
             <motion.div
-              className={`relative px-6 py-4 rounded-2xl ${activeToast.bgColor} backdrop-blur-xl border ${activeToast.borderColor} shadow-2xl min-w-[280px]`}
+              className={`relative px-6 py-4 rounded-2xl ${activeToast.bgColor} bg-neutral-900 border ${activeToast.borderColor} shadow-2xl min-w-[280px]`}
               whileHover={{ scale: 1.02 }}
             >
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/5 to-white/10" />
@@ -225,7 +225,7 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
             onClick={() => setIsContactModalOpen(false)}
           >
             <motion.div
@@ -233,7 +233,7 @@ const Navbar = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 50 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-neutral-900/95 backdrop-blur-xl rounded-3xl border border-neutral-700/50 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-neutral-900 rounded-3xl border border-neutral-700/50 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="absolute top-6 right-6 z-10">

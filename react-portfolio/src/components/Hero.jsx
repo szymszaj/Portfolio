@@ -114,7 +114,7 @@ const Hero = () => {
               </div>
 
               <motion.div
-                className="relative p-6 bg-gradient-to-br from-neutral-950/80 to-neutral-900/60 rounded-2xl border border-neutral-800/50 backdrop-blur-xl shadow-xl min-h-[200px]"
+                className="relative p-6 bg-neutral-900/90 rounded-2xl border border-neutral-800/50 shadow-xl min-h-[200px]"
                 key={activeTab}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
