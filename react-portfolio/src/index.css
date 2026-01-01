@@ -6,14 +6,6 @@
   font-family: "Inter", sans-serif;
 }
 
-* {
-  will-change: auto;
-}
-
-* {
-  will-change: auto;
-}
-
 .will-change-transform {
   will-change: transform;
 }

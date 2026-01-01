@@ -5,7 +5,6 @@ import { FaGithub } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { Contact } from "./Contact";
 import { useTranslations } from "../hooks/useTranslations";
-import LanguageToggle from "./LanguageToggle";
 
 const Navbar = () => {
   const [activeToast, setActiveToast] = useState(null);
@@ -97,8 +96,6 @@ const Navbar = () => {
         </motion.div>
 
         <div className="flex items-center justify-center gap-4 lg:gap-6 text-2xl">
-          <LanguageToggle />
-
           {socialLinks.map((link, index) => {
             const Icon = link.icon;
             return (

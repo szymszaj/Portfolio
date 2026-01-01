@@ -67,6 +67,7 @@ const Hero = () => {
                 initial="hidden"
                 animate="visible"
                 className="text-6xl lg:text-8xl font-thin tracking-tight mb-8"
+                style={{ willChange: "opacity, transform" }}
               >
                 Szymon Zych
               </motion.h1>
@@ -75,6 +76,7 @@ const Hero = () => {
                 initial="hidden"
                 animate="visible"
                 className="mb-8"
+                style={{ willChange: "opacity, transform" }}
               >
                 <div className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl tracking-tight text-transparent">
                   <Typewriter
@@ -92,6 +94,7 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               className="space-y-6"
+              style={{ willChange: "opacity, transform" }}
             >
               <div className="flex flex-wrap gap-3">
                 {HERO_TABS.map((tab) => (
@@ -148,13 +151,14 @@ const Hero = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.2 }}
             className="flex justify-center"
+            style={{ willChange: "opacity, transform" }}
           >
             <div
-              className="relative cursor-pointer will-change-transform"
+              className="relative cursor-pointer"
               style={{ perspective: "1000px" }}
             >
               <div
-                className={`relative w-80 h-96 md:w-96 md:h-[500px] flip-card-inner flip-card-interactive ${
+                className={`relative w-80 h-96 md:w-96 md:h-[500px] flip-card-inner flip-card-interactive will-change-transform ${
                   isFlipped ? "flipped" : ""
                 }`}
                 style={{
