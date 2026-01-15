@@ -1,6 +1,6 @@
 import VSCODE from "../assets/me.jpg";
 import PROFILE from "../assets/profile.jpg";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback, useMemo } from "react";
 import Typewriter from "./Typewriter";
 import { useTranslations } from "../hooks/useTranslations";
@@ -14,6 +14,24 @@ const container = (delay) => ({
     transition: { duration: 0.5, delay: delay },
   },
 });
+
+const tabContentVariants = {
+  hidden: { opacity: 0, scale: 0.8, rotateX: -20, y: 50 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotateX: 0,
+    y: 0,
+    transition: { duration: 0.5, ease: "backOut" },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+    rotateX: 20,
+    y: -50,
+    transition: { duration: 0.3 },
+  },
+};
 
 const Hero = () => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -113,36 +131,41 @@ const Hero = () => {
                 ))}
               </div>
 
-              <motion.div
-                className="relative p-6 bg-neutral-900/90 rounded-2xl border border-neutral-800/50 shadow-xl min-h-[200px]"
-                key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div
-                  className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${activeTabData?.color} opacity-10 rounded-full blur-2xl`}
-                ></div>
-
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-4">
+              <div className="relative min-h-[200px] [perspective:1000px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTab}
+                    variants={tabContentVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="p-6 bg-neutral-900/90 rounded-2xl border border-neutral-800/50 shadow-xl"
+                  >
                     <div
-                      className={`p-2 rounded-lg bg-gradient-to-r ${activeTabData?.color}`}
-                    >
-                      {activeTabData?.icon && (
-                        <activeTabData.icon className="w-5 h-5 text-white" />
-                      )}
-                    </div>
-                    <h3 className="text-xl font-bold text-white">
-                      {activeTabData?.label}
-                    </h3>
-                  </div>
+                      className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${activeTabData?.color} opacity-10 rounded-full blur-2xl`}
+                    ></div>
 
-                  <p className="text-neutral-300 leading-relaxed">
-                    {activeTabData?.content}
-                  </p>
-                </div>
-              </motion.div>
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div
+                          className={`p-2 rounded-lg bg-gradient-to-r ${activeTabData?.color}`}
+                        >
+                          {activeTabData?.icon && (
+                            <activeTabData.icon className="w-5 h-5 text-white" />
+                          )}
+                        </div>
+                        <h3 className="text-xl font-bold text-white">
+                          {activeTabData?.label}
+                        </h3>
+                      </div>
+
+                      <p className="text-neutral-300 leading-relaxed lg:text-lg">
+                        {activeTabData?.content}
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </motion.div>
           </div>
 
