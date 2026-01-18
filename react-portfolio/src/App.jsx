@@ -8,7 +8,9 @@ const Experience = lazy(() => import("./components/Experience"));
 const Projects = lazy(() => import("./components/Projects"));
 const Courses = lazy(() => import("./components/Courses"));
 const Contact = lazy(() =>
-  import("./components/Contact").then((module) => ({ default: module.Contact }))
+  import("./components/Contact").then((module) => ({
+    default: module.Contact,
+  })),
 );
 
 const LoadingSpinner = () => (
@@ -21,8 +23,6 @@ const App = () => {
   return (
     <div className="overflow-x-hidden text-neutral-300 antialiased selection:bg-cyan-300 selection:text-cyan-900">
       <InteractiveBackground />
-
-      {/* <ParticleBackground /> */}
 
       <div className="container mx-auto px-6 relative z-10">
         <Navbar />
