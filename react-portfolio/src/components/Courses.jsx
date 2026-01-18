@@ -101,10 +101,10 @@ const CourseCard = ({ course }) => {
                       course.progress === 100
                         ? "bg-gradient-to-r from-green-500 to-emerald-500"
                         : course.progress >= 80
-                        ? "bg-gradient-to-r from-blue-500 to-cyan-500"
-                        : course.progress >= 50
-                        ? "bg-gradient-to-r from-yellow-500 to-orange-500"
-                        : "bg-gradient-to-r from-purple-500 to-pink-500"
+                          ? "bg-gradient-to-r from-blue-500 to-cyan-500"
+                          : course.progress >= 50
+                            ? "bg-gradient-to-r from-yellow-500 to-orange-500"
+                            : "bg-gradient-to-r from-purple-500 to-pink-500"
                     }`}
                     initial={{ width: 0 }}
                     animate={{ width: `${course.progress}%` }}
@@ -118,7 +118,7 @@ const CourseCard = ({ course }) => {
               <FiAward className="w-4 h-4 text-neutral-400" />
               <span
                 className={`px-2 py-1 rounded-md bg-gradient-to-r ${getLevelColor(
-                  course.level
+                  course.level,
                 )} text-xs font-medium border`}
               >
                 {course.level}
@@ -179,10 +179,10 @@ const Courses = () => {
   const { t } = useTranslations();
 
   const completedCount = t("COURSES").filter(
-    (course) => course.status === "completed"
+    (course) => course.status === "completed",
   ).length;
   const inProgressCount = t("COURSES").filter(
-    (course) => course.status === "inProgress"
+    (course) => course.status === "inProgress",
   ).length;
 
   const displayedCourses = showAll ? t("COURSES") : t("COURSES").slice(0, 3);

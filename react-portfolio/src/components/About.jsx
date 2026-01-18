@@ -186,7 +186,7 @@ const About = () => {
                   >
                     {(() => {
                       const activeTabData = tabs.find(
-                        (t) => t.id === activeTab
+                        (t) => t.id === activeTab,
                       );
                       const IconComponent = activeTabData?.icon;
                       return IconComponent ? (

@@ -66,12 +66,12 @@ const Hero = () => {
         color: "from-red-500 to-orange-500",
       },
     ],
-    [t]
+    [t],
   );
 
   const activeTabData = useMemo(
     () => HERO_TABS.find((tab) => tab.id === activeTab),
-    [HERO_TABS, activeTab]
+    [HERO_TABS, activeTab],
   );
 
   return (
