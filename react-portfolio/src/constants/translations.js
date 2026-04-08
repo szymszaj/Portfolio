@@ -16,7 +16,7 @@ export const translations = {
       work: {
         label: "Czym się zajmuję",
         content:
-          "Jestem Front-end Developerem (Junior+) z ponad trzyletnim doświadczeniem komercyjnym w pracy z React, Next.js, TypeScript oraz systemami CMS. Tworzę nowoczesne i skalowalne aplikacje webowe, dbając o jakość kodu, wydajność oraz zgodność z projektami UI (Figma). Posiadam doświadczenie w integracjach z WordPress, Builder.io i Magento, a także w tworzeniu komponentów, testów jednostkowych (Jest) i automatycznych (Playwright). Pracuję w środowisku Agile, wykorzystując na co dzień narzędzia takie jak Git, JIRA, Confluence i Figma. Obecnie rozwijam się w kierunku mid developera, realizując coraz bardziej złożone zadania i pogłębiając wiedzę z zakresu architektury front-endu.",
+          "Jestem Front-end Developerem z ponad czteroletnim doświadczeniem komercyjnym w pracy z React, Next.js, TypeScript oraz systemami CMS. Tworzę nowoczesne i skalowalne aplikacje webowe, dbając o jakość kodu, wydajność oraz zgodność z projektami UI (Figma). Posiadam doświadczenie w integracjach z WordPress, Builder.io i Magento, a także w tworzeniu komponentów, testów jednostkowych (Jest) i automatycznych (Playwright). Pracuję w środowisku Agile, wykorzystując na co dzień narzędzia takie jak Git, JIRA, Confluence i Figma. Obecnie rozwijam się w kierunku mid developera, realizując coraz bardziej złożone zadania i pogłębiając wiedzę z zakresu architektury front-endu.",
       },
       about: {
         label: "O mnie",
