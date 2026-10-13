@@ -19,6 +19,7 @@ html.dark {
   body {
     background: #fff !important;
     color: #000 !important;
+    /* smooth-scroll-behavior: auto !important; */
   }
 
   @page {
