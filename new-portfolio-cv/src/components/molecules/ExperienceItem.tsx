@@ -6,25 +6,23 @@ type ExperienceItemProps = {
 
 export function ExperienceItem({ item }: ExperienceItemProps) {
   return (
-    <li className="break-inside-avoid">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-        <p className="font-medium text-slate-900 dark:text-slate-100">
-          {item.stanowisko}{" "}
-          <span className="text-slate-500 dark:text-slate-400">
-            · {item.firma}
-          </span>
+    <li className="grid gap-1.5 border-b border-line/70 py-6 first:pt-0 last:border-b-0 last:pb-0 sm:grid-cols-[140px_1fr] sm:gap-8">
+      {item.okres ? (
+        <p className="text-sm tabular-nums text-muted">{item.okres}</p>
+      ) : (
+        <span />
+      )}
+      <div>
+        <p className="font-medium text-ink">
+          {item.stanowisko}
+          <span className="font-normal text-muted">, {item.firma}</span>
         </p>
-        {item.okres && (
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            {item.okres}
+        {item.opis && (
+          <p className="mt-1.5 whitespace-pre-line text-sm leading-relaxed text-ink/80">
+            {item.opis}
           </p>
         )}
       </div>
-      {item.opis && (
-        <p className="mt-1 whitespace-pre-line text-sm text-slate-600 dark:text-slate-300">
-          {item.opis}
-        </p>
-      )}
     </li>
   );
 }

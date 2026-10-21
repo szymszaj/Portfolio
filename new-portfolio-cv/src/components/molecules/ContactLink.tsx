@@ -6,11 +6,11 @@ type ContactLinkProps = {
 
 export function ContactLink({ label, href, value }: ContactLinkProps) {
   return (
-    <p>
-      <span className="text-slate-500 dark:text-slate-400">{label}: </span>
+    <p className="text-sm">
+      <span className="text-muted">{label}: </span>
       <a
         href={href}
-        className="text-slate-900 underline-offset-2 hover:underline dark:text-slate-100 print:text-slate-900"
+        className="text-ink underline-offset-4 hover:text-accent hover:underline"
       >
         {value}
       </a>

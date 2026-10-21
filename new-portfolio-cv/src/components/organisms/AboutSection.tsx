@@ -1,22 +1,29 @@
+import { UserRound } from "lucide-react";
+
+import { Reveal } from "@/components/atoms/Reveal";
+import { SectionShell } from "@/components/atoms/SectionShell";
 import { SectionTitle } from "@/components/atoms/SectionTitle";
 import type { CvAboutViewModel } from "@/types/cv";
 
 type AboutSectionProps = {
+  id: string;
   title: string;
   about: CvAboutViewModel;
 };
 
-export function AboutSection({ title, about }: AboutSectionProps) {
+export function AboutSection({ id, title, about }: AboutSectionProps) {
   if (!about.opis) {
     return null;
   }
 
   return (
-    <section className="mt-8 print:mt-6">
-      <SectionTitle title={title} />
-      <p className="mt-2 whitespace-pre-line text-slate-700 dark:text-slate-300">
-        {about.opis}
-      </p>
-    </section>
+    <SectionShell id={id} tone="surface">
+      <Reveal>
+        <SectionTitle title={title} icon={UserRound} />
+        <p className="mt-6 max-w-2xl whitespace-pre-line text-lg leading-relaxed text-ink/90">
+          {about.opis}
+        </p>
+      </Reveal>
+    </SectionShell>
   );
 }
