@@ -1,34 +1,40 @@
+import { Sparkles } from "lucide-react";
+
 import { Badge } from "@/components/atoms/Badge";
+import { Reveal } from "@/components/atoms/Reveal";
+import { SectionShell } from "@/components/atoms/SectionShell";
 import { SectionTitle } from "@/components/atoms/SectionTitle";
 import type { CvSkillViewModel } from "@/types/cv";
 
 type SkillsSectionProps = {
+  id: string;
   title: string;
   items: CvSkillViewModel[];
   emptyMessage: string;
 };
 
 export function SkillsSection({
+  id,
   title,
   items,
   emptyMessage,
 }: SkillsSectionProps) {
   return (
-    <section className="mt-8 print:mt-6">
-      <SectionTitle title={title} />
-      {items.length > 0 ? (
-        <ul className="mt-3 flex flex-wrap gap-2 print:gap-0">
-          {items.map((item) => (
-            <li key={item.id}>
-              <Badge label={item.nazwa} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-          {emptyMessage}
-        </p>
-      )}
-    </section>
+    <SectionShell id={id} tone="surface">
+      <Reveal>
+        <SectionTitle title={title} icon={Sparkles} />
+        {items.length > 0 ? (
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {items.map((item) => (
+              <li key={item.id}>
+                <Badge label={item.nazwa} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-5 text-sm text-muted">{emptyMessage}</p>
+        )}
+      </Reveal>
+    </SectionShell>
   );
 }
