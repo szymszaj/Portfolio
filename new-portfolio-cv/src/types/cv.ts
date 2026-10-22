@@ -7,6 +7,15 @@ export type CvAboutViewModel = {
   opis: string | null;
 };
 
+export type CvProjectViewModel = {
+  id: string;
+  nazwa: string;
+  opis: string | null;
+  link: string | null;
+  obrazekUrl: string | null;
+  obrazekAlt: string;
+};
+
 export type CvExperienceItemViewModel = {
   id: string;
   firma: string;
@@ -42,6 +51,7 @@ export type CvContactViewModel = {
 export type CvViewModel = {
   header: CvHeaderViewModel;
   about: CvAboutViewModel;
+  projects: CvProjectViewModel[];
   experience: CvExperienceItemViewModel[];
   education: CvEducationItemViewModel[];
   skills: CvSkillViewModel[];

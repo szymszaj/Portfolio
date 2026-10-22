@@ -40,6 +40,39 @@ export const Cv: GlobalConfig = {
       label: 'Profil GitHub (adres URL)',
     },
     {
+      name: 'projekty',
+      type: 'array',
+      label: 'Projekty',
+      labels: {
+        singular: 'Projekt',
+        plural: 'Projekty',
+      },
+      fields: [
+        {
+          name: 'nazwa',
+          type: 'text',
+          label: 'Nazwa projektu',
+          required: true,
+        },
+        {
+          name: 'opis',
+          type: 'textarea',
+          label: 'Krótki opis',
+        },
+        {
+          name: 'link',
+          type: 'text',
+          label: 'Link do projektu (adres URL)',
+        },
+        {
+          name: 'zdjecie',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Zrzut ekranu / zdjęcie',
+        },
+      ],
+    },
+    {
       name: 'doswiadczenie',
       type: 'array',
       label: 'Doświadczenie',
