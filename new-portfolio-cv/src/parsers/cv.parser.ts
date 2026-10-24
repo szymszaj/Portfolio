@@ -1,5 +1,19 @@
-import type { Cv as CvGlobal } from "@/payload-types";
+import type { Cv as CvGlobal, Media } from "@/payload-types";
 import type { CvViewModel } from "@/types/cv";
+
+function resolveProjectImage(zdjecie: string | Media | null | undefined): {
+  url: string | null;
+  alt: string;
+} {
+  if (zdjecie && typeof zdjecie === "object") {
+    const media = zdjecie as Media;
+    return {
+      url: media.sizes?.card?.url ?? media.url ?? null,
+      alt: media.alt ?? "",
+    };
+  }
+  return { url: null, alt: "" };
+}
 
 export function parseCv(data: CvGlobal): CvViewModel {
   return {
@@ -10,6 +24,17 @@ export function parseCv(data: CvGlobal): CvViewModel {
     about: {
       opis: data.opis ?? null,
     },
+    projects: (data.projekty ?? []).map((item, index) => {
+      const image = resolveProjectImage(item.zdjecie);
+      return {
+        id: item.id ?? `projekt-${index}`,
+        nazwa: item.nazwa,
+        opis: item.opis ?? null,
+        link: item.link ?? null,
+        obrazekUrl: image.url,
+        obrazekAlt: image.alt || item.nazwa,
+      };
+    }),
     experience: (data.doswiadczenie ?? []).map((item, index) => ({
       id: item.id ?? `doswiadczenie-${index}`,
       firma: item.firma,
