@@ -1,3 +1,11 @@
+export interface ProjectItem {
+  id?: string | null;
+  nazwa: string;
+  opis?: string | null;
+  link?: string | null;
+  zdjecie?: (string | null) | Media;
+}
+
 export interface ExperienceItem {
   id?: string | null;
   firma: string;
@@ -32,6 +40,7 @@ export interface Cv {
   email?: string | null;
   linkedin?: string | null;
   github?: string | null;
+  projekty?: ProjectItem[] | null;
   doswiadczenie?: ExperienceItem[] | null;
   wyksztalcenie?: EducationItem[] | null;
   umiejetnosci?: SkillItem[] | null;
@@ -47,12 +56,41 @@ export interface User {
   createdAt: string;
 }
 
+export interface Wiadomosc {
+  id: string;
+  imie: string;
+  email: string;
+  wiadomosc: string;
+  updatedAt: string;
+  createdAt: string;
+}
+
+export interface Media {
+  id: string;
+  alt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  width?: number | null;
+  height?: number | null;
+  sizes?: {
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+    };
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+
 export interface Config {
   globals: {
     cv: Cv;
   };
   collections: {
     users: User;
+    wiadomosci: Wiadomosc;
+    media: Media;
   };
 }
 

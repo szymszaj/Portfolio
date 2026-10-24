@@ -2,24 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+:root {
+  --color-paper: #f6f4ef;
+  --color-surface: #ffffff;
+  --color-line: #e3ddd0;
+  --color-ink: #1c1b19;
+  --color-muted: #6b6660;
+  --color-accent: #93711a;
+  --color-accent-soft: rgba(147, 113, 26, 0.12);
   color-scheme: light;
 }
 
-html.dark {
+:root.dark {
+  --color-paper: #121316;
+  --color-surface: #1a1c1f;
+  --color-line: #2b2e33;
+  --color-ink: #ececed;
+  --color-muted: #9aa0a6;
+  --color-accent: #d9ac3d;
+  --color-accent-soft: rgba(217, 172, 61, 0.14);
   color-scheme: dark;
 }
 
-@media print {
-  html,
-  html.dark {
-    color-scheme: light;
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  body {
-    background: #fff !important;
-    color: #000 !important;
-    /* smooth-scroll-behavior: auto !important; */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  :root,
+  :root.dark {
+    --color-paper: #ffffff;
+    --color-surface: #ffffff;
+    --color-line: #d9d9d9;
+    --color-ink: #000000;
+    --color-muted: #3a3a3a;
+    --color-accent: #000000;
+    --color-accent-soft: transparent;
+    color-scheme: light;
   }
 
   @page {

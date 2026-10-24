@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fraunces, IBM_Plex_Sans } from "next/font/google";
 import React from "react";
 
 import "./globals.css";
@@ -7,6 +8,21 @@ export const metadata: Metadata = {
   title: "CV",
   description: "CV online",
 };
+
+const display = Fraunces({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const sans = IBM_Plex_Sans({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 const noFlashThemeScript = `
 (function () {
@@ -25,11 +41,15 @@ export default function FrontendLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pl" suppressHydrationWarning>
+    <html
+      lang="pl"
+      suppressHydrationWarning
+      className={`${display.variable} ${sans.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashThemeScript }} />
       </head>
-      <body className="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+      <body className="bg-paper font-sans text-ink antialiased">
         {children}
       </body>
     </html>

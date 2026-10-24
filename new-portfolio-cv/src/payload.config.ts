@@ -1,11 +1,15 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { pl } from "@payloadcms/translations/languages/pl";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import path from "path";
 import { buildConfig } from "payload";
+import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+import { Media } from "./collections/Media";
 import { Users } from "./collections/Users";
+import { Wiadomosci } from "./collections/Wiadomosci";
 import { Cv } from "./globals/Cv";
 
 const filename = fileURLToPath(import.meta.url);
@@ -21,7 +25,7 @@ export default buildConfig({
       titleSuffix: " — Panel CV",
     },
   },
-  collections: [Users],
+  collections: [Users, Wiadomosci, Media],
   globals: [Cv],
   editor: lexicalEditor(),
   i18n: {
@@ -38,4 +42,14 @@ export default buildConfig({
     },
     push: true,
   }),
+  sharp,
+  plugins: [
+    vercelBlobStorage({
+      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || "",
+    }),
+  ],
 });
