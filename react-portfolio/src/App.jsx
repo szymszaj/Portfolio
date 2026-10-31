@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import InteractiveBackground from "./components/InteractiveBackground";
+import About from "./components/About";
 
 const Technologies = lazy(() => import("./components/Technologies"));
 const Experience = lazy(() => import("./components/Experience"));
@@ -31,7 +32,7 @@ const App = () => {
         <Suspense fallback={<LoadingSpinner />}>
           <Technologies />
           <Experience />
-          <Projects />
+          {/* <Projects /> */}
           <Courses />
           <Contact />
         </Suspense>
