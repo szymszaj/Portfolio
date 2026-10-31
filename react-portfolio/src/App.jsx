@@ -24,7 +24,7 @@ const App = () => {
     <div className="overflow-x-hidden text-neutral-300 antialiased selection:bg-cyan-300 selection:text-cyan-900">
       <InteractiveBackground />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 lg:px-6 relative z-10">
         <Navbar />
         <Hero />
         {/* <About /> */}
