@@ -1,143 +1,243 @@
-import { motion } from "framer-motion";
-import { FiBriefcase, FiCalendar, FiMapPin, FiCode } from "react-icons/fi";
+import { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
+import { FiMapPin } from "react-icons/fi";
 import { useTranslations } from "../hooks/useTranslations";
+import WaveField from "./WaveField";
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.6,
-      type: "spring",
-      stiffness: 100,
-    },
-  }),
+const useIsDesktop = () => {
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window === "undefined"
+      ? true
+      : window.matchMedia("(min-width: 1024px)").matches,
+  );
+
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 1024px)");
+    const onChange = (e) => setIsDesktop(e.matches);
+    query.addEventListener("change", onChange);
+    return () => query.removeEventListener("change", onChange);
+  }, []);
+
+  return isDesktop;
+};
+
+const JobPanel = ({ job, index, total, progress, animated, techLabel }) => {
+  const span = 1 / total;
+  const start = index * span;
+  const end = start + span;
+  const fade = span * 0.26;
+
+  const opacity = useTransform(
+    progress,
+    [start, start + fade, end - fade, end],
+    [index === 0 ? 1 : 0, 1, 1, index === total - 1 ? 1 : 0],
+  );
+  const y = useTransform(progress, [start, end], [60, -60]);
+
+  return (
+    <motion.article
+      style={animated ? { opacity, y } : undefined}
+      className={
+        animated
+          ? "absolute inset-0 flex flex-col justify-center"
+          : "border-t border-line py-10 first:border-t-0"
+      }
+    >
+      <div className="mb-5 flex flex-wrap items-center gap-4">
+        <span className="rounded-full border border-success/30 bg-success/10 px-4 py-1.5 text-sm font-medium text-success">
+          {job.year}
+        </span>
+        <span className="flex items-center gap-2 text-ink-muted">
+          <FiMapPin className="h-4 w-4" />
+          {job.company || "Freelance"}
+        </span>
+      </div>
+
+      <h3 className="font-display mb-6 text-3xl font-light tracking-tight text-ink lg:text-4xl">
+        {job.role}
+      </h3>
+
+      {/* Pełna lista obowiązków z CV rozkłada się na dwie kolumny,
+          żeby zmieścić się w przypiętym kadrze. */}
+      {Array.isArray(job.description) ? (
+        <ul className="mb-7 grid gap-x-10 gap-y-2 text-sm lg:grid-cols-2">
+          {job.description.map((item) => (
+            <li key={item} className="flex gap-2.5 text-ink-muted">
+              <span className="mt-[0.5rem] h-1 w-1 shrink-0 rounded-full bg-success" />
+              <span className="leading-snug">{item}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mb-7 max-w-2xl text-sm leading-relaxed text-ink-muted">
+          {job.description}
+        </p>
+      )}
+
+      <div>
+        <div className="mb-2.5 text-xs uppercase tracking-[0.2em] text-ink-subtle">
+          {techLabel}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {job.technologies.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-full border border-line px-3 py-1 text-xs text-ink-muted"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.article>
+  );
+};
+
+JobPanel.propTypes = {
+  job: PropTypes.shape({
+    year: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    company: PropTypes.string,
+    description: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]).isRequired,
+    technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  progress: PropTypes.object.isRequired,
+  animated: PropTypes.bool,
+  techLabel: PropTypes.string.isRequired,
+};
+
+const StepMarker = ({ index, total, progress, reduceMotion }) => {
+  const span = 1 / total;
+  const start = index * span;
+  const end = start + span;
+
+  const opacity = useTransform(
+    progress,
+    [start - 0.02, start + 0.02, end - 0.02, end + 0.02],
+    [0.25, 1, 1, 0.25],
+  );
+  const scaleX = useTransform(progress, [start, end], [0, 1]);
+
+  return (
+    <motion.div
+      style={reduceMotion ? undefined : { opacity }}
+      className="flex items-center gap-4"
+    >
+      <span className="font-display w-8 text-sm text-ink">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <span className="relative h-px w-16 overflow-hidden bg-line">
+        <motion.span
+          style={reduceMotion ? undefined : { scaleX }}
+          className="absolute inset-0 origin-left bg-success"
+        />
+      </span>
+    </motion.div>
+  );
+};
+
+StepMarker.propTypes = {
+  index: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  progress: PropTypes.object.isRequired,
+  reduceMotion: PropTypes.bool,
 };
 
 const Experience = () => {
   const { t } = useTranslations();
+  const trackRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const isDesktop = useIsDesktop();
+
+  const pinned = isDesktop && !reduceMotion;
+
+  const jobs = t("EXPERIENCES");
+  const total = jobs.length;
+
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start start", "end end"],
+  });
+
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 110,
+    damping: 28,
+    restDelta: 0.001,
+  });
 
   return (
-    <section className="relative border-b border-neutral-900 pb-24 overflow-hidden">
-      <motion.h2
-        whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: -100 }}
-        transition={{ duration: 0.7 }}
-        className="my-20 text-center text-4xl font-bold relative z-10"
+    <section
+      ref={trackRef}
+      className="relative w-full border-b border-line-muted"
+      style={pinned ? { height: `${total * 100 + 60}vh` } : undefined}
+    >
+      <div
+        className={
+          pinned
+            ? "sticky top-0 flex h-screen items-center overflow-hidden"
+            : "relative overflow-hidden py-20"
+        }
       >
-        {t("experience.title")}{" "}
-        <span className="text-purple-400">
-          {t("experience.titleHighlight")}
+        <WaveField />
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-success/[0.07] via-transparent to-transparent"
+        />
+
+        <span
+          aria-hidden="true"
+          className="font-display pointer-events-none absolute left-1/2 top-6 w-full -translate-x-1/2 select-none text-center text-[22vw] font-bold leading-none tracking-tighter text-transparent opacity-[0.06] [-webkit-text-stroke:1px_#8b949e]"
+        >
+          WORK
         </span>
-      </motion.h2>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 gap-8">
-          {t("EXPERIENCES").map((experience, index) => (
-            <motion.div
-              key={index}
-              className="group relative"
-              variants={cardVariants}
-              custom={index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="relative p-8 bg-gradient-to-br from-neutral-950/90 via-neutral-900/80 to-neutral-950/90 rounded-3xl border border-neutral-800/50 backdrop-blur-xl shadow-2xl overflow-hidden">
-                <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-2xl" />
-
-                <div className="relative z-10">
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-                    <div className="flex items-center gap-4 mb-4 lg:mb-0">
-                      <div className="p-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg">
-                        <FiBriefcase className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl lg:text-2xl font-bold text-white mb-1">
-                          {experience.role}
-                        </h3>
-                        <div className="flex items-center gap-2 text-purple-300">
-                          <FiMapPin className="w-4 h-4" />
-                          <span className="font-medium">
-                            {experience.company || "Freelance"}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 px-4 py-2 bg-neutral-800/40 rounded-xl border border-neutral-700/50">
-                      <FiCalendar className="w-4 h-4 text-cyan-400" />
-                      <span className="text-cyan-300 font-medium">
-                        {experience.year}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mb-6">
-                    {Array.isArray(experience.description) ? (
-                      <ul className="space-y-3">
-                        {experience.description.map((item, idx) => (
-                          <motion.li
-                            key={idx}
-                            className="flex items-start gap-3 text-neutral-300 leading-relaxed"
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.1 }}
-                          >
-                            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mt-2 flex-shrink-0" />
-                            <span>{item}</span>
-                          </motion.li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-neutral-300 leading-relaxed">
-                        {experience.description}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <FiCode className="w-5 h-5 text-cyan-400" />
-                      <h4 className="text-lg font-semibold text-white">
-                        {t("experience.technologies")}
-                      </h4>
-                    </div>
-                    <div className="flex flex-wrap gap-3">
-                      {experience.technologies.map((tech, techIndex) => (
-                        <motion.span
-                          key={techIndex}
-                          className="px-4 py-2 rounded-xl bg-gradient-to-r from-neutral-800/80 to-neutral-700/80 border border-neutral-600/30 text-neutral-200 font-medium hover:from-purple-600/20 hover:to-pink-600/20 hover:border-purple-500/30 hover:text-purple-300 transition-all duration-300 cursor-default"
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: techIndex * 0.1 }}
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ padding: "1px" }}
-                >
-                  <div className="w-full h-full rounded-3xl bg-neutral-950/90" />
-                </div>
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+          <div className="grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-20">
+            <div className="hidden lg:flex lg:flex-col lg:gap-6">
+              <div className="font-display mb-2 text-sm uppercase tracking-[0.25em] text-ink-subtle">
+                {t("experience.title")} {t("experience.titleHighlight")}
               </div>
-            </motion.div>
-          ))}
+              {pinned &&
+                jobs.map((job, i) => (
+                  <StepMarker
+                    key={job.role}
+                    index={i}
+                    total={total}
+                    progress={progress}
+                    reduceMotion={reduceMotion}
+                  />
+                ))}
+            </div>
+
+            <div className={pinned ? "relative min-h-[34rem]" : "relative"}>
+              {jobs.map((job, i) => (
+                <JobPanel
+                  key={job.role}
+                  job={job}
+                  index={i}
+                  total={total}
+                  progress={progress}
+                  animated={pinned}
+                  techLabel={t("experience.technologies")}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="absolute left-1/2 top-32 bottom-24 w-px bg-gradient-to-b from-transparent via-purple-500/30 to-transparent transform -translate-x-1/2 hidden lg:block" />
     </section>
   );
 };

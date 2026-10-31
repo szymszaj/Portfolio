@@ -2,8 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import { FiMail } from "react-icons/fi";
-import { Contact } from "./Contact";
+import { FiMail, FiPhone, FiX, FiArrowUpRight } from "react-icons/fi";
+import { CONTACT } from "../constants";
 import { useTranslations } from "../hooks/useTranslations";
 
 const Navbar = () => {
@@ -13,30 +13,30 @@ const Navbar = () => {
 
   const socialLinks = [
     {
-      href: "https://www.linkedin.com/in/szymon-zych-5b2950296/",
+      href: "https://www.linkedin.com/in/szymonzych-5b2950296/",
       icon: FaLinkedin,
       name: "LinkedIn",
-      color: "from-blue-600 to-blue-400",
-      bgColor: "bg-blue-500/10",
-      borderColor: "border-blue-500/30",
+      color: "from-accent-soft to-accent",
+      bgColor: "bg-accent/10",
+      borderColor: "border-accent/30",
       type: "external",
     },
     {
       href: "https://github.com/szymszaj",
       icon: FaGithub,
       name: "GitHub",
-      color: "from-gray-600 to-gray-400",
-      bgColor: "bg-gray-500/10",
-      borderColor: "border-gray-500/30",
+      color: "from-line to-ink-muted",
+      bgColor: "bg-line/10",
+      borderColor: "border-line/30",
       type: "external",
     },
     {
       href: "#contact",
       icon: FiMail,
       name: t("navbar.contact"),
-      color: "from-purple-600 to-purple-400",
-      bgColor: "bg-purple-500/10",
-      borderColor: "border-purple-500/30",
+      color: "from-accent-soft to-accent",
+      bgColor: "bg-accent-soft/10",
+      borderColor: "border-accent-soft/30",
       type: "modal",
     },
   ];
@@ -51,7 +51,7 @@ const Navbar = () => {
 
     const isMobile =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
+        navigator.userAgent,
       ) || window.innerWidth <= 768;
 
     if (isMobile) {
@@ -79,19 +79,10 @@ const Navbar = () => {
           whileTap={{ scale: 0.95 }}
         >
           <motion.span
-            className="relative bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-3xl font-bold text-transparent cursor-pointer"
-            whileHover={{
-              background: "linear-gradient(45deg, #f97316, #8b5cf6, #06b6d4)",
-              backgroundClip: "text",
-            }}
+            className="font-display relative cursor-pointer text-3xl font-bold tracking-tight text-ink transition-colors duration-300 hover:text-accent"
             transition={{ duration: 0.3 }}
           >
-            SH
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 opacity-0 blur-xl"
-              whileHover={{ opacity: 0.3 }}
-              transition={{ duration: 0.3 }}
-            />
+            {t("navbar.logo")}
           </motion.span>
         </motion.div>
 
@@ -153,7 +144,7 @@ const Navbar = () => {
             className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50"
           >
             <motion.div
-              className={`relative px-6 py-4 rounded-2xl ${activeToast.bgColor} bg-neutral-900 border ${activeToast.borderColor} shadow-2xl min-w-[280px]`}
+              className={`relative px-6 py-4 rounded-2xl ${activeToast.bgColor} bg-surface border ${activeToast.borderColor} shadow-2xl min-w-[280px]`}
               whileHover={{ scale: 1.02 }}
             >
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/5 to-white/10" />
@@ -178,7 +169,7 @@ const Navbar = () => {
                     {t("navbar.toastRedirecting")}
                   </motion.h3>
                   <motion.p
-                    className="text-neutral-300 text-sm"
+                    className="text-ink text-sm"
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
@@ -209,7 +200,7 @@ const Navbar = () => {
               </div>
 
               <motion.div
-                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-b-2xl"
+                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-accent-soft to-iris rounded-b-2xl"
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 2, ease: "linear" }}
@@ -225,61 +216,65 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-canvas-inset/90 p-4"
             onClick={() => setIsContactModalOpen(false)}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 50 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-neutral-900 rounded-3xl border border-neutral-700/50 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              initial={{ opacity: 0, y: 28, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 28, scale: 0.97 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-line bg-surface"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="absolute top-6 right-6 z-10">
-                <motion.button
-                  onClick={() => setIsContactModalOpen(false)}
-                  className="p-2 rounded-xl bg-neutral-800/80 text-neutral-400 hover:text-white hover:bg-neutral-700/80 transition-all duration-200"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </motion.button>
-              </div>
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-iris/60 to-transparent" />
 
-              <div className="p-8 pb-0">
-                <motion.h2
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-3xl font-bold text-white mb-2"
-                >
-                  {t("navbar.modalTitle")} 📨
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-neutral-400"
-                >
+              <button
+                onClick={() => setIsContactModalOpen(false)}
+                aria-label="Zamknij"
+                className="absolute right-5 top-5 rounded-full p-2 text-ink-subtle transition-colors duration-200 hover:bg-surface-raised hover:text-ink"
+              >
+                <FiX className="h-5 w-5" />
+              </button>
+
+              <div className="p-8">
+                <span className="font-display text-xs font-semibold uppercase tracking-[0.25em] text-iris">
+                  {t("navbar.contact")}
+                </span>
+                <h2 className="font-display mt-4 text-2xl font-light text-ink">
+                  {t("navbar.modalTitle")}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-ink-muted">
                   {t("navbar.modalSubtitle")}
-                </motion.p>
-              </div>
+                </p>
 
-              <div className="p-4">
-                <Contact />
+                <div className="mt-7 space-y-px overflow-hidden rounded-xl border border-line bg-line">
+                  <a
+                    href={`mailto:${CONTACT.email}`}
+                    className="flex items-center gap-4 bg-surface p-4 transition-colors duration-200 hover:bg-surface-raised"
+                  >
+                    <FiMail className="h-4 w-4 shrink-0 text-iris" />
+                    <span className="break-all text-sm text-ink">
+                      {CONTACT.email}
+                    </span>
+                  </a>
+                  <a
+                    href={`tel:${CONTACT.phoneNo.replace(/\s/g, "")}`}
+                    className="flex items-center gap-4 bg-surface p-4 transition-colors duration-200 hover:bg-surface-raised"
+                  >
+                    <FiPhone className="h-4 w-4 shrink-0 text-iris" />
+                    <span className="text-sm text-ink">{CONTACT.phoneNo}</span>
+                  </a>
+                </div>
+
+                <a
+                  href="#kontakt"
+                  onClick={() => setIsContactModalOpen(false)}
+                  className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-canvas transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  {t("navbar.modalCta")}
+                  <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
               </div>
             </motion.div>
           </motion.div>

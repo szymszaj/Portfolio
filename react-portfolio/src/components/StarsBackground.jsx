@@ -70,8 +70,24 @@ const StarsBackground = () => {
     };
     window.addEventListener("resize", handleResize);
 
+    let running = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !running) {
+          running = true;
+          animationFrameId = requestAnimationFrame(draw);
+        } else if (!entry.isIntersecting && running) {
+          running = false;
+          cancelAnimationFrame(animationFrameId);
+        }
+      },
+      { threshold: 0 },
+    );
+    observer.observe(canvas);
+
     return () => {
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
     };
   }, []);
