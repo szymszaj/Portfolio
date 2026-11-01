@@ -28,7 +28,6 @@ const App = () => {
     <div className="overflow-x-clip text-ink antialiased selection:bg-accent selection:text-canvas">
       <InteractiveBackground />
 
-      {/* Navbar nakłada się na pełnoekranowe intro */}
       <header className="absolute inset-x-0 top-0 z-30">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
           <Navbar />

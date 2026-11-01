@@ -94,8 +94,20 @@ const InteractiveDots = () => {
       if (visible) frameId = requestAnimationFrame(loop);
     };
 
+    let rect = { left: 0, top: 0 };
+    let rectStale = true;
+
+    const refreshRect = () => {
+      rect = canvas.getBoundingClientRect();
+      rectStale = false;
+    };
+
+    const invalidateRect = () => {
+      rectStale = true;
+    };
+
     const handlePointerMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
+      if (rectStale) refreshRect();
       pointer.x = e.clientX - rect.left;
       pointer.y = e.clientY - rect.top;
     };
@@ -105,6 +117,11 @@ const InteractiveDots = () => {
       pointer.y = -9999;
     };
 
+    const handleResize = () => {
+      build();
+      invalidateRect();
+    };
+
     build();
     draw();
 
@@ -112,22 +129,32 @@ const InteractiveDots = () => {
       ([entry]) => {
         visible = entry.isIntersecting;
         cancelAnimationFrame(frameId);
-        if (visible && !prefersReducedMotion) {
-          frameId = requestAnimationFrame(loop);
+
+        if (visible) {
+          invalidateRect();
+          window.addEventListener("pointermove", handlePointerMove, {
+            passive: true,
+          });
+          window.addEventListener("pointerleave", handlePointerLeave);
+          if (!prefersReducedMotion) frameId = requestAnimationFrame(loop);
+        } else {
+          window.removeEventListener("pointermove", handlePointerMove);
+          window.removeEventListener("pointerleave", handlePointerLeave);
+          handlePointerLeave();
         }
       },
       { threshold: 0 },
     );
     observer.observe(canvas);
 
-    window.addEventListener("resize", build);
-    window.addEventListener("pointermove", handlePointerMove);
-    window.addEventListener("pointerleave", handlePointerLeave);
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", invalidateRect, { passive: true });
 
     return () => {
       cancelAnimationFrame(frameId);
       observer.disconnect();
-      window.removeEventListener("resize", build);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", invalidateRect);
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("pointerleave", handlePointerLeave);
     };
