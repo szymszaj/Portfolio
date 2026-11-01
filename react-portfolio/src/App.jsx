@@ -9,7 +9,6 @@ const Approach = lazy(() => import("./components/Approach"));
 const Technologies = lazy(() => import("./components/Technologies"));
 const Experience = lazy(() => import("./components/Experience"));
 const Education = lazy(() => import("./components/Education"));
-// Sekcja projektów chwilowo wyłączona — do przeprojektowania
 // const Projects = lazy(() => import("./components/Projects"));
 const Courses = lazy(() => import("./components/Courses"));
 const Contact = lazy(() =>
@@ -24,8 +23,6 @@ const LoadingSpinner = () => (
   </div>
 );
 
-// overflow-x-clip (zamiast -hidden) nie tworzy kontenera przewijania,
-// dzięki czemu sticky w Hero działa względem viewportu.
 const App = () => {
   return (
     <div className="overflow-x-clip text-ink antialiased selection:bg-accent selection:text-canvas">
@@ -38,8 +35,6 @@ const App = () => {
         </div>
       </header>
 
-      {/* Każda sekcja sama rozciąga tło na pełną szerokość i trzyma
-          treść we własnym kontenerze. */}
       <main className="relative z-10">
         <Hero />
 
