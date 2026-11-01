@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import { useTranslations } from "../hooks/useTranslations";
+import Serpentine from "./Serpentine";
 import {
   FiBook,
   FiCalendar,
@@ -21,13 +22,13 @@ const CourseCard = ({ course }) => {
   const getLevelColor = (level) => {
     switch (level) {
       case "Podstawowy":
-        return "from-green-500/20 to-emerald-500/20 border-green-500/30 text-green-300";
+        return "bg-emerald-50 border-emerald-200 text-emerald-700";
       case "Średniozaawansowany":
-        return "from-yellow-500/20 to-orange-500/20 border-yellow-500/30 text-yellow-300";
+        return "bg-amber-50 border-amber-200 text-amber-700";
       case "Zaawansowany":
-        return "from-red-500/20 to-pink-500/20 border-red-500/30 text-red-300";
+        return "bg-rose-50 border-rose-200 text-rose-700";
       default:
-        return "from-gray-500/20 to-neutral-500/20 border-gray-500/30 text-gray-300";
+        return "bg-slate-50 border-slate-200 text-slate-700";
     }
   };
 
@@ -40,9 +41,9 @@ const CourseCard = ({ course }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="relative h-full bg-gradient-to-br from-neutral-900/50 to-neutral-950/50 rounded-2xl border border-neutral-800/50 backdrop-blur-sm overflow-hidden hover:border-purple-500/30 transition-all duration-300">
+      <div className="relative h-full bg-white rounded-2xl border border-paper-line overflow-hidden hover:border-accent-soft/40 transition-colors duration-300 shadow-sm">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-purple-600/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          className="absolute inset-0 bg-accent-soft/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
           transition={{ duration: 0.3 }}
         />
@@ -50,24 +51,24 @@ const CourseCard = ({ course }) => {
         <div className="relative p-6 h-full flex flex-col">
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30">
-                <FiBook className="w-5 h-5 text-purple-300" />
+              <div className="p-2 rounded-lg bg-accent-soft/10 border border-accent-soft/25">
+                <FiBook className="w-5 h-5 text-accent-soft" />
               </div>
               <div>
-                <h3 className="font-bold text-white text-lg leading-tight group-hover:text-purple-300 transition-colors duration-300">
+                <h3 className="font-display font-semibold text-paper-ink text-lg leading-tight transition-colors duration-300">
                   {course.title}
                 </h3>
-                <p className="text-neutral-400 text-sm">{course.provider}</p>
+                <p className="text-paper-muted text-sm">{course.provider}</p>
               </div>
             </div>
           </div>
 
-          <p className="text-neutral-300 text-sm leading-relaxed mb-4 flex-grow">
+          <p className="text-paper-muted text-sm leading-relaxed mb-4 flex-grow">
             {course.description}
           </p>
 
           <div className="space-y-3 mb-4">
-            <div className="flex items-center gap-6 text-sm text-neutral-400">
+            <div className="flex items-center gap-6 text-sm text-paper-muted">
               <div className="flex items-center gap-2">
                 <FiClock className="w-4 h-4" />
                 <span>{course.duration}</span>
@@ -79,7 +80,7 @@ const CourseCard = ({ course }) => {
             </div>
 
             {course.completedDate && (
-              <div className="flex items-center gap-2 text-sm text-neutral-400">
+              <div className="flex items-center gap-2 text-sm text-paper-muted">
                 <FiCalendar className="w-4 h-4" />
                 <span>
                   {t("courses.completed")}: {course.completedDate}
@@ -90,21 +91,21 @@ const CourseCard = ({ course }) => {
             {course.progress !== undefined && (
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-neutral-400">Postęp kursu:</span>
-                  <span className="text-neutral-300 font-medium">
+                  <span className="text-paper-muted">Postęp kursu:</span>
+                  <span className="text-paper-ink font-medium">
                     {course.progress}%
                   </span>
                 </div>
-                <div className="w-full bg-neutral-800 rounded-full h-2 overflow-hidden">
+                <div className="w-full bg-paper-line rounded-full h-2 overflow-hidden">
                   <motion.div
                     className={`h-full rounded-full ${
                       course.progress === 100
-                        ? "bg-gradient-to-r from-green-500 to-emerald-500"
+                        ? "bg-gradient-to-r from-success to-accent"
                         : course.progress >= 80
-                          ? "bg-gradient-to-r from-blue-500 to-cyan-500"
+                          ? "bg-gradient-to-r from-accent to-accent-soft"
                           : course.progress >= 50
-                            ? "bg-gradient-to-r from-yellow-500 to-orange-500"
-                            : "bg-gradient-to-r from-purple-500 to-pink-500"
+                            ? "bg-gradient-to-r from-amber to-ember"
+                            : "bg-gradient-to-r from-accent-soft to-iris"
                     }`}
                     initial={{ width: 0 }}
                     animate={{ width: `${course.progress}%` }}
@@ -115,9 +116,9 @@ const CourseCard = ({ course }) => {
             )}
 
             <div className="flex items-center gap-2">
-              <FiAward className="w-4 h-4 text-neutral-400" />
+              <FiAward className="w-4 h-4 text-paper-muted" />
               <span
-                className={`px-2 py-1 rounded-md bg-gradient-to-r ${getLevelColor(
+                className={`px-2 py-1 rounded-md ${getLevelColor(
                   course.level,
                 )} text-xs font-medium border`}
               >
@@ -131,7 +132,7 @@ const CourseCard = ({ course }) => {
               {course.technologies.map((tech, techIndex) => (
                 <span
                   key={techIndex}
-                  className="px-2 py-1 text-xs font-medium bg-neutral-800/50 text-neutral-300 rounded-md border border-neutral-700/50"
+                  className="px-2 py-1 text-xs font-medium bg-paper-line/60 text-paper-ink rounded-md border border-paper-line"
                 >
                   {tech}
                 </span>
@@ -144,7 +145,7 @@ const CourseCard = ({ course }) => {
               href={course.certificateUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-200 text-sm"
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-paper-ink text-paper font-medium rounded-lg transition-transform duration-200 hover:-translate-y-0.5 text-sm"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -189,7 +190,23 @@ const Courses = () => {
   const hasMoreCourses = t("COURSES").length > 3;
 
   return (
-    <div className="border-b border-neutral-800 pb-12 pt-12 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section className="relative w-full overflow-hidden bg-paper py-28 text-paper-ink lg:py-40">
+      {/* Siatka techniczna zamiast pustej bieli */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.55] [background-image:linear-gradient(to_right,#d3d6e0_1px,transparent_1px),linear-gradient(to_bottom,#d3d6e0_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,black,transparent)]"
+      />
+
+      <Serpentine color="#3b4ee0" opacity={0.5} />
+
+      <span
+        aria-hidden="true"
+        className="font-display pointer-events-none absolute left-1/2 top-2 w-full -translate-x-1/2 select-none text-center text-[23vw] font-bold leading-none tracking-tighter text-transparent opacity-30 [-webkit-text-stroke:2px_#b9bed0]"
+      >
+        LEARN
+      </span>
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -197,24 +214,24 @@ const Courses = () => {
         viewport={{ once: true }}
         className="text-center mb-12 sm:mb-16"
       >
-        <h2 className="text-3xl lg:text-4xl font-bold  text-white mb-4">
+        <h2 className="font-display text-3xl lg:text-5xl font-light tracking-tight text-paper-ink mb-4">
           {t("courses.title")}{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <span className="text-accent-soft">
             {t("courses.titleHighlight")}
           </span>
         </h2>
-        <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
+        <p className="text-paper-muted text-lg max-w-2xl mx-auto">
           {t("courses.subtitle")}
         </p>
 
         <div className="flex items-center justify-center gap-6 mt-6">
-          <div className="flex items-center gap-2 text-green-400">
+          <div className="flex items-center gap-2 text-success">
             <FiCheckCircle className="w-5 h-5" />
             <span className="font-medium">
               {completedCount} {t("courses.completedCount")}
             </span>
           </div>
-          <div className="flex items-center gap-2 text-blue-400">
+          <div className="flex items-center gap-2 text-accent">
             <FiPlay className="w-5 h-5" />
             <span className="font-medium">
               {inProgressCount} {t("courses.inProgressCount")}
@@ -238,7 +255,7 @@ const Courses = () => {
         >
           <motion.button
             onClick={() => setShowAll(!showAll)}
-            className="p-4 rounded-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 hover:from-purple-600/30 hover:to-pink-600/30 hover:border-purple-400/50 transition-all duration-300 group"
+            className="p-4 rounded-full bg-gradient-to-r from-accent-soft/20 to-iris/20 border border-accent-soft/30 hover:from-accent-soft/30 hover:to-iris/30 hover:border-accent/50 transition-all duration-300 group"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -256,12 +273,13 @@ const Courses = () => {
                 rotate: { duration: 0.3 },
               }}
             >
-              <FiChevronDown className="w-6 h-6 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+              <FiChevronDown className="w-6 h-6 text-accent group-hover:text-accent transition-colors duration-300" />
             </motion.div>
           </motion.button>
         </motion.div>
       )}
-    </div>
+      </div>
+    </section>
   );
 };
 

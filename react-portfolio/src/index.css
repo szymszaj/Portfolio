@@ -1,7 +1,83 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Archivo", "Helvetica Neue", sans-serif;
+
+  /* Powierzchnie — paleta inspirowana GitHub Dark */
+  --color-canvas: #0d1117;
+  --color-canvas-inset: #010409;
+  --color-surface: #161b22;
+  --color-surface-raised: #21262d;
+  --color-line: #30363d;
+  --color-line-muted: #21262d;
+
+  /* Jasny motyw dla sekcji-przerywników */
+  --color-paper: #f1f2f7;
+  --color-paper-ink: #0b0d12;
+  --color-paper-muted: #5b6270;
+  --color-paper-line: #d3d6e0;
+
+  /* Tekst */
+  --color-ink: #e6edf3;
+  --color-ink-muted: #8b949e;
+  --color-ink-subtle: #6e7681;
+
+  /* Akcenty — każda sekcja dostaje własny, zamiast jednego gradientu wszędzie */
+  --color-accent: #58a6ff;
+  --color-accent-soft: #1f6feb;
+  --color-success: #3fb950;
+  --color-iris: #a371f7;
+  --color-ember: #db6d28;
+  --color-amber: #d29922;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 40s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 :root {
   font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+/* Maska wygaszająca krawędzie przewijanych pasów */
+.edge-fade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8rem,
+    black calc(100% - 8rem),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8rem,
+    black calc(100% - 8rem),
+    transparent
+  );
 }
 
 .will-change-transform {
@@ -46,5 +122,10 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none !important;
   }
 }

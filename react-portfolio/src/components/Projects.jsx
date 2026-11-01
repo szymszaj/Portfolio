@@ -1,125 +1,103 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiExternalLink, FiX, FiEye, FiCode } from "react-icons/fi";
-import StarsBackground from "./StarsBackground";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
+import { FiExternalLink, FiX, FiArrowUpRight, FiCode } from "react-icons/fi";
 import { useTranslations } from "../hooks/useTranslations";
+import SectionHeading from "./SectionHeading";
+import SectionShell from "./SectionShell";
 
-const cardVariants = {
-  initial: { opacity: 0, y: 60 },
-  animate: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, type: "spring" },
-  }),
-};
+const EASE = [0.16, 1, 0.3, 1];
 
 const modalVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
+  hidden: { opacity: 0, scale: 0.94 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { type: "spring", damping: 25, stiffness: 300 },
+    transition: { type: "spring", damping: 26, stiffness: 300 },
   },
-  exit: {
-    opacity: 0,
-    scale: 0.8,
-    transition: { duration: 0.2 },
-  },
-};
-
-const backdropVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-  exit: { opacity: 0 },
+  exit: { opacity: 0, scale: 0.94, transition: { duration: 0.2 } },
 };
 
 const ProjectModal = ({ project, isOpen, onClose }) => {
   const { t } = useTranslations();
-
   if (!project) return null;
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90"
-          variants={backdropVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-canvas-inset/90 p-4 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           onClick={onClose}
         >
-          <StarsBackground />
           <motion.div
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-neutral-900 rounded-2xl border border-neutral-700/50"
+            className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-line bg-surface"
             variants={modalVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 flex items-center justify-between p-6 border-b border-neutral-700/50 bg-neutral-900 rounded-t-2xl">
-              <h2 className="text-2xl font-bold text-white">{project.title}</h2>
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-surface p-6">
+              <h2 className="font-display text-2xl font-light text-ink">
+                {project.title}
+              </h2>
               <button
                 onClick={onClose}
-                className="p-2 text-neutral-400 hover:text-white transition-colors rounded-full hover:bg-neutral-800/50"
+                className="rounded-full p-2 text-ink-muted transition-colors hover:bg-surface-raised hover:text-ink"
+                aria-label="Zamknij"
               >
-                <FiX className="w-6 h-6" />
+                <FiX className="h-6 w-6" />
               </button>
             </div>
 
             <div className="p-6">
-              <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-6">
+              <div className="mb-6 aspect-video w-full overflow-hidden rounded-xl">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
 
-              {/* Description */}
-              <div className="mb-6">
-                <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-                  <FiCode className="text-purple-400" />
-                  {t("projects.description")}
-                </h3>
-                <p className="text-neutral-300 leading-relaxed text-base">
-                  {project.description}
-                </p>
-              </div>
+              <h3 className="mb-3 flex items-center gap-2 text-lg font-semibold text-ink">
+                <FiCode className="text-ember" />
+                {t("projects.description")}
+              </h3>
+              <p className="mb-6 leading-relaxed text-ink-muted">
+                {project.description}
+              </p>
 
-              <div className="mb-6">
-                <h3 className="text-xl font-semibold text-white mb-3">
-                  {t("projects.technologies")}
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-2 rounded-lg bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 text-purple-300 font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              <div className="mb-6 flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-lg border border-line bg-surface-raised/60 px-3 py-1.5 text-sm text-ink-muted"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
 
               {project.link && (
-                <div className="flex gap-4">
-                  <motion.a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:from-purple-500 hover:to-pink-500 transition-all duration-200 shadow-lg hover:shadow-purple-500/25"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FiExternalLink className="w-5 h-5" />
-                    {t("projects.viewProject")}
-                  </motion.a>
-                </div>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-ember px-6 py-3 font-semibold text-canvas transition-transform duration-200 hover:-translate-y-0.5"
+                >
+                  <FiExternalLink className="h-4 w-4" />
+                  {t("projects.viewProject")}
+                </a>
               )}
             </div>
           </motion.div>
@@ -141,10 +119,121 @@ ProjectModal.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
+const ProjectCard = ({ project, index, onOpen, label }) => {
+  const flipped = index % 2 === 1;
+  const cardRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 26,
+    restDelta: 0.001,
+  });
+
+  const drift = flipped ? 1 : -1;
+  const imageX = useTransform(
+    smooth,
+    [0, 1],
+    [`${drift * 14}%`, `${-drift * 14}%`],
+  );
+  const imageScale = useTransform(smooth, [0, 0.5, 1], [1.12, 1, 1.12]);
+
+  const imageStyle = reduceMotion ? undefined : { x: imageX };
+
+  return (
+    <article ref={cardRef} className="group">
+      <button
+        type="button"
+        onClick={() => onOpen(project)}
+        className="grid w-full items-center gap-8 text-left lg:grid-cols-2 lg:gap-16"
+      >
+        <motion.div
+          style={imageStyle}
+          initial={{ opacity: 0, scale: 0.94 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.9, ease: EASE }}
+          className={`relative overflow-hidden rounded-2xl border border-line bg-surface ${
+            flipped ? "lg:order-2" : ""
+          }`}
+        >
+          <div className="aspect-[16/10] w-full overflow-hidden">
+            <motion.img
+              src={project.image}
+              alt={project.title}
+              loading="lazy"
+              decoding="async"
+              style={reduceMotion ? undefined : { scale: imageScale }}
+              className="h-full w-full object-cover"
+            />
+          </div>
+
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-canvas/70 via-transparent to-transparent opacity-80" />
+
+          <span className="font-display absolute left-5 top-5 rounded-full border border-line bg-canvas/90 px-3 py-1 text-xs text-ink-muted">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.28, ease: EASE }}
+          className={flipped ? "lg:order-1" : ""}
+        >
+          <div className="mb-4 h-px w-16 bg-ember/50 transition-all duration-700 group-hover:w-28" />
+
+          <h3 className="font-display mb-4 text-3xl font-light leading-tight tracking-tight text-ink lg:text-5xl">
+            {project.title}
+          </h3>
+
+          <p className="mb-6 max-w-xl leading-relaxed text-ink-muted">
+            {project.description}
+          </p>
+
+          <div className="mb-8 flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-full border border-line px-3 py-1.5 text-sm text-ink-subtle transition-colors duration-300 group-hover:border-ember/40 group-hover:text-ink-muted"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <span className="inline-flex items-center gap-2 font-medium text-ink transition-colors duration-300 group-hover:text-ember">
+            {label}
+            <FiArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </span>
+        </motion.div>
+      </button>
+    </article>
+  );
+};
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+  onOpen: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+};
+
 const Projects = () => {
+  const { t } = useTranslations();
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { t } = useTranslations();
 
   const openModal = (project) => {
     setSelectedProject(project);
@@ -157,66 +246,21 @@ const Projects = () => {
   };
 
   return (
-    <section className="relative border-b border-neutral-900 pb-20 overflow-hidden">
-      <motion.h2
-        whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: -60 }}
-        transition={{ duration: 0.8 }}
-        className="my-20 text-center text-4xl font-bold relative z-10 drop-shadow"
-      >
-        {t("projects.title")}{" "}
-        <span className="text-purple-400">{t("projects.titleHighlight")}</span>
-      </motion.h2>
+    <SectionShell tint="ember" watermark="WORKS" className="py-24 lg:py-32">
+      <SectionHeading
+        title={t("projects.title")}
+        highlight={t("projects.titleHighlight")}
+      />
 
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto">
+      <div className="space-y-24 lg:space-y-36">
         {t("PROJECTS").map((project, i) => (
-          <motion.div
+          <ProjectCard
             key={project.title}
-            className="group relative rounded-2xl border border-neutral-800/60 bg-neutral-900 shadow-xl overflow-hidden cursor-pointer"
-            variants={cardVariants}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, amount: 0.2 }}
-            custom={i}
-            whileHover={{
-              y: -8,
-              transition: { type: "spring", stiffness: 300, damping: 20 },
-            }}
-            onClick={() => openModal(project)}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 via-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:via-purple-600/5 group-hover:to-pink-600/10 transition-all duration-500 rounded-2xl" />
-
-            <div className="relative aspect-video overflow-hidden">
-              <img
-                src={project.image}
-                alt={project.title}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-              />
-
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/40">
-                <div className="p-4 rounded-full bg-white/20 border border-white/30">
-                  <FiEye className="w-8 h-8 text-white" />
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-neutral-900/95 via-neutral-900/80 to-transparent">
-              <h3 className="text-xl font-bold text-white group-hover:text-purple-100 transition-colors">
-                {project.title}
-              </h3>
-
-              <div className="mt-2 flex items-center justify-between">
-                <span className="text-sm text-purple-400 font-medium group-hover:text-purple-300 transition-colors">
-                  {t("projects.clickToSeeMore")}
-                </span>
-                <div className="p-2 rounded-full bg-purple-600/20 group-hover:bg-purple-600/30 transition-colors">
-                  <FiEye className="w-4 h-4 text-purple-400" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            project={project}
+            index={i}
+            onOpen={openModal}
+            label={t("projects.clickToSeeMore")}
+          />
         ))}
       </div>
 
@@ -225,7 +269,7 @@ const Projects = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
       />
-    </section>
+    </SectionShell>
   );
 };
 
