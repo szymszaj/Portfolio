@@ -149,7 +149,6 @@ export const Contact = () => {
         </span>
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
-          {/* Nagłówek */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -168,7 +167,6 @@ export const Contact = () => {
             </p>
           </motion.div>
 
-          {/* Dane kontaktowe */}
           <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
             {DETAILS.map((detail, i) => {
               const Icon = detail.icon;
@@ -208,7 +206,6 @@ export const Contact = () => {
             })}
           </div>
 
-          {/* Formularz */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}

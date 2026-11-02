@@ -39,8 +39,7 @@ const DriftText = ({
 
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
-      <motion.div
-        style={reduceMotion ? undefined : { x, opacity }}
+      <motion.div style={reduceMotion ? undefined : { x, opacity }}
         className={align === "right" ? "text-right" : "text-left"}
       >
         {children}

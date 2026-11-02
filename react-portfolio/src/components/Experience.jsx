@@ -64,8 +64,6 @@ const JobPanel = ({ job, index, total, progress, animated, techLabel }) => {
         {job.role}
       </h3>
 
-      {/* Pełna lista obowiązków z CV rozkłada się na dwie kolumny,
-          żeby zmieścić się w przypiętym kadrze. */}
       {Array.isArray(job.description) ? (
         <ul className="mb-7 grid gap-x-10 gap-y-2 text-sm lg:grid-cols-2">
           {job.description.map((item) => (

@@ -191,7 +191,6 @@ const Courses = () => {
 
   return (
     <section className="relative w-full overflow-hidden bg-paper py-28 text-paper-ink lg:py-40">
-      {/* Siatka techniczna zamiast pustej bieli */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.55] [background-image:linear-gradient(to_right,#d3d6e0_1px,transparent_1px),linear-gradient(to_bottom,#d3d6e0_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,black,transparent)]"

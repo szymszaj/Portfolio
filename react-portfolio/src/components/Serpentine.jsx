@@ -8,16 +8,33 @@ import {
   useReducedMotion,
 } from "framer-motion";
 
-const Serpentine = ({ color = "#3b4ee0", opacity = 1 }) => {
+const SIZES = {
+  lg: {
+    wrapper: "absolute left-[-30%] top-[-35%] h-[170%] w-[150%]",
+    strokeMid: 14,
+  },
+  sm: {
+    wrapper: "absolute left-[5%] top-[-5%] h-[110%] w-[90%]",
+    strokeMid: 8,
+  },
+};
+
+const Serpentine = ({
+  color = "#3b4ee0",
+  opacity = 1,
+  size = "lg",
+  progressValue,
+}) => {
   const ref = useRef(null);
   const reduceMotion = useReducedMotion();
+  const dims = SIZES[size] ?? SIZES.lg;
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const smooth = useSpring(scrollYProgress, {
+  const smooth = useSpring(progressValue ?? scrollYProgress, {
     stiffness: 70,
     damping: 26,
     restDelta: 0.001,
@@ -26,6 +43,7 @@ const Serpentine = ({ color = "#3b4ee0", opacity = 1 }) => {
   const rotate = useTransform(smooth, [0, 1], [-14, 14]);
   const y = useTransform(smooth, [0, 1], ["-8%", "8%"]);
   const x = useTransform(smooth, [0, 1], ["-4%", "4%"]);
+  const dashOffset = useTransform(smooth, [0, 1], [0, -96]);
 
   const style = reduceMotion ? undefined : { rotate, y, x };
 
@@ -40,35 +58,19 @@ const Serpentine = ({ color = "#3b4ee0", opacity = 1 }) => {
         style={style}
         viewBox="0 0 1000 1000"
         preserveAspectRatio="xMidYMid slice"
-        className="absolute left-[-30%] top-[-35%] h-[170%] w-[150%]"
+        className={dims.wrapper}
       >
-        <circle
-          cx="500"
-          cy="500"
-          r="430"
-          fill="none"
-          stroke={color}
-          strokeWidth="46"
-        />
-        <circle
+        <motion.circle
           cx="500"
           cy="500"
           r="300"
           fill="none"
           stroke={color}
-          strokeWidth="14"
+          strokeWidth={dims.strokeMid}
           strokeDasharray="6 26"
           strokeLinecap="round"
           opacity="0.55"
-        />
-        <circle
-          cx="500"
-          cy="500"
-          r="560"
-          fill="none"
-          stroke={color}
-          strokeWidth="2"
-          opacity="0.4"
+          style={reduceMotion ? undefined : { strokeDashoffset: dashOffset }}
         />
       </motion.svg>
     </div>
@@ -78,6 +80,8 @@ const Serpentine = ({ color = "#3b4ee0", opacity = 1 }) => {
 Serpentine.propTypes = {
   color: PropTypes.string,
   opacity: PropTypes.number,
+  size: PropTypes.oneOf(["sm", "lg"]),
+  progressValue: PropTypes.object,
 };
 
 export default Serpentine;
