@@ -62,7 +62,6 @@ body {
   color: var(--color-ink);
 }
 
-/* Maska wygaszająca krawędzie przewijanych pasów */
 .edge-fade {
   -webkit-mask-image: linear-gradient(
     to right,

@@ -19,7 +19,6 @@ const FIRST_NAME = "SZYMON";
 const LETTER_DELAY = 0.19;
 const LETTER_DURATION = 1.7;
 const INTRO_START = 0.4;
-// Moment, w którym ostatnia litera kończy wjazd
 const INTRO_END =
   INTRO_START + (FIRST_NAME.length - 1) * LETTER_DELAY + LETTER_DURATION;
 
@@ -30,10 +29,8 @@ const Hero = () => {
   const lenis = useLenis();
   const [introDone, setIntroDone] = useState(false);
 
-  // Przy ograniczonym ruchu intro nie blokuje niczego
   const introFinished = introDone || reduceMotion;
 
-  // Scroll pozostaje zablokowany, dopóki imię się nie złoży
   useEffect(() => {
     if (reduceMotion) return undefined;
 

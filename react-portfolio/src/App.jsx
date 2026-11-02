@@ -9,7 +9,6 @@ const Approach = lazy(() => import("./components/Approach"));
 const Technologies = lazy(() => import("./components/Technologies"));
 const Experience = lazy(() => import("./components/Experience"));
 const Education = lazy(() => import("./components/Education"));
-// const Projects = lazy(() => import("./components/Projects"));
 const Courses = lazy(() => import("./components/Courses"));
 const Contact = lazy(() =>
   import("./components/Contact").then((module) => ({
