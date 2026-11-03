@@ -41,7 +41,7 @@ const Typewriter: React.FC<TypewriterProps> = ({
       } else if (isDeleting && charIndex === 0) {
         setIsDeleting(false);
         setWordIndex((prev) =>
-          prev + 1 === words.length ? (loop ? 0 : prev) : prev + 1
+          prev + 1 === words.length ? (loop ? 0 : prev) : prev + 1,
         );
       }
     }
