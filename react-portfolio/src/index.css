@@ -4,7 +4,6 @@
   --font-sans: "Inter", sans-serif;
   --font-display: "Archivo", "Helvetica Neue", sans-serif;
 
-  /* Powierzchnie — paleta inspirowana GitHub Dark */
   --color-canvas: #0d1117;
   --color-canvas-inset: #010409;
   --color-surface: #161b22;
@@ -12,18 +11,15 @@
   --color-line: #30363d;
   --color-line-muted: #21262d;
 
-  /* Jasny motyw dla sekcji-przerywników */
   --color-paper: #f1f2f7;
   --color-paper-ink: #0b0d12;
   --color-paper-muted: #5b6270;
   --color-paper-line: #d3d6e0;
 
-  /* Tekst */
   --color-ink: #e6edf3;
   --color-ink-muted: #8b949e;
   --color-ink-subtle: #6e7681;
 
-  /* Akcenty — każda sekcja dostaje własny, zamiast jednego gradientu wszędzie */
   --color-accent: #58a6ff;
   --color-accent-soft: #1f6feb;
   --color-success: #3fb950;
