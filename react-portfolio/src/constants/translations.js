@@ -122,7 +122,8 @@ export const translations = {
   education: {
     title: "Moje",
     titleHighlight: "wykształcenie",
-    subtitle: "Wiedza akademicka i techniczna, która uzupełnia doświadczenie komercyjne",
+    subtitle:
+      "Wiedza akademicka i techniczna, która uzupełnia doświadczenie komercyjne",
     period: "Okres",
     inProgress: "W trakcie",
     completed: "Ukończono",
@@ -238,7 +239,12 @@ export const translations = {
   ],
   LANGUAGES: [
     { name: "Polski", level: "C2", description: "Biegły", value: 100 },
-    { name: "Angielski", level: "B2", description: "Średniozaawansowany", value: 70 },
+    {
+      name: "Angielski",
+      level: "B2",
+      description: "Średniozaawansowany",
+      value: 70,
+    },
   ],
   INTERESTS: ["Podróże", "Gry wideo", "Technologia", "Sztuczna inteligencja"],
   PROJECTS: [
