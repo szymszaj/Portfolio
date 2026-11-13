@@ -1,9 +1,9 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useRef } from "react";
+import PropTypes from "prop-types";
 import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-import InteractiveBackground from "./components/InteractiveBackground";
 import About from "./components/About";
 import { CmsProvider } from "./context/CmsContext";
+import { useIntro } from "./hooks/useIntro";
 
 const Manifesto = lazy(() => import("./components/Manifesto"));
 const Approach = lazy(() => import("./components/Approach"));
@@ -23,39 +23,40 @@ const LoadingSpinner = () => (
   </div>
 );
 
-const App = () => {
+const App = ({ initialContent = null }) => {
+  const restRef = useRef(null);
+  useIntro(restRef);
+
   return (
-    <CmsProvider>
-      <div className="overflow-x-clip text-ink antialiased selection:bg-accent selection:text-canvas">
-        <InteractiveBackground />
-
-        <header className="absolute inset-x-0 top-0 z-30">
-          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
-            <Navbar />
-          </div>
-        </header>
-
-        <main className="relative z-10">
+    <CmsProvider initialContent={initialContent}>
+      <div className="overflow-x-clip bg-canvas text-ink antialiased selection:bg-accent selection:text-canvas">
+        <main>
           <Hero />
 
-          <Suspense fallback={<LoadingSpinner />}>
-            <Manifesto />
-          </Suspense>
+          <div ref={restRef} className="intro-hidden">
+            <Suspense fallback={<LoadingSpinner />}>
+              <Manifesto />
+            </Suspense>
 
-          <About />
+            <About />
 
-          <Suspense fallback={<LoadingSpinner />}>
-            <Approach />
-            <Technologies />
-            <Experience />
-            <Education />
-            <Courses />
-            <Contact />
-          </Suspense>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Approach />
+              <Technologies />
+              <Experience />
+              <Education />
+              <Courses />
+              <Contact />
+            </Suspense>
+          </div>
         </main>
       </div>
     </CmsProvider>
   );
+};
+
+App.propTypes = {
+  initialContent: PropTypes.object,
 };
 
 export default App;

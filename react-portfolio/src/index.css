@@ -1,8 +1,10 @@
 @import "tailwindcss";
+@import "./fonts.css";
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --font-display: "Archivo", "Helvetica Neue", sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", sans-serif;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
 
   --color-canvas: #0d1117;
   --color-canvas-inset: #010409;
@@ -19,6 +21,14 @@
   --color-ink: #e6edf3;
   --color-ink-muted: #8b949e;
   --color-ink-subtle: #6e7681;
+
+  --color-hero-canvas: #ece9f6;
+  --color-hero-frame: #f3f0fb;
+  --color-hero-ink: #1b1726;
+  --color-hero-muted: #574e6b;
+  --color-hero-line: #cec7e4;
+  --color-hero-indigo: #4b3bd9;
+  --color-hero-rose: #e85c7a;
 
   --color-accent: #58a6ff;
   --color-accent-soft: #1f6feb;
@@ -50,7 +60,104 @@
 }
 
 :root {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-sans);
+
+  --hero-inset: 12px;
+  --hero-inset-top: 64px;
+  --hero-radius: 20px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --hero-inset: 24px;
+    --hero-inset-top: 76px;
+    --hero-radius: 28px;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-scene-in {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes intro-reveal {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.hero-rise {
+  display: block;
+}
+
+html.intro-lock,
+html.intro-lock body {
+  overflow: hidden;
+}
+
+[data-intro="play"] .hero-scene-in {
+  animation: hero-scene-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+[data-intro="play"] .hero-rise {
+  animation: hero-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(0.3s + var(--hero-index, 0) * 0.12s);
+}
+
+[data-intro="play"] .hero-late {
+  animation: hero-fade 0.45s ease-out both;
+  animation-delay: calc(1.3s + var(--hero-index, 0) * 0.1s);
+}
+
+[data-intro="play"] .intro-hidden {
+  animation: intro-reveal 0.4s ease-out 1.75s both;
+}
+
+[data-intro="short"] .hero-scene-in,
+[data-intro="short"] .hero-rise,
+[data-intro="short"] .hero-late,
+[data-intro="short"] .intro-hidden {
+  animation: hero-fade 0.4s ease-out both;
+}
+
+.hero-frame-pad {
+  padding: var(--hero-inset-top) var(--hero-inset) var(--hero-inset);
+}
+
+.hero-frame-static {
+  clip-path: inset(
+    var(--hero-inset-top) var(--hero-inset) var(--hero-inset) var(--hero-inset)
+      round var(--hero-radius)
+  );
 }
 
 body {
@@ -122,5 +229,15 @@ body {
   .animate-marquee,
   .animate-marquee-reverse {
     animation: none !important;
+  }
+
+  .hero-rise,
+  .hero-late,
+  .hero-scene-in,
+  .intro-hidden {
+    animation: none !important;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
   }
 }

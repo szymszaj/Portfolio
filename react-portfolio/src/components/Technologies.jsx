@@ -70,7 +70,12 @@ const Technologies = () => {
   const { t } = useTranslations();
 
   return (
-    <SectionShell tint="iris" watermark="STACK" className="py-24 lg:py-32">
+    <SectionShell
+      id="technologie"
+      tint="iris"
+      watermark="STACK"
+      className="py-24 lg:py-32"
+    >
       <SectionHeading
         title={t("technologies.title")}
         subtitle={t("technologies.subtitle")}
