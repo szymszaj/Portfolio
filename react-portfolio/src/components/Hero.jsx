@@ -128,18 +128,12 @@ const Hero = () => {
               <div className="min-w-0">
                 <h1 className="font-display pb-[0.06em] text-[clamp(4.5rem,13vw,12rem)] font-light leading-[0.9] tracking-[-0.03em] text-hero-ink">
                   <span className="block overflow-hidden">
-                    <span
-                      className="hero-rise"
-                      style={{ "--hero-delay": "0.05s" }}
-                    >
+                    <span className="hero-rise" style={{ "--hero-index": 0 }}>
                       {FIRST_NAME}
                     </span>
                   </span>
                   <span className="block overflow-hidden">
-                    <span
-                      className="hero-rise"
-                      style={{ "--hero-delay": "0.14s" }}
-                    >
+                    <span className="hero-rise" style={{ "--hero-index": 1 }}>
                       {LAST_NAME}
                     </span>
                   </span>
@@ -147,23 +141,23 @@ const Hero = () => {
                 </h1>
 
                 <p
-                  className="hero-fade font-display mt-6 text-[clamp(1.75rem,3.2vw,3rem)] leading-[1.2] text-hero-indigo md:mt-8"
-                  style={{ "--hero-delay": "0.34s" }}
+                  className="hero-late font-display mt-6 text-[clamp(1.75rem,3.2vw,3rem)] leading-[1.2] text-hero-indigo md:mt-8"
+                  style={{ "--hero-index": 2 }}
                 >
                   <RotatingTitles titles={titles} />
                 </p>
 
                 <p
-                  className="hero-fade mt-4 max-w-[min(40ch,100%)] text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.5] text-hero-muted md:mt-6"
-                  style={{ "--hero-delay": "0.44s" }}
+                  className="hero-late mt-4 max-w-[min(40ch,100%)] text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.5] text-hero-muted md:mt-6"
+                  style={{ "--hero-index": 3 }}
                 >
                   {t("hero.lead")}
                 </p>
               </div>
 
               <div
-                className="hero-fade flex shrink-0 flex-col items-center gap-2 self-end pb-1 text-[0.9375rem] text-hero-muted"
-                style={{ "--hero-delay": "0.5s" }}
+                className="hero-late flex shrink-0 flex-col items-center gap-2 self-end pb-1 text-[0.9375rem] text-hero-muted"
+                style={{ "--hero-index": 4 }}
               >
                 <span>{t("hero.scroll")}</span>
                 <span

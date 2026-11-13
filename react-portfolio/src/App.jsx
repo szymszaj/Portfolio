@@ -1,8 +1,9 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useRef } from "react";
 import PropTypes from "prop-types";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import { CmsProvider } from "./context/CmsContext";
+import { useIntro } from "./hooks/useIntro";
 
 const Manifesto = lazy(() => import("./components/Manifesto"));
 const Approach = lazy(() => import("./components/Approach"));
@@ -23,26 +24,31 @@ const LoadingSpinner = () => (
 );
 
 const App = ({ initialContent = null }) => {
+  const restRef = useRef(null);
+  useIntro(restRef);
+
   return (
     <CmsProvider initialContent={initialContent}>
       <div className="overflow-x-clip bg-canvas text-ink antialiased selection:bg-accent selection:text-canvas">
         <main>
           <Hero />
 
-          <Suspense fallback={<LoadingSpinner />}>
-            <Manifesto />
-          </Suspense>
+          <div ref={restRef} className="intro-hidden">
+            <Suspense fallback={<LoadingSpinner />}>
+              <Manifesto />
+            </Suspense>
 
-          <About />
+            <About />
 
-          <Suspense fallback={<LoadingSpinner />}>
-            <Approach />
-            <Technologies />
-            <Experience />
-            <Education />
-            <Courses />
-            <Contact />
-          </Suspense>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Approach />
+              <Technologies />
+              <Experience />
+              <Education />
+              <Courses />
+              <Contact />
+            </Suspense>
+          </div>
         </main>
       </div>
     </CmsProvider>

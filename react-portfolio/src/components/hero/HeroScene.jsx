@@ -89,9 +89,13 @@ const createPebbleGeometry = () => {
 
 const createRingGeometry = () => new THREE.TorusGeometry(0.4, 0.13, 10, 26);
 
+const INTRO_SECONDS = 0.7;
+const INTRO_SPREAD = 1.6;
+
 const Shapes = ({ items }) => {
   const refs = useRef([]);
   const pointer = useRef(new THREE.Vector2());
+  const introStart = useRef(0);
 
   const geometries = useMemo(
     () => ({ pebble: createPebbleGeometry(), ring: createRingGeometry() }),
@@ -117,6 +121,11 @@ const Shapes = ({ items }) => {
     const pointerY = pointer.current.y * state.viewport.height * 0.5;
     const time = state.clock.elapsedTime;
 
+    if (introStart.current === 0) introStart.current = time;
+    const intro = Math.min(1, (time - introStart.current) / INTRO_SECONDS);
+    const eased = 1 - Math.pow(1 - intro, 3);
+    const spread = 1 + (1 - eased) * INTRO_SPREAD;
+
     for (const item of items) {
       const mesh = refs.current[item.index];
       if (!mesh) continue;
@@ -139,7 +148,12 @@ const Shapes = ({ items }) => {
         pushY = (dy / distance) * force;
       }
 
-      mesh.position.set(x + pushX, y + pushY, item.base[2]);
+      mesh.position.set(
+        (x + pushX) * spread,
+        (y + pushY) * spread,
+        item.base[2] * spread,
+      );
+      if (intro < 1) mesh.scale.setScalar(item.scale * (0.5 + 0.5 * eased));
       mesh.rotation.set(
         item.rotation[0] + time * item.spin[0],
         item.rotation[1] + time * item.spin[1],

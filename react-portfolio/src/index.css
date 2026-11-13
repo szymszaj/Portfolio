@@ -77,7 +77,7 @@
 
 @keyframes hero-rise {
   from {
-    transform: translateY(110%);
+    transform: translateY(100%);
   }
   to {
     transform: translateY(0);
@@ -96,7 +96,7 @@
 @keyframes hero-scene-in {
   from {
     opacity: 0;
-    transform: scale(1.05);
+    transform: scale(1.06);
   }
   to {
     opacity: 1;
@@ -104,19 +104,49 @@
   }
 }
 
+@keyframes intro-reveal {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 .hero-rise {
   display: block;
-  animation: hero-rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: var(--hero-delay, 0s);
 }
 
-.hero-fade {
-  animation: hero-fade 0.7s ease-out both;
-  animation-delay: var(--hero-delay, 0s);
+html.intro-lock,
+html.intro-lock body {
+  overflow: hidden;
 }
 
-.hero-scene-in {
-  animation: hero-scene-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+[data-intro="play"] .hero-scene-in {
+  animation: hero-scene-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+[data-intro="play"] .hero-rise {
+  animation: hero-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(0.3s + var(--hero-index, 0) * 0.12s);
+}
+
+[data-intro="play"] .hero-late {
+  animation: hero-fade 0.45s ease-out both;
+  animation-delay: calc(1.3s + var(--hero-index, 0) * 0.1s);
+}
+
+[data-intro="play"] .intro-hidden {
+  animation: intro-reveal 0.4s ease-out 1.75s both;
+}
+
+[data-intro="short"] .hero-scene-in,
+[data-intro="short"] .hero-rise,
+[data-intro="short"] .hero-late,
+[data-intro="short"] .intro-hidden {
+  animation: hero-fade 0.4s ease-out both;
 }
 
 .hero-frame-pad {
@@ -202,10 +232,12 @@ body {
   }
 
   .hero-rise,
-  .hero-fade,
-  .hero-scene-in {
+  .hero-late,
+  .hero-scene-in,
+  .intro-hidden {
     animation: none !important;
     opacity: 1;
+    visibility: visible;
     transform: none;
   }
 }

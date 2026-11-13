@@ -56,15 +56,24 @@ const TopBar = ({ style }) => {
       className="absolute inset-x-0 top-0 z-30 text-hero-ink"
     >
       <div className="mx-auto flex max-w-[110rem] items-center gap-4 px-4 py-3.5 md:gap-8 md:px-7 md:py-5">
-        <span className="font-display text-xl font-semibold tracking-tight">
+        <span
+          className="hero-late font-display text-xl font-semibold tracking-tight"
+          style={{ "--hero-index": 0 }}
+        >
           {t("navbar.logo")}
         </span>
 
-        <p className="hero-fade hidden min-w-0 flex-1 truncate text-base text-hero-muted md:block lg:text-[1.0625rem]">
+        <p
+          className="hero-late hidden min-w-0 flex-1 truncate text-base text-hero-muted md:block lg:text-[1.0625rem]"
+          style={{ "--hero-index": 1 }}
+        >
           {t("hero.tagline")}
         </p>
 
-        <div className="ml-auto flex items-center gap-2 md:ml-0">
+        <div
+          className="hero-late ml-auto flex items-center gap-2 md:ml-0"
+          style={{ "--hero-index": 2 }}
+        >
           <a href="#kontakt" className={PILL_PRIMARY}>
             {t("hero.cta")}
           </a>
