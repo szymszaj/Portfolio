@@ -1,21 +1,15 @@
 import { useRef } from "react";
 import PropTypes from "prop-types";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { useTranslations } from "../hooks/useTranslations";
 import { useIsHydrated } from "../hooks/useIsHydrated";
-import Serpentine from "./Serpentine";
+import FrameCorners from "./hero/FrameCorners";
 import MaskedLines from "./MaskedLines";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-const StepTile = ({ step, index, total, progress, pinned }) => {
+const StepTile = ({ step, index, total, progress, animated }) => {
   const span = 1 / total;
   const start = index * span;
   const end = start + span * 0.6;
@@ -23,18 +17,19 @@ const StepTile = ({ step, index, total, progress, pinned }) => {
   const opacity = useTransform(progress, [start, end], [0, 1]);
   const y = useTransform(progress, [start, end], [28, 0]);
 
-  const style = pinned ? { opacity, y } : undefined;
-
   return (
-    <motion.li style={style} className="flex gap-5 bg-paper p-6">
-      <span className="font-display text-sm font-semibold text-paper-muted">
+    <motion.li
+      style={animated ? { opacity, y } : undefined}
+      className="flex gap-5 bg-hero-frame p-6"
+    >
+      <span className="font-display text-[clamp(1.25rem,1.8vw,1.75rem)] font-light text-hero-ink/25">
         {String(index + 1).padStart(2, "0")}
       </span>
       <div>
-        <h3 className="font-display mb-1 text-lg font-semibold">
+        <h3 className="font-display mb-1 text-lg font-semibold text-hero-ink">
           {step.title}
         </h3>
-        <p className="text-sm leading-relaxed text-paper-muted">
+        <p className="text-[0.9375rem] leading-relaxed text-hero-muted">
           {step.description}
         </p>
       </div>
@@ -50,22 +45,20 @@ StepTile.propTypes = {
   index: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   progress: PropTypes.object.isRequired,
-  pinned: PropTypes.bool,
+  animated: PropTypes.bool,
 };
 
 const Approach = () => {
   const { t } = useTranslations();
   const trackRef = useRef(null);
-  const reduceMotion = useReducedMotion();
   const hydrated = useIsHydrated();
-  const pinned = hydrated && !reduceMotion;
 
   const steps = t("APPROACH_STEPS");
   const total = steps.length;
 
   const { scrollYProgress } = useScroll({
     target: trackRef,
-    offset: ["start start", "end end"],
+    offset: ["start 0.85", "end 0.6"],
   });
 
   const progress = useSpring(scrollYProgress, {
@@ -78,28 +71,16 @@ const Approach = () => {
     <section
       id="podejscie"
       ref={trackRef}
-      className="relative w-full scroll-mt-24"
-      style={pinned ? { height: `${total * 70 + 60}vh` } : undefined}
+      className="relative w-full scroll-mt-24 bg-hero-canvas py-16 md:py-24"
     >
-      <div
-        className={
-          pinned
-            ? "sticky top-0 flex h-screen items-center overflow-hidden bg-paper text-paper-ink"
-            : "relative overflow-hidden bg-paper py-20 text-paper-ink lg:py-28"
-        }
-      >
-        <Serpentine
-          color="#3b4ee0"
-          opacity={0.7}
-          size="sm"
-          progressValue={pinned ? progress : undefined}
-        />
+      <div className="mx-auto w-full max-w-[110rem] px-3 md:px-6">
+        <div className="relative rounded-[20px] bg-hero-frame px-5 py-14 text-hero-ink md:rounded-[28px] md:px-12 md:py-20">
+          <FrameCorners />
 
-        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 lg:px-10">
           <MaskedLines
             as="h2"
             lines={t("approach.headline")}
-            lineClassName="font-display text-[8vw] font-light leading-[1.02] tracking-[-0.03em] lg:text-[4.6vw]"
+            lineClassName="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-light leading-[1.05] tracking-[-0.02em]"
           />
 
           <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:gap-20">
@@ -111,27 +92,22 @@ const Approach = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.4 }}
                   transition={{ duration: 0.7, ease: EASE }}
-                  className="text-lg leading-relaxed text-paper-muted"
+                  className="max-w-[46ch] text-[clamp(1.0625rem,1.4vw,1.25rem)] leading-[1.6] text-hero-muted"
                 >
                   {paragraph}
                 </motion.p>
               ))}
 
-              <motion.a
+              <a
                 href="#kontakt"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="group mt-4 inline-flex items-center gap-3 rounded-full bg-paper-ink px-7 py-4 font-medium text-paper transition-transform duration-300 hover:-translate-y-0.5"
+                className="group mt-4 inline-flex items-center gap-2 rounded-full bg-hero-ink px-6 py-3 text-[0.9375rem] font-medium text-hero-canvas transition-colors duration-200 hover:bg-hero-indigo focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-hero-indigo"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-paper" />
                 {t("approach.cta")}
-                <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </motion.a>
+                <FiArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
             </div>
 
-            <ul className="space-y-px overflow-hidden rounded-2xl border border-paper-line bg-paper-line">
+            <ul className="space-y-px overflow-hidden rounded-[16px] bg-hero-line/70">
               {steps.map((step, i) => (
                 <StepTile
                   key={step.title}
@@ -139,7 +115,7 @@ const Approach = () => {
                   index={i}
                   total={total}
                   progress={progress}
-                  pinned={pinned}
+                  animated={hydrated}
                 />
               ))}
             </ul>
