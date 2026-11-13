@@ -1,5 +1,4 @@
 import { lazy, Suspense, useRef } from "react";
-import PropTypes from "prop-types";
 import {
   motion,
   useInView,
@@ -12,6 +11,7 @@ import { useTranslations } from "../hooks/useTranslations";
 import { useIsHydrated } from "../hooks/useIsHydrated";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useSceneEnabled } from "../hooks/useSceneEnabled";
+import FrameCorners from "./hero/FrameCorners";
 import HeroPoster from "./hero/HeroPoster";
 import SceneBoundary from "./hero/SceneBoundary";
 import RotatingTitles from "./hero/RotatingTitles";
@@ -24,20 +24,6 @@ const LAST_NAME = "Zych";
 
 const SCENE_COUNT_DESKTOP = 42;
 const SCENE_COUNT_MOBILE = 18;
-
-const Corner = ({ className }) => (
-  <svg
-    aria-hidden="true"
-    viewBox="0 0 16 16"
-    className={`absolute h-3.5 w-3.5 text-hero-ink/30 ${className}`}
-  >
-    <path d="M8 1.5v13M1.5 8h13" stroke="currentColor" strokeWidth="1" />
-  </svg>
-);
-
-Corner.propTypes = {
-  className: PropTypes.string.isRequired,
-};
 
 const Hero = () => {
   const { t } = useTranslations();
@@ -60,13 +46,13 @@ const Hero = () => {
     restDelta: 0.001,
   });
 
-  const frameFactor = useTransform(progress, [0, 0.75], [1, 0]);
-  const clipPath = useMotionTemplate`inset(calc(var(--hero-inset-top) * ${frameFactor}) calc(var(--hero-inset) * ${frameFactor}) calc(var(--hero-inset) * ${frameFactor}) calc(var(--hero-inset) * ${frameFactor}) round calc(var(--hero-radius) * ${frameFactor}))`;
+  const sideFactor = useTransform(progress, [0, 0.8], [1, 5]);
+  const topFactor = useTransform(progress, [0, 0.8], [1, 1.9]);
+  const clipPath = useMotionTemplate`inset(calc(var(--hero-inset-top) * ${topFactor}) calc(var(--hero-inset) * ${sideFactor}) calc(var(--hero-inset) * ${sideFactor}) calc(var(--hero-inset) * ${sideFactor}) round var(--hero-radius))`;
 
   const barOpacity = useTransform(progress, [0, 0.3], [1, 0]);
   const contentOpacity = useTransform(progress, [0, 0.38], [1, 0]);
-  const sceneOpacity = useTransform(progress, [0.45, 0.9], [1, 0]);
-  const veilOpacity = useTransform(progress, [0.55, 0.95], [0, 1]);
+  const sceneOpacity = useTransform(progress, [0.5, 1], [1, 0.45]);
 
   const sceneCount = isDesktop ? SCENE_COUNT_DESKTOP : SCENE_COUNT_MOBILE;
   const titles = t("hero.titles").filter(
@@ -111,18 +97,10 @@ const Hero = () => {
           />
 
           <motion.div
-            style={{ opacity: veilOpacity }}
-            className="pointer-events-none absolute inset-0 bg-canvas"
-          />
-
-          <motion.div
             style={hydrated ? { opacity: contentOpacity } : undefined}
             className="hero-frame-pad absolute inset-0"
           >
-            <Corner className="left-0 top-0" />
-            <Corner className="right-0 top-0" />
-            <Corner className="bottom-0 left-0" />
-            <Corner className="bottom-0 right-0" />
+            <FrameCorners inset="p-0" />
 
             <div className="absolute inset-x-0 bottom-0 flex flex-col gap-5 p-5 md:flex-row md:items-end md:justify-between md:gap-10 md:p-9">
               <div className="min-w-0">
