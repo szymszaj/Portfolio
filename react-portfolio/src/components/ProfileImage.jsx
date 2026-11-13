@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 
-// Warianty generowane przez `npm run images` (scripts/generate-images.mjs).
 const WIDTHS = [192, 288, 384, 576];
 
 const srcSet = (ext) =>
@@ -10,10 +9,6 @@ const AVIF = srcSet("avif");
 const WEBP = srcSet("webp");
 const JPEG = srcSet("jpg");
 
-/**
- * Zdjęcie profilowe w AVIF/WebP/JPEG. `sizes` musi odpowiadać realnej
- * szerokości renderowania, inaczej przeglądarka pobierze za duży wariant.
- */
 const ProfileImage = ({
   className = "",
   sizes = "(min-width: 768px) 192px, 144px",

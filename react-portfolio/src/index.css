@@ -1,8 +1,5 @@
 @import "tailwindcss";
-/* @font-face generowane przez `npm run fonts` (scripts/fetch-fonts.mjs).
-   Zmienne woff2 zawężone do używanych znaków leżą w public/fonts/. */
 @import "./fonts.css";
-
 
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
@@ -25,7 +22,6 @@
   --color-ink-muted: #8b949e;
   --color-ink-subtle: #6e7681;
 
-  /* Hero: jasna scena na tle reszty strony w ciemnym motywie. */
   --color-hero-canvas: #ece9f6;
   --color-hero-frame: #f3f0fb;
   --color-hero-ink: #1b1726;
@@ -66,8 +62,6 @@
 :root {
   font-family: var(--font-sans);
 
-  /* Marginesy i zaokrąglenie ramki sceny w hero. Scroll mnoży je przez
-     wartość 1 -> 0, więc ramka rozszerza się do pełnej szerokości. */
   --hero-inset: 12px;
   --hero-inset-top: 64px;
   --hero-radius: 20px;
@@ -81,8 +75,6 @@
   }
 }
 
-/* Wejście hero: czysty CSS, żeby ruszyło przy pierwszym paintcie, bez
-   czekania na hydrację i bez blokowania treści. */
 @keyframes hero-rise {
   from {
     transform: translateY(110%);

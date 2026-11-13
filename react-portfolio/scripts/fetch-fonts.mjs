@@ -1,9 +1,3 @@
-/**
- * npm run fonts - self-hostowane woff2 zawężone do znaków z CHARSET
- * (~75 kB zamiast ~201 kB pełnych subsetów) + generowany src/fonts.css.
- * Znak spoza CHARSET renderuje się fontem systemowym - sprawdza to
- * npm run check:fonts.
- */
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -18,10 +12,10 @@ const range = (from, to) =>
   Array.from({ length: to - from + 1 }, (_, i) => String.fromCodePoint(from + i)).join("");
 
 const CHARSET = [
-  range(0x20, 0x7e), // ASCII drukowalne
-  range(0xc0, 0xff), // Latin-1: À-ÿ (ü, é, ñ, ö... w nazwiskach)
-  "ąćęłńóśźżĄĆĘŁŃÓŚŹŻ", // polskie diakrytyki spoza Latin-1
-  "čďěňřšťůžČĎĚŇŘŠŤŮŽ", // czeskie/słowackie
+  range(0x20, 0x7e),
+  range(0xc0, 0xff),
+  "ąćęłńóśźżĄĆĘŁŃÓŚŹŻ",
+  "čďěňřšťůžČĎĚŇŘŠŤŮŽ",
   "£§©«®°·»€™",
   "–—…„”“‘’‹›•†‡",
   "↑↓→←×≈",

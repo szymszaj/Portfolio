@@ -10,17 +10,16 @@ const FOCUS_RING =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-hero-indigo";
 
 const PILL_PRIMARY =
-  `inline-flex items-center rounded-full bg-hero-ink px-5 py-2.5 text-sm font-medium text-hero-canvas ` +
+  `inline-flex items-center rounded-full bg-hero-ink px-5 py-2.5 text-[0.9375rem] font-medium text-hero-canvas ` +
   `transition-colors duration-200 hover:bg-hero-indigo ${FOCUS_RING}`;
 
 const PILL_OUTLINE =
-  `inline-flex items-center rounded-full border border-hero-line bg-white/60 px-5 py-2.5 text-sm font-medium text-hero-ink ` +
+  `inline-flex items-center rounded-full border border-hero-line bg-white/60 px-5 py-2.5 text-[0.9375rem] font-medium text-hero-ink ` +
   `transition-colors duration-200 hover:border-hero-ink/40 hover:bg-white ${FOCUS_RING}`;
 
 const MENU_LINK =
-  `block rounded-xl px-3 py-2 text-sm text-hero-ink transition-colors duration-150 hover:bg-hero-canvas ${FOCUS_RING}`;
+  `block rounded-xl px-3 py-2 text-[0.9375rem] text-hero-ink transition-colors duration-150 hover:bg-hero-canvas ${FOCUS_RING}`;
 
-/** Pasek nad sceną. "Menu" to disclosure zamykany Escapem i klikiem poza. */
 const TopBar = ({ style }) => {
   const { t } = useTranslations();
   const [open, setOpen] = useState(false);
@@ -61,7 +60,7 @@ const TopBar = ({ style }) => {
           {t("navbar.logo")}
         </span>
 
-        <p className="hero-fade hidden min-w-0 flex-1 truncate text-sm text-hero-muted md:block">
+        <p className="hero-fade hidden min-w-0 flex-1 truncate text-base text-hero-muted md:block lg:text-[1.0625rem]">
           {t("hero.tagline")}
         </p>
 

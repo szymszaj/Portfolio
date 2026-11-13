@@ -1,6 +1,5 @@
 import { useCallback, useSyncExternalStore } from "react";
 
-/** Media query z wartością dla prerenderu (hydracja widzi ten sam markup). */
 export const useMediaQuery = (query, serverValue = false) => {
   const subscribe = useCallback(
     (onChange) => {

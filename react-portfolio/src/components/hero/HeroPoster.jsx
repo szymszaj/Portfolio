@@ -1,7 +1,3 @@
-/**
- * Tło sceny: same gradienty CSS, zero żądań. Przy reduced-motion i na słabym
- * sprzęcie zostaje jedyną warstwą.
- */
 const HeroPoster = () => (
   <div aria-hidden="true" className="absolute inset-0 bg-hero-frame">
     <div

@@ -10,7 +10,6 @@ const LENIS_OPTIONS = {
   anchors: true,
 };
 
-/** Wspólny korzeń dla klienta i prerenderu - oba muszą dać to samo drzewo. */
 const Root = ({ initialContent = null }) => (
   <MotionConfig reducedMotion="user">
     <ReactLenis root options={LENIS_OPTIONS}>

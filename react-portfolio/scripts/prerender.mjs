@@ -1,8 +1,3 @@
-/**
- * Prerendering: treść z Sanity -> HTML -> dist/index.html (+ snapshot treści
- * i lastmod w sitemap). Gdy Sanity nie odpowiada, leci fallback z
- * src/constants/translations.js.
- */
 import fs from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";

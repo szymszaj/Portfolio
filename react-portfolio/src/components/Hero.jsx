@@ -17,8 +17,6 @@ import SceneBoundary from "./hero/SceneBoundary";
 import RotatingTitles from "./hero/RotatingTitles";
 import TopBar from "./hero/TopBar";
 
-// Scena jest ciężka (three + drei), więc ląduje w osobnym chunku i montuje
-// się dopiero po hydracji. LCP zostaje tekstem h1, nie canvasem.
 const HeroScene = lazy(() => import("./hero/HeroScene"));
 
 const FIRST_NAME = "Szymon";
@@ -49,7 +47,6 @@ const Hero = () => {
 
   const trackRef = useRef(null);
   const frameRef = useRef(null);
-  // Scena liczy klatki tylko wtedy, gdy ramka jest na ekranie.
   const sceneActive = useInView(frameRef, { amount: 0.15 });
 
   const { scrollYProgress } = useScroll({
@@ -63,9 +60,6 @@ const Hero = () => {
     restDelta: 0.001,
   });
 
-  // 1 -> 0: marginesy i promień ramki znikają, scena rozszerza się na całą
-  // szerokość i przechodzi w ciemną sekcję poniżej. clip-path zamiast zmiany
-  // layoutu, żeby canvas nie był przeliczany przy każdej klatce.
   const frameFactor = useTransform(progress, [0, 0.75], [1, 0]);
   const clipPath = useMotionTemplate`inset(calc(var(--hero-inset-top) * ${frameFactor}) calc(var(--hero-inset) * ${frameFactor}) calc(var(--hero-inset) * ${frameFactor}) calc(var(--hero-inset) * ${frameFactor}) round calc(var(--hero-radius) * ${frameFactor}))`;
 
@@ -75,10 +69,11 @@ const Hero = () => {
   const veilOpacity = useTransform(progress, [0.55, 0.95], [0, 1]);
 
   const sceneCount = isDesktop ? SCENE_COUNT_DESKTOP : SCENE_COUNT_MOBILE;
+  const titles = t("hero.titles").filter(
+    (title) => typeof title === "string" && title.trim() !== "",
+  );
 
   return (
-    // Wysokość ścieżki scrolla jest stała (także w prerenderze): useScroll
-    // mierzy element raz przy montażu i zakres 0 dawałby progress = 1.
     <section
       ref={trackRef}
       className="relative h-[180vh] bg-hero-canvas"
@@ -106,8 +101,6 @@ const Hero = () => {
             </motion.div>
           )}
 
-          {/* Pod tekstem: gwarantuje kontrast niezależnie od tego, co akurat
-              dryfuje w scenie. */}
           <div
             aria-hidden="true"
             className="absolute inset-x-0 bottom-0 h-2/3"
@@ -131,9 +124,9 @@ const Hero = () => {
             <Corner className="bottom-0 left-0" />
             <Corner className="bottom-0 right-0" />
 
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-5 md:p-9">
+            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-5 p-5 md:flex-row md:items-end md:justify-between md:gap-10 md:p-9">
               <div className="min-w-0">
-                <h1 className="font-display text-[clamp(2.6rem,8.5vw,7rem)] font-light leading-[0.94] tracking-[-0.035em] text-hero-ink">
+                <h1 className="font-display pb-[0.06em] text-[clamp(4.5rem,13vw,12rem)] font-light leading-[0.9] tracking-[-0.03em] text-hero-ink">
                   <span className="block overflow-hidden">
                     <span
                       className="hero-rise"
@@ -154,14 +147,14 @@ const Hero = () => {
                 </h1>
 
                 <p
-                  className="hero-fade font-display mt-4 text-lg text-hero-indigo md:mt-6 md:text-2xl"
+                  className="hero-fade font-display mt-6 text-[clamp(1.75rem,3.2vw,3rem)] leading-[1.2] text-hero-indigo md:mt-8"
                   style={{ "--hero-delay": "0.34s" }}
                 >
-                  <RotatingTitles titles={t("hero.titles")} />
+                  <RotatingTitles titles={titles} />
                 </p>
 
                 <p
-                  className="hero-fade mt-4 hidden max-w-md text-sm leading-relaxed text-hero-muted sm:block"
+                  className="hero-fade mt-4 max-w-[min(40ch,100%)] text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.5] text-hero-muted md:mt-6"
                   style={{ "--hero-delay": "0.44s" }}
                 >
                   {t("hero.lead")}
@@ -169,7 +162,7 @@ const Hero = () => {
               </div>
 
               <div
-                className="hero-fade flex shrink-0 flex-col items-center gap-2 pb-1 text-sm text-hero-muted"
+                className="hero-fade flex shrink-0 flex-col items-center gap-2 self-end pb-1 text-[0.9375rem] text-hero-muted"
                 style={{ "--hero-delay": "0.5s" }}
               >
                 <span>{t("hero.scroll")}</span>

@@ -5,8 +5,6 @@ import "./index.css";
 
 const container = document.getElementById("root");
 
-// Snapshot treści wstrzyknięty przez scripts/prerender.mjs. Dzięki temu
-// pierwszy render klienta jest identyczny z prerenderowanym HTML-em.
 const initialContent = window.__CMS_CONTENT__ ?? null;
 
 const tree = (

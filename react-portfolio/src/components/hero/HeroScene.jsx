@@ -4,7 +4,6 @@ import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Instance, Instances, Lightformer } from "@react-three/drei";
 
-// Dwa kolory akcentu + czerń i biel.
 const PALETTE = [
   { color: "#4b3bd9", weight: 0.32 },
   { color: "#e85c7a", weight: 0.22 },
@@ -15,7 +14,6 @@ const PALETTE = [
 const PUSH_RADIUS = 2.4;
 const PUSH_STRENGTH = 1.15;
 
-/** Deterministyczny PRNG - ten sam układ brył przy każdym montażu. */
 const mulberry32 = (seed) => () => {
   seed = (seed + 0x6d2b79f5) | 0;
   let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
@@ -32,6 +30,15 @@ const pickColor = (random) => {
   return PALETTE[PALETTE.length - 1].color;
 };
 
+const TEXT_ZONE_X = 0.6;
+const TEXT_ZONE_Y = -0.4;
+
+const clearTextZone = ([x, y, z]) => [
+  x,
+  x < TEXT_ZONE_X && y < TEXT_ZONE_Y ? Math.abs(y) + 0.4 : y,
+  z,
+];
+
 const buildItems = (count) => {
   const random = mulberry32(count * 7919 + 13);
 
@@ -42,11 +49,11 @@ const buildItems = (count) => {
       index,
       ring,
       color: pickColor(random),
-      base: [
+      base: clearTextZone([
         (random() - 0.5) * 11,
         (random() - 0.5) * 6.4,
         (random() - 0.5) * 4.5 - 0.6,
-      ],
+      ]),
       rotation: [random() * Math.PI, random() * Math.PI, random() * Math.PI],
       spin: [
         (random() - 0.5) * 0.3,
@@ -60,7 +67,6 @@ const buildItems = (count) => {
   });
 };
 
-/** Własna geometria: ikosaedr z przesuniętymi wierzchołkami, płaskie normalne. */
 const createPebbleGeometry = () => {
   const geometry = new THREE.IcosahedronGeometry(0.5, 1);
   const position = geometry.attributes.position;
@@ -105,7 +111,6 @@ const Shapes = ({ items }) => {
 
   useFrame((state, delta) => {
     const step = Math.min(delta, 0.05);
-    // Wygładzony kursor: parallax grupy + odpychanie pojedynczych brył.
     pointer.current.lerp(state.pointer, 1 - Math.pow(0.0015, step));
 
     const pointerX = pointer.current.x * state.viewport.width * 0.5;
@@ -190,7 +195,6 @@ Shapes.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-/** Światło liczone lokalnie, frames={1} - bez plików HDR z zewnątrz. */
 const SoftStudio = () => (
   <>
     <ambientLight intensity={0.55} />

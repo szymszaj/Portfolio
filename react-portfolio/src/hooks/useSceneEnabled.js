@@ -2,10 +2,6 @@ import { useSyncExternalStore } from "react";
 
 const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
 
-/**
- * Czy uruchamiać scenę 3D. Nie: w prerenderze, przy prefers-reduced-motion,
- * save-data, słabym sprzęcie i bez WebGL - wtedy zostaje poster.
- */
 let webglSupport;
 
 const hasWebGL = () => {

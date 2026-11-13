@@ -1,7 +1,3 @@
-/**
- * Czy subsety fontów pokrywają tekst w dist/index.html.
- * Braki -> dopisz znaki do CHARSET w scripts/fetch-fonts.mjs i npm run fonts.
- */
 import fs from "node:fs/promises";
 import path from "node:path";
 

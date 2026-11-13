@@ -4,7 +4,6 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-/** Tytuły z hero.titles pod h1; pierwszy statycznie, rotacja po montażu. */
 const RotatingTitles = ({ titles, interval = 2800, className = "" }) => {
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
@@ -26,14 +25,14 @@ const RotatingTitles = ({ titles, interval = 2800, className = "" }) => {
   }
 
   return (
-    <span className={`relative block h-[1.35em] overflow-hidden ${className}`}>
-      <AnimatePresence initial={false}>
+    <span className={`relative block overflow-hidden ${className}`}>
+      <AnimatePresence initial={false} mode="popLayout">
         <motion.span
           key={index}
-          className="absolute inset-x-0 top-0 block"
-          initial={{ y: "115%" }}
+          className="block"
+          initial={{ y: "110%" }}
           animate={{ y: "0%" }}
-          exit={{ y: "-115%" }}
+          exit={{ y: "-110%" }}
           transition={{ duration: 0.55, ease: EASE }}
         >
           {title}

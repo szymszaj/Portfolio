@@ -7,8 +7,6 @@ export const sanityClient = createClient({
   projectId,
   dataset,
   apiVersion: "2025-01-01",
-  // W przeglądarce CDN (szybki, cache'owany), w czasie builda żywe API,
-  // żeby rebuild z webhooka Sanity dostał od razu świeżo opublikowaną treść.
   useCdn: typeof document !== "undefined",
 });
 

@@ -1,7 +1,3 @@
-/**
- * npm run images - warianty zdjęcia profilowego do public/profile/.
- * Nazwy bez hasha, żeby ten sam URL działał w prerenderze i w kliencie.
- */
 import fs from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
@@ -10,9 +6,8 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const SOURCE = path.join(ROOT, "src", "assets", "profile.jpg");
 const OUT_DIR = path.join(ROOT, "public", "profile");
 
-// 144 px (mobile) i 192 px (>=md) w layoucie, czyli do 3x na gęstych ekranach.
 const WIDTHS = [192, 288, 384, 576];
-const ASPECT = 5 / 4; // wysokość = szerokość * ASPECT
+const ASPECT = 5 / 4;
 
 const FORMATS = [
   { ext: "avif", encode: (pipe) => pipe.avif({ quality: 52, effort: 6 }) },

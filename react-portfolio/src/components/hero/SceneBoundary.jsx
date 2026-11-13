@@ -1,7 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 
-/** Błąd sceny nie może zdejmować strony - zostaje sam poster. */
 class SceneBoundary extends Component {
   constructor(props) {
     super(props);

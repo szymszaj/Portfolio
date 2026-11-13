@@ -12,8 +12,6 @@ export default [
   reactHooks.configs.flat.recommended,
   { settings: { react: { version: "detect" } } },
   {
-    // Elementy react-three-fiber (<meshStandardMaterial>, <ambientLight>...)
-    // to własny reconciler three.js - plugin react zna tylko DOM.
     files: ["src/components/hero/HeroScene.jsx"],
     rules: { "react/no-unknown-property": "off" },
   },

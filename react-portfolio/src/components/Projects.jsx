@@ -16,10 +16,8 @@ import SectionShell from "./SectionShell";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-// Karta zajmuje pół szerokości na desktopie, całą na mobile.
 const CARD_WIDTHS = [480, 768, 1024, 1440];
 const CARD_SIZES = "(min-width: 1024px) 50vw, 100vw";
-// Modal ma max-w-4xl (896 px) i proporcje 16/9.
 const MODAL_WIDTHS = [640, 896, 1280];
 const MODAL_SIZES = "(min-width: 896px) 896px, 100vw";
 
