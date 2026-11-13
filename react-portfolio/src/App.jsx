@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import InteractiveBackground from "./components/InteractiveBackground";
 import About from "./components/About";
+import { CmsProvider } from "./context/CmsContext";
 
 const Manifesto = lazy(() => import("./components/Manifesto"));
 const Approach = lazy(() => import("./components/Approach"));
@@ -24,34 +25,36 @@ const LoadingSpinner = () => (
 
 const App = () => {
   return (
-    <div className="overflow-x-clip text-ink antialiased selection:bg-accent selection:text-canvas">
-      <InteractiveBackground />
+    <CmsProvider>
+      <div className="overflow-x-clip text-ink antialiased selection:bg-accent selection:text-canvas">
+        <InteractiveBackground />
 
-      <header className="absolute inset-x-0 top-0 z-30">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
-          <Navbar />
-        </div>
-      </header>
+        <header className="absolute inset-x-0 top-0 z-30">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+            <Navbar />
+          </div>
+        </header>
 
-      <main className="relative z-10">
-        <Hero />
+        <main className="relative z-10">
+          <Hero />
 
-        <Suspense fallback={<LoadingSpinner />}>
-          <Manifesto />
-        </Suspense>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Manifesto />
+          </Suspense>
 
-        <About />
+          <About />
 
-        <Suspense fallback={<LoadingSpinner />}>
-          <Approach />
-          <Technologies />
-          <Experience />
-          <Education />
-          <Courses />
-          <Contact />
-        </Suspense>
-      </main>
-    </div>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Approach />
+            <Technologies />
+            <Experience />
+            <Education />
+            <Courses />
+            <Contact />
+          </Suspense>
+        </main>
+      </div>
+    </CmsProvider>
   );
 };
 
