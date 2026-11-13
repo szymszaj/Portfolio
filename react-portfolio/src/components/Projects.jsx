@@ -10,10 +10,18 @@ import {
 } from "framer-motion";
 import { FiExternalLink, FiX, FiArrowUpRight, FiCode } from "react-icons/fi";
 import { useTranslations } from "../hooks/useTranslations";
+import { cmsImageProps } from "../lib/sanityImage";
 import SectionHeading from "./SectionHeading";
 import SectionShell from "./SectionShell";
 
 const EASE = [0.16, 1, 0.3, 1];
+
+// Karta zajmuje pół szerokości na desktopie, całą na mobile.
+const CARD_WIDTHS = [480, 768, 1024, 1440];
+const CARD_SIZES = "(min-width: 1024px) 50vw, 100vw";
+// Modal ma max-w-4xl (896 px) i proporcje 16/9.
+const MODAL_WIDTHS = [640, 896, 1280];
+const MODAL_SIZES = "(min-width: 896px) 896px, 100vw";
 
 const modalVariants = {
   hidden: { opacity: 0, scale: 0.94 },
@@ -63,8 +71,13 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             <div className="p-6">
               <div className="mb-6 aspect-video w-full overflow-hidden rounded-xl">
                 <img
-                  src={project.image}
+                  {...cmsImageProps(project, {
+                    widths: MODAL_WIDTHS,
+                    sizes: MODAL_SIZES,
+                  })}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -111,6 +124,7 @@ ProjectModal.propTypes = {
   project: PropTypes.shape({
     title: PropTypes.string,
     image: PropTypes.string,
+    imageId: PropTypes.string,
     description: PropTypes.string,
     technologies: PropTypes.arrayOf(PropTypes.string),
     link: PropTypes.string,
@@ -164,7 +178,10 @@ const ProjectCard = ({ project, index, onOpen, label }) => {
         >
           <div className="aspect-[16/10] w-full overflow-hidden">
             <motion.img
-              src={project.image}
+              {...cmsImageProps(project, {
+                widths: CARD_WIDTHS,
+                sizes: CARD_SIZES,
+              })}
               alt={project.title}
               loading="lazy"
               decoding="async"
@@ -223,6 +240,7 @@ ProjectCard.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    imageId: PropTypes.string,
     technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,

@@ -7,7 +7,9 @@ export const sanityClient = createClient({
   projectId,
   dataset,
   apiVersion: "2025-01-01",
-  useCdn: true,
+  // W przeglądarce CDN (szybki, cache'owany), w czasie builda żywe API,
+  // żeby rebuild z webhooka Sanity dostał od razu świeżo opublikowaną treść.
+  useCdn: typeof document !== "undefined",
 });
 
 const CONTENT_QUERY = `{
@@ -27,7 +29,8 @@ const CONTENT_QUERY = `{
     description,
     technologies,
     link,
-    "image": image.asset->url
+    "image": image.asset->url,
+    "imageId": image.asset->_id
   },
   "courses": *[_type == "course"] | order(order asc){
     title,
@@ -68,6 +71,7 @@ const mapToTranslationsShape = (data) => {
     result.hero = {
       titles: siteContent.hero.titles,
       lead: siteContent.hero.lead,
+      tagline: siteContent.hero.tagline,
       tabs: {
         work: siteContent.hero.work,
         about: siteContent.hero.about,

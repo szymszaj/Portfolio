@@ -3,11 +3,12 @@ import { motion } from "framer-motion";
 
 const MaskedLines = ({
   lines,
+  as: Tag = "div",
   className = "",
   lineClassName = "",
   delay = 0,
 }) => (
-  <div className={className}>
+  <Tag className={className}>
     {lines.map((line, i) => (
       <span key={line} className="block overflow-hidden">
         <motion.span
@@ -25,11 +26,12 @@ const MaskedLines = ({
         </motion.span>
       </span>
     ))}
-  </div>
+  </Tag>
 );
 
 MaskedLines.propTypes = {
   lines: PropTypes.arrayOf(PropTypes.string).isRequired,
+  as: PropTypes.elementType,
   className: PropTypes.string,
   lineClassName: PropTypes.string,
   delay: PropTypes.number,

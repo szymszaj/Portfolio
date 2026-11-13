@@ -1,8 +1,13 @@
 @import "tailwindcss";
+/* @font-face generowane przez `npm run fonts` (scripts/fetch-fonts.mjs).
+   Zmienne woff2 zawężone do używanych znaków leżą w public/fonts/. */
+@import "./fonts.css";
+
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --font-display: "Archivo", "Helvetica Neue", sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", sans-serif;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
 
   --color-canvas: #0d1117;
   --color-canvas-inset: #010409;
@@ -19,6 +24,15 @@
   --color-ink: #e6edf3;
   --color-ink-muted: #8b949e;
   --color-ink-subtle: #6e7681;
+
+  /* Hero: jasna scena na tle reszty strony w ciemnym motywie. */
+  --color-hero-canvas: #ece9f6;
+  --color-hero-frame: #f3f0fb;
+  --color-hero-ink: #1b1726;
+  --color-hero-muted: #574e6b;
+  --color-hero-line: #cec7e4;
+  --color-hero-indigo: #4b3bd9;
+  --color-hero-rose: #e85c7a;
 
   --color-accent: #58a6ff;
   --color-accent-soft: #1f6feb;
@@ -50,7 +64,78 @@
 }
 
 :root {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-sans);
+
+  /* Marginesy i zaokrąglenie ramki sceny w hero. Scroll mnoży je przez
+     wartość 1 -> 0, więc ramka rozszerza się do pełnej szerokości. */
+  --hero-inset: 12px;
+  --hero-inset-top: 64px;
+  --hero-radius: 20px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --hero-inset: 24px;
+    --hero-inset-top: 76px;
+    --hero-radius: 28px;
+  }
+}
+
+/* Wejście hero: czysty CSS, żeby ruszyło przy pierwszym paintcie, bez
+   czekania na hydrację i bez blokowania treści. */
+@keyframes hero-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-scene-in {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-rise {
+  display: block;
+  animation: hero-rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--hero-delay, 0s);
+}
+
+.hero-fade {
+  animation: hero-fade 0.7s ease-out both;
+  animation-delay: var(--hero-delay, 0s);
+}
+
+.hero-scene-in {
+  animation: hero-scene-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-frame-pad {
+  padding: var(--hero-inset-top) var(--hero-inset) var(--hero-inset);
+}
+
+.hero-frame-static {
+  clip-path: inset(
+    var(--hero-inset-top) var(--hero-inset) var(--hero-inset) var(--hero-inset)
+      round var(--hero-radius)
+  );
 }
 
 body {
@@ -122,5 +207,13 @@ body {
   .animate-marquee,
   .animate-marquee-reverse {
     animation: none !important;
+  }
+
+  .hero-rise,
+  .hero-fade,
+  .hero-scene-in {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
   }
 }

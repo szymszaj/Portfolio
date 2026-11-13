@@ -2,30 +2,31 @@
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/image.png" />
+    <link rel="icon" type="image/png" href="/image.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonty self-hosted (public/fonts/), @font-face w src/index.css. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Inter:wght@100..900&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/inter-subset.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/archivo-subset.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
 
     <title>
       Szymon Zych - Frontend Developer (Mid) | React & Next.js Portfolio
     </title>
     <meta
-      name="title"
-      content="Szymon Zych - Frontend Developer (Mid) | React & Next.js Portfolio"
-    />
-    <meta
       name="description"
       content="Frontend Developer (Mid) z ponad 3-letnim doświadczeniem komercyjnym w React, Next.js, TypeScript i systemach CMS. Zobacz moje portfolio, projekty i doświadczenie zawodowe."
-    />
-    <meta
-      name="keywords"
-      content="Szymon Zych, Frontend Developer, React Developer, Next.js, TypeScript, Web Development, Portfolio, UI/UX"
     />
     <meta name="author" content="Szymon Zych" />
     <meta name="robots" content="index, follow" />
@@ -33,6 +34,8 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Szymon Zych - Portfolio" />
+    <meta property="og:locale" content="pl_PL" />
     <meta property="og:url" content="https://portfolio-szymon.vercel.app/" />
     <meta
       property="og:title"
@@ -46,39 +49,49 @@
       property="og:image"
       content="https://portfolio-szymon.vercel.app/og-image.jpg"
     />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Szymon Zych - Frontend Developer (Mid), React, Next.js, TypeScript"
+    />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://portfolio-szymon.vercel.app/" />
     <meta
-      property="twitter:url"
-      content="https://portfolio-szymon.vercel.app/"
-    />
-    <meta
-      property="twitter:title"
+      name="twitter:title"
       content="Szymon Zych - Frontend Developer (Mid) | React & Next.js Portfolio"
     />
     <meta
-      property="twitter:description"
+      name="twitter:description"
       content="Frontend Developer (Mid) z ponad 3-letnim doświadczeniem komercyjnym w React, Next.js, TypeScript i systemach CMS. Zobacz moje portfolio, projekty i doświadczenie zawodowe."
     />
     <meta
-      property="twitter:image"
+      name="twitter:image"
       content="https://portfolio-szymon.vercel.app/og-image.jpg"
     />
+    <meta
+      name="twitter:image:alt"
+      content="Szymon Zych - Frontend Developer (Mid), React, Next.js, TypeScript"
+    />
 
-    <!-- Additional SEO -->
-    <meta name="theme-color" content="#000000" />
-    <meta name="language" content="Polish" />
-    <meta name="revisit-after" content="7 days" />
+    <meta name="theme-color" content="#ece9f6" />
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
+        "@id": "https://portfolio-szymon.vercel.app/#person",
         "name": "Szymon Zych",
+        "givenName": "Szymon",
+        "familyName": "Zych",
         "jobTitle": "Frontend Developer (Mid)",
+        "description": "Frontend Developer (Mid) z ponad 3-letnim doświadczeniem komercyjnym w React, Next.js, TypeScript i systemach CMS. Prowadzę zadania frontendowe end-to-end: od analizy wymagań, przez implementację komponentów z Figmy, po wdrożenie i utrzymanie na produkcji.",
         "url": "https://portfolio-szymon.vercel.app/",
+        "image": "https://portfolio-szymon.vercel.app/og-image.jpg",
+        "email": "mailto:szymonzych868@gmail.com",
         "sameAs": [
           "https://github.com/szymszaj",
           "https://www.linkedin.com/in/szymonzych-5b2950296/"
@@ -88,11 +101,38 @@
           "Next.js",
           "TypeScript",
           "JavaScript",
-          "Web Development",
+          "Tailwind CSS",
+          "Gatsby",
+          "Node.js",
+          "Jest",
+          "Playwright",
+          "WordPress (headless CMS)",
+          "Magento 2",
+          "Frontend Development",
+          "Web Performance",
           "UI/UX",
-          "Frontend Development"
+          "CI/CD (GitHub Actions, Vercel)"
         ],
-        "description": "Frontend Developer (Mid) z ponad 3-letnim doświadczeniem komercyjnym w React, Next.js, TypeScript i systemach CMS"
+        "knowsLanguage": [
+          { "@type": "Language", "name": "Polski", "alternateName": "pl" },
+          { "@type": "Language", "name": "Angielski", "alternateName": "en" }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kraków",
+          "addressCountry": "PL"
+        },
+        "affiliation": {
+          "@type": "CollegeOrUniversity",
+          "name": "Uniwersytet Ekonomiczny w Krakowie"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebSite",
+          "@id": "https://portfolio-szymon.vercel.app/#website",
+          "url": "https://portfolio-szymon.vercel.app/",
+          "name": "Szymon Zych - Portfolio",
+          "inLanguage": "pl-PL"
+        }
       }
     </script>
   </head>

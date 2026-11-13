@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { useTranslations } from "../hooks/useTranslations";
+import { useIsHydrated } from "../hooks/useIsHydrated";
 import Serpentine from "./Serpentine";
 import MaskedLines from "./MaskedLines";
 
@@ -56,7 +57,8 @@ const Approach = () => {
   const { t } = useTranslations();
   const trackRef = useRef(null);
   const reduceMotion = useReducedMotion();
-  const pinned = !reduceMotion;
+  const hydrated = useIsHydrated();
+  const pinned = hydrated && !reduceMotion;
 
   const steps = t("APPROACH_STEPS");
   const total = steps.length;
@@ -74,8 +76,9 @@ const Approach = () => {
 
   return (
     <section
+      id="podejscie"
       ref={trackRef}
-      className="relative w-full"
+      className="relative w-full scroll-mt-24"
       style={pinned ? { height: `${total * 70 + 60}vh` } : undefined}
     >
       <div
@@ -94,6 +97,7 @@ const Approach = () => {
 
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6 lg:px-10">
           <MaskedLines
+            as="h2"
             lines={t("approach.headline")}
             lineClassName="font-display text-[8vw] font-light leading-[1.02] tracking-[-0.03em] lg:text-[4.6vw]"
           />

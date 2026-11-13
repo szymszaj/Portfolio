@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { canvasDpr } from "../lib/canvas";
 
 const SPACING = 34;
 const PUSH_RADIUS = 150;
@@ -28,7 +29,7 @@ const InteractiveDots = () => {
     const pointer = { x: -9999, y: -9999 };
 
     const build = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = canvasDpr();
       const rect = canvas.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
@@ -108,25 +109,34 @@ const InteractiveDots = () => {
     build();
     draw();
 
+    let onScreen = true;
+
+    const sync = () => {
+      const shouldRun = onScreen && !document.hidden && !prefersReducedMotion;
+      cancelAnimationFrame(frameId);
+      visible = shouldRun;
+      if (shouldRun) frameId = requestAnimationFrame(loop);
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        visible = entry.isIntersecting;
-        cancelAnimationFrame(frameId);
-        if (visible && !prefersReducedMotion) {
-          frameId = requestAnimationFrame(loop);
-        }
+        onScreen = entry.isIntersecting;
+        sync();
       },
       { threshold: 0 },
     );
     observer.observe(canvas);
+    document.addEventListener("visibilitychange", sync);
 
     window.addEventListener("resize", build);
     window.addEventListener("pointermove", handlePointerMove);
     window.addEventListener("pointerleave", handlePointerLeave);
 
     return () => {
+      visible = false;
       cancelAnimationFrame(frameId);
       observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
       window.removeEventListener("resize", build);
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("pointerleave", handlePointerLeave);

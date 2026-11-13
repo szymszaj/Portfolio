@@ -190,7 +190,10 @@ const Courses = () => {
   const hasMoreCourses = t("COURSES").length > 3;
 
   return (
-    <section className="relative w-full overflow-hidden bg-paper py-28 text-paper-ink lg:py-40">
+    <section
+      id="kursy"
+      className="relative w-full scroll-mt-24 overflow-hidden bg-paper py-28 text-paper-ink lg:py-40"
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.55] [background-image:linear-gradient(to_right,#d3d6e0_1px,transparent_1px),linear-gradient(to_bottom,#d3d6e0_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,black,transparent)]"
@@ -253,26 +256,25 @@ const Courses = () => {
           className="flex justify-center mt-8 sm:mt-12"
         >
           <motion.button
+            type="button"
+            aria-expanded={showAll}
+            aria-label={showAll ? t("courses.showLess") : t("courses.showMore")}
             onClick={() => setShowAll(!showAll)}
             className="p-4 rounded-full bg-gradient-to-r from-accent-soft/20 to-iris/20 border border-accent-soft/30 hover:from-accent-soft/30 hover:to-iris/30 hover:border-accent/50 transition-all duration-300 group"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
             <motion.div
-              animate={{
-                y: showAll ? 0 : [0, -8, 0],
-                rotate: showAll ? 180 : 0,
-              }}
-              transition={{
-                y: {
-                  duration: 1.5,
-                  repeat: showAll ? 0 : Infinity,
-                  ease: "easeInOut",
-                },
-                rotate: { duration: 0.3 },
-              }}
+              animate={{ rotate: showAll ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <FiChevronDown className="w-6 h-6 text-accent group-hover:text-accent transition-colors duration-300" />
+              <motion.div
+                whileInView={showAll ? undefined : { y: [0, -8, 0] }}
+                viewport={{ amount: 0.5 }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <FiChevronDown className="w-6 h-6 text-accent group-hover:text-accent transition-colors duration-300" />
+              </motion.div>
             </motion.div>
           </motion.button>
         </motion.div>
