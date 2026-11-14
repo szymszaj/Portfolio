@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useLenis } from "lenis/react";
 
-const INTRO_MS = 2000;
-const END_EVENTS = ["pointerdown", "keydown", "wheel", "touchstart"];
+const INTRO_MS = 3400;
+const END_EVENTS = ["click", "keydown"];
 
 export const useIntro = (contentRef) => {
   const lenis = useLenis();

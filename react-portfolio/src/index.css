@@ -125,21 +125,21 @@ html.intro-lock body {
 }
 
 [data-intro="play"] .hero-scene-in {
-  animation: hero-scene-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-scene-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 [data-intro="play"] .hero-rise {
-  animation: hero-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(0.3s + var(--hero-index, 0) * 0.12s);
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(0.45s + var(--hero-index, 0) * 0.15s);
 }
 
 [data-intro="play"] .hero-late {
-  animation: hero-fade 0.45s ease-out both;
-  animation-delay: calc(1.3s + var(--hero-index, 0) * 0.1s);
+  animation: hero-fade 0.55s ease-out both;
+  animation-delay: calc(2s + var(--hero-index, 0) * 0.12s);
 }
 
 [data-intro="play"] .intro-hidden {
-  animation: intro-reveal 0.4s ease-out 1.75s both;
+  animation: intro-reveal 0.5s ease-out 3.2s both;
 }
 
 [data-intro="short"] .hero-scene-in,

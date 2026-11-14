@@ -89,7 +89,7 @@ const createPebbleGeometry = () => {
 
 const createRingGeometry = () => new THREE.TorusGeometry(0.4, 0.13, 10, 26);
 
-const INTRO_SECONDS = 0.7;
+const INTRO_SECONDS = 1.2;
 const INTRO_SPREAD = 1.6;
 
 const Shapes = ({ items }) => {
