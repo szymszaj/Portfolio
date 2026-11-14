@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { canvasDpr } from "../lib/canvas";
 
 const LINE_COUNT = 26;
 const STEP = 14;
@@ -23,7 +24,7 @@ const WaveField = () => {
     let time = 0;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = canvasDpr();
       const rect = canvas.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
@@ -69,20 +70,28 @@ const WaveField = () => {
     resize();
     draw();
 
+    let onScreen = false;
+
+    const sync = () => {
+      const shouldRun = onScreen && !document.hidden && !prefersReducedMotion;
+      if (shouldRun && !running) {
+        running = true;
+        frameId = requestAnimationFrame(loop);
+      } else if (!shouldRun && running) {
+        running = false;
+        cancelAnimationFrame(frameId);
+      }
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const shouldRun = entry.isIntersecting && !prefersReducedMotion;
-        if (shouldRun && !running) {
-          running = true;
-          frameId = requestAnimationFrame(loop);
-        } else if (!shouldRun && running) {
-          running = false;
-          cancelAnimationFrame(frameId);
-        }
+        onScreen = entry.isIntersecting;
+        sync();
       },
       { threshold: 0 },
     );
     observer.observe(canvas);
+    document.addEventListener("visibilitychange", sync);
 
     window.addEventListener("resize", resize);
 
@@ -90,6 +99,7 @@ const WaveField = () => {
       running = false;
       cancelAnimationFrame(frameId);
       observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
       window.removeEventListener("resize", resize);
     };
   }, []);

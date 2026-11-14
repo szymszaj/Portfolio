@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { FiMapPin } from "react-icons/fi";
 import { useTranslations } from "../hooks/useTranslations";
+import { useIsHydrated } from "../hooks/useIsHydrated";
 import WaveField from "./WaveField";
 
 const useIsDesktop = () => {
@@ -158,8 +159,9 @@ const Experience = () => {
   const trackRef = useRef(null);
   const reduceMotion = useReducedMotion();
   const isDesktop = useIsDesktop();
+  const hydrated = useIsHydrated();
 
-  const pinned = isDesktop && !reduceMotion;
+  const pinned = hydrated && isDesktop && !reduceMotion;
 
   const jobs = t("EXPERIENCES");
   const total = jobs.length;
@@ -177,8 +179,9 @@ const Experience = () => {
 
   return (
     <section
+      id="doswiadczenie"
       ref={trackRef}
-      className="relative w-full border-b border-line-muted"
+      className="relative w-full scroll-mt-24 border-b border-line-muted"
       style={pinned ? { height: `${total * 100 + 60}vh` } : undefined}
     >
       <div
@@ -204,20 +207,22 @@ const Experience = () => {
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-20">
-            <div className="hidden lg:flex lg:flex-col lg:gap-6">
-              <div className="font-display mb-2 text-sm uppercase tracking-[0.25em] text-ink-subtle">
+            <div className="flex flex-col">
+              <h2 className="font-display mb-2 text-sm uppercase tracking-[0.25em] text-ink-subtle">
                 {t("experience.title")} {t("experience.titleHighlight")}
+              </h2>
+              <div className="hidden lg:flex lg:flex-col lg:gap-6">
+                {pinned &&
+                  jobs.map((job, i) => (
+                    <StepMarker
+                      key={job.role}
+                      index={i}
+                      total={total}
+                      progress={progress}
+                      reduceMotion={reduceMotion}
+                    />
+                  ))}
               </div>
-              {pinned &&
-                jobs.map((job, i) => (
-                  <StepMarker
-                    key={job.role}
-                    index={i}
-                    total={total}
-                    progress={progress}
-                    reduceMotion={reduceMotion}
-                  />
-                ))}
             </div>
 
             <div className={pinned ? "relative min-h-[34rem]" : "relative"}>

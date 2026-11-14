@@ -1,0 +1,19 @@
+/* Wygenerowane przez scripts/fetch-fonts.mjs - nie edytuj ręcznie. */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/inter-subset.woff2") format("woff2");
+  unicode-range: U+20-7e, U+a3, U+a7, U+a9, U+ab, U+ae, U+b0, U+b7, U+bb, U+c0-ff, U+104-107, U+10c-10f, U+118-11b, U+141-144, U+147-148, U+158-15b, U+160-161, U+164-165, U+16e-16f, U+179-17e, U+2013-2014, U+2018-2019, U+201c-201e, U+2020-2022, U+2026, U+2039-203a, U+20ac, U+2122, U+2190-2193, U+2248;
+}
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/archivo-subset.woff2") format("woff2");
+  unicode-range: U+20-7e, U+a3, U+a7, U+a9, U+ab, U+ae, U+b0, U+b7, U+bb, U+c0-ff, U+104-107, U+10c-10f, U+118-11b, U+141-144, U+147-148, U+158-15b, U+160-161, U+164-165, U+16e-16f, U+179-17e, U+2013-2014, U+2018-2019, U+201c-201e, U+2020-2022, U+2026, U+2039-203a, U+20ac, U+2122, U+2190-2193, U+2248;
+}

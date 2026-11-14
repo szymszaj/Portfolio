@@ -29,6 +29,12 @@ export const siteContent = defineType({
           validation: (r) => r.required().min(1),
         }),
         defineField({name: 'lead', title: 'Lead', type: 'text', rows: 4, validation: (r) => r.required()}),
+        defineField({
+          name: 'tagline',
+          title: 'Jedno zdanie (górny pasek)',
+          type: 'string',
+          description: 'Krótkie zdanie w pasku nad sceną. Puste = tekst z translations.js.',
+        }),
         tabField('work', 'Zakładka: Czym się zajmuję'),
         tabField('about', 'Zakładka: O mnie'),
         tabField('hobby', 'Zakładka: Hobby'),

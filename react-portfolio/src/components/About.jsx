@@ -64,9 +64,9 @@ const ExpertiseCard = ({ pillar, index }) => {
           <span className={`h-px flex-1 ${style.rule} opacity-25`} />
         </div>
 
-        <h3 className="font-display mb-6 text-2xl font-bold text-ink">
+        <h4 className="font-display mb-6 text-2xl font-bold text-ink">
           {pillar.title}
-        </h3>
+        </h4>
 
         <ul className="space-y-3">
           {pillar.points.map((point) => (
@@ -100,7 +100,12 @@ const About = () => {
   const { t } = useTranslations();
 
   return (
-    <SectionShell tint="accent" watermark="ABOUT" className="py-24 lg:py-32">
+    <SectionShell
+      id="o-mnie"
+      tint="accent"
+      watermark="ABOUT"
+      className="py-24 lg:py-32"
+    >
       <div className="mx-auto max-w-6xl">
         <motion.div
           variants={reveal}
@@ -224,7 +229,8 @@ const About = () => {
         >
           <span>{t("about.scrollHint")}</span>
           <motion.span
-            animate={{ y: [0, 6, 0] }}
+            whileInView={{ y: [0, 6, 0] }}
+            viewport={{ amount: 0.5 }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
           >
             <FiArrowDown className="h-4 w-4" />

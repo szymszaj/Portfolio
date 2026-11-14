@@ -7,7 +7,12 @@ const Education = () => {
   const { t } = useTranslations();
 
   return (
-    <SectionShell tint="amber" watermark="STUDY" className="py-24 lg:py-32">
+    <SectionShell
+      id="edukacja"
+      tint="amber"
+      watermark="STUDY"
+      className="py-24 lg:py-32"
+    >
       <SectionHeading
         title={t("education.title")}
         highlight={t("education.titleHighlight")}

@@ -1,21 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { ReactLenis } from "lenis/react";
-import App from "./App.jsx";
+import { StrictMode } from "react";
+import { createRoot, hydrateRoot } from "react-dom/client";
+import Root from "./Root.jsx";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ReactLenis
-      root
-      options={{
-        lerp: 0.14,
-        duration: 1.0,
-        wheelMultiplier: 1.1,
-        anchors: true,
-      }}
-    >
-      <App />
-    </ReactLenis>
-  </React.StrictMode>,
+const container = document.getElementById("root");
+
+const initialContent = window.__CMS_CONTENT__ ?? null;
+
+const tree = (
+  <StrictMode>
+    <Root initialContent={initialContent} />
+  </StrictMode>
 );
+
+if (container.hasChildNodes()) {
+  hydrateRoot(container, tree);
+} else {
+  createRoot(container).render(tree);
+}

@@ -1,56 +1,39 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useRef } from "react";
 import {
   motion,
+  useInView,
+  useMotionTemplate,
   useScroll,
   useSpring,
   useTransform,
-  useReducedMotion,
 } from "framer-motion";
-import { useLenis } from "lenis/react";
-import { FiArrowDown, FiArrowUpRight } from "react-icons/fi";
-import PROFILE from "../assets/profile.jpg";
-import Typewriter from "./Typewriter";
-import ParticleField from "./ParticleField";
 import { useTranslations } from "../hooks/useTranslations";
+import { useIsHydrated } from "../hooks/useIsHydrated";
+import { useMediaQuery } from "../hooks/useMediaQuery";
+import { useSceneEnabled } from "../hooks/useSceneEnabled";
+import FrameCorners from "./hero/FrameCorners";
+import HeroPoster from "./hero/HeroPoster";
+import SceneBoundary from "./hero/SceneBoundary";
+import RotatingTitles from "./hero/RotatingTitles";
+import TopBar from "./hero/TopBar";
 
-const EASE_OUT = [0.16, 1, 0.3, 1];
+const HeroScene = lazy(() => import("./hero/HeroScene"));
 
-const FIRST_NAME = "SZYMON";
-const LETTER_DELAY = 0.19;
-const LETTER_DURATION = 1.7;
-const INTRO_START = 0.4;
-const INTRO_END =
-  INTRO_START + (FIRST_NAME.length - 1) * LETTER_DELAY + LETTER_DURATION;
+const FIRST_NAME = "Szymon";
+const LAST_NAME = "Zych";
+
+const SCENE_COUNT_DESKTOP = 42;
+const SCENE_COUNT_MOBILE = 18;
 
 const Hero = () => {
-  const trackRef = useRef(null);
   const { t } = useTranslations();
-  const reduceMotion = useReducedMotion();
-  const lenis = useLenis();
-  const [introDone, setIntroDone] = useState(false);
+  const hydrated = useIsHydrated();
+  const sceneEnabled = useSceneEnabled();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  const introFinished = introDone || reduceMotion;
-
-  useEffect(() => {
-    if (reduceMotion) return undefined;
-
-    window.scrollTo(0, 0);
-    lenis?.stop();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const timer = setTimeout(() => {
-      setIntroDone(true);
-      lenis?.start();
-      document.body.style.overflow = previousOverflow;
-    }, INTRO_END * 1000);
-
-    return () => {
-      clearTimeout(timer);
-      lenis?.start();
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [lenis, reduceMotion]);
+  const trackRef = useRef(null);
+  const frameRef = useRef(null);
+  const sceneActive = useInView(frameRef, { amount: 0.15 });
 
   const { scrollYProgress } = useScroll({
     target: trackRef,
@@ -58,143 +41,113 @@ const Hero = () => {
   });
 
   const progress = useSpring(scrollYProgress, {
-    stiffness: 120,
+    stiffness: 140,
     damping: 30,
     restDelta: 0.001,
   });
 
-  const nameScale = useTransform(progress, [0, 0.62], [1, 0.26]);
-  const nameX = useTransform(progress, [0, 0.62], ["0%", "-34%"]);
-  const nameY = useTransform(progress, [0, 0.62], ["0%", "-30%"]);
-  const surnameOpacity = useTransform(progress, [0.12, 0.42], [0, 1]);
-  const surnameX = useTransform(progress, [0.12, 0.42], ["-28%", "0%"]);
-  const hintOpacity = useTransform(progress, [0, 0.12], [1, 0]);
-  const panelOpacity = useTransform(progress, [0.45, 0.8], [0, 1]);
-  const panelY = useTransform(progress, [0.45, 0.8], [48, 0]);
-  const fieldOpacity = useTransform(progress, [0, 0.8], [1, 0.3]);
+  const sideFactor = useTransform(progress, [0, 0.8], [1, 5]);
+  const topFactor = useTransform(progress, [0, 0.8], [1, 1.9]);
+  const clipPath = useMotionTemplate`inset(calc(var(--hero-inset-top) * ${topFactor}) calc(var(--hero-inset) * ${sideFactor}) calc(var(--hero-inset) * ${sideFactor}) calc(var(--hero-inset) * ${sideFactor}) round var(--hero-radius))`;
 
-  const nameStyle = reduceMotion
-    ? undefined
-    : { scale: nameScale, x: nameX, y: nameY };
+  const barOpacity = useTransform(progress, [0, 0.3], [1, 0]);
+  const contentOpacity = useTransform(progress, [0, 0.38], [1, 0]);
+  const sceneOpacity = useTransform(progress, [0.5, 1], [1, 0.45]);
+
+  const sceneCount = isDesktop ? SCENE_COUNT_DESKTOP : SCENE_COUNT_MOBILE;
+  const titles = t("hero.titles").filter(
+    (title) => typeof title === "string" && title.trim() !== "",
+  );
 
   return (
-    <section ref={trackRef} className="relative h-[220vh]">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+    <section
+      ref={trackRef}
+      className="relative h-[180vh] bg-hero-canvas"
+    >
+      <div className="sticky top-0 h-svh overflow-hidden">
         <motion.div
-          style={reduceMotion ? undefined : { opacity: fieldOpacity }}
-          className="absolute inset-0"
+          ref={frameRef}
+          style={hydrated ? { clipPath, willChange: "clip-path" } : undefined}
+          className={`absolute inset-0 bg-hero-frame ${
+            hydrated ? "" : "hero-frame-static"
+          }`}
         >
-          <ParticleField />
-        </motion.div>
+          <HeroPoster />
 
-        <motion.div
-          style={nameStyle}
-          className="absolute inset-0 flex items-center justify-center px-4"
-        >
-          <div className="font-display relative whitespace-nowrap text-[17vw] font-light leading-[0.88] tracking-[-0.03em] lg:text-[14vw]">
-            <span aria-label={FIRST_NAME} className="inline-flex text-ink">
-              {FIRST_NAME.split("").map((letter, i) => (
-                <span
-                  key={`${letter}-${i}`}
-                  aria-hidden="true"
-                  className="inline-block overflow-hidden"
-                >
-                  <motion.span
-                    className="inline-block"
-                    initial={
-                      reduceMotion
-                        ? false
-                        : { y: i % 2 === 0 ? "-120%" : "120%" }
-                    }
-                    animate={{ y: "0%" }}
-                    transition={{
-                      delay: INTRO_START + i * LETTER_DELAY,
-                      duration: LETTER_DURATION,
-                      ease: EASE_OUT,
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                </span>
-              ))}
-            </span>
-
-            <motion.span
-              className="absolute left-full top-0 ml-[0.18em] inline-block text-ink-muted"
-              style={
-                reduceMotion
-                  ? undefined
-                  : { opacity: surnameOpacity, x: surnameX }
-              }
+          {sceneEnabled && (
+            <motion.div
+              style={{ opacity: sceneOpacity }}
+              className="absolute inset-0"
             >
-              ZYCH
-            </motion.span>
-          </div>
-        </motion.div>
+              <SceneBoundary>
+                <Suspense fallback={null}>
+                  <HeroScene count={sceneCount} active={sceneActive} />
+                </Suspense>
+              </SceneBoundary>
+            </motion.div>
+          )}
 
-        <motion.div
-          style={
-            reduceMotion ? undefined : { opacity: panelOpacity, y: panelY }
-          }
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-6 pb-16 lg:px-16"
-        >
-          <div className="mx-auto flex max-w-6xl flex-col items-start gap-10 lg:flex-row lg:items-end lg:justify-end">
-            <div className="pointer-events-auto max-w-md">
-              <div className="font-display mb-3 text-xl text-accent md:text-2xl">
-                <Typewriter
-                  words={t("hero.titles")}
-                  typingSpeed={80}
-                  deletingSpeed={40}
-                  pause={1400}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-2/3"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(243, 240, 251, 0.94) 10%, rgba(243, 240, 251, 0) 100%)",
+            }}
+          />
+
+          <motion.div
+            style={hydrated ? { opacity: contentOpacity } : undefined}
+            className="hero-frame-pad absolute inset-0"
+          >
+            <FrameCorners inset="p-0" />
+
+            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-5 p-5 md:flex-row md:items-end md:justify-between md:gap-10 md:p-9">
+              <div className="min-w-0">
+                <h1 className="font-display pb-[0.06em] text-[clamp(4.5rem,13vw,12rem)] font-light leading-[0.9] tracking-[-0.03em] text-hero-ink">
+                  <span className="block overflow-hidden">
+                    <span className="hero-rise" style={{ "--hero-index": 0 }}>
+                      {FIRST_NAME}
+                    </span>
+                  </span>
+                  <span className="block overflow-hidden">
+                    <span className="hero-rise" style={{ "--hero-index": 1 }}>
+                      {LAST_NAME}
+                    </span>
+                  </span>
+                  <span className="sr-only">{` – ${t("hero.role")}`}</span>
+                </h1>
+
+                <p
+                  className="hero-late font-display mt-6 text-[clamp(1.75rem,3.2vw,3rem)] leading-[1.2] text-hero-indigo md:mt-8"
+                  style={{ "--hero-index": 2 }}
+                >
+                  <RotatingTitles titles={titles} />
+                </p>
+
+                <p
+                  className="hero-late mt-4 max-w-[min(40ch,100%)] text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.5] text-hero-muted md:mt-6"
+                  style={{ "--hero-index": 3 }}
+                >
+                  {t("hero.lead")}
+                </p>
+              </div>
+
+              <div
+                className="hero-late flex shrink-0 flex-col items-center gap-2 self-end pb-1 text-[0.9375rem] text-hero-muted"
+                style={{ "--hero-index": 4 }}
+              >
+                <span>{t("hero.scroll")}</span>
+                <span
+                  aria-hidden="true"
+                  className="hidden h-10 w-px bg-hero-ink/25 md:block"
                 />
               </div>
-              <p className="mb-6 leading-relaxed text-ink-muted">
-                {t("hero.lead")}
-              </p>
-              <a
-                href="#kontakt"
-                className="group inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 font-medium text-ink transition-colors duration-300 hover:border-accent hover:text-accent"
-              >
-                {t("hero.cta")}
-                <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
             </div>
-
-            <div className="pointer-events-auto shrink-0">
-              <img
-                src={PROFILE}
-                alt="Szymon Zych"
-                loading="eager"
-                decoding="async"
-                className="h-44 w-36 rounded-2xl border border-line object-cover shadow-2xl md:h-60 md:w-48"
-              />
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          style={reduceMotion ? undefined : { opacity: hintOpacity }}
-          className="absolute bottom-10 right-6 lg:right-16"
-        >
-          <motion.div
-            className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-ink-muted"
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            animate={introFinished ? { opacity: 1, y: 0 } : undefined}
-            transition={{ duration: 0.7, ease: EASE_OUT }}
-          >
-            <span>{t("hero.scroll")}</span>
-            <motion.span
-              animate={reduceMotion ? undefined : { y: [0, 5, 0] }}
-              transition={{
-                duration: 1.8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <FiArrowDown className="h-4 w-4" />
-            </motion.span>
           </motion.div>
         </motion.div>
+
+        <TopBar style={hydrated ? { opacity: barOpacity } : undefined} />
       </div>
     </section>
   );

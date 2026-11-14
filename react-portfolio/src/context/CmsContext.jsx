@@ -3,12 +3,16 @@ import PropTypes from "prop-types";
 import { fetchCmsContent } from "../lib/sanity";
 import { CmsContext } from "./cmsStore";
 
-export const CmsProvider = ({ children }) => {
-  const [cmsContent, setCmsContent] = useState(null);
+export const CmsProvider = ({ children, initialContent = null }) => {
+  const [cmsContent, setCmsContent] = useState(initialContent);
 
   useEffect(() => {
     fetchCmsContent()
-      .then(setCmsContent)
+      .then((content) => {
+        if (content && Object.keys(content).length > 0) {
+          setCmsContent(content);
+        }
+      })
       .catch((error) => {
         console.error(
           "Nie udało się pobrać treści z Sanity, używam lokalnych danych:",
@@ -24,4 +28,5 @@ export const CmsProvider = ({ children }) => {
 
 CmsProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  initialContent: PropTypes.object,
 };
