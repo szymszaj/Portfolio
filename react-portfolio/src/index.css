@@ -149,6 +149,48 @@ html.intro-lock body {
   animation: hero-fade 0.4s ease-out both;
 }
 
+@keyframes drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8%, -6%, 0) scale(1.12);
+  }
+}
+
+@keyframes drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-7%, 5%, 0) scale(0.95);
+  }
+}
+
+@keyframes drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.98);
+  }
+  50% {
+    transform: translate3d(5%, 7%, 0) scale(1.1);
+  }
+}
+
+.drift-a {
+  animation: drift-a 22s ease-in-out infinite;
+}
+
+.drift-b {
+  animation: drift-b 27s ease-in-out infinite;
+}
+
+.drift-c {
+  animation: drift-c 19s ease-in-out infinite;
+}
+
 .hero-frame-pad {
   padding: var(--hero-inset-top) var(--hero-inset) var(--hero-inset);
 }
@@ -227,7 +269,10 @@ body {
   }
 
   .animate-marquee,
-  .animate-marquee-reverse {
+  .animate-marquee-reverse,
+  .drift-a,
+  .drift-b,
+  .drift-c {
     animation: none !important;
   }
 
